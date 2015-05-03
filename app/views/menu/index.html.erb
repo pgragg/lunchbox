@@ -1,0 +1,5 @@
+<div class="col-md-4">
+  <% if policy(Menu.new).create? %>
+    <%= link_to "New Menu", new_menu_path, class: 'btn btn-success' %>
+  <% end %>
+</div>
