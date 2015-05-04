@@ -1,0 +1,14 @@
+
+  <div class="lunch_choice">
+    <% if lunch_choice = current_user.chose(lunch) %>
+      <%= link_to [lunch, lunch_choice], class: 'btn btn-danger', method: :delete do %>
+        <i class="glyphicon glyphicon-star-empty"> </i>&nbsp; Nope
+      <% end %>
+    <% else %>
+      <%= link_to [lunch, LunchChoice.new], class: 'btn btn-primary', method: :post do %>
+        <i class="glyphicon glyphicon-star"> </i>&nbsp; Choose lunch
+      <% end %>
+    <% end %>
+  </div>
+
+<!--  It usually isn't good practice to initialize a new model instance (LunchChoice.new) in the view, but we are making an exception here so we don't have to modify the menu_controller and menu#index view. -->

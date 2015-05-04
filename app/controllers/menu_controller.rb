@@ -1,6 +1,8 @@
 class MenuController < ApplicationController
   def index
     @menus = Menu.all
+    @lunches = Lunch.all
+    @user = current_user
   end
   
   def new

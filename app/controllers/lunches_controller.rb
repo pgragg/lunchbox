@@ -1,7 +1,12 @@
 class LunchesController < ApplicationController
+  include LunchesHelper
 
   def new
     @lunch = Lunch.new 
+  end
+
+  def show
+    @lunch = Lunch.find(params[:id])
   end
 
   def edit

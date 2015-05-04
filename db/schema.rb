@@ -11,12 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150503192102) do
+ActiveRecord::Schema.define(version: 20150504141705) do
 
   create_table "days", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "lunch_choices", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "day_id"
+    t.integer  "lunch_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "lunch_choices", ["day_id"], name: "index_lunch_choices_on_day_id"
+  add_index "lunch_choices", ["lunch_id"], name: "index_lunch_choices_on_lunch_id"
+  add_index "lunch_choices", ["user_id"], name: "index_lunch_choices_on_user_id"
 
   create_table "lunches", force: :cascade do |t|
     t.date     "date"
@@ -27,6 +39,14 @@ ActiveRecord::Schema.define(version: 20150503192102) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "lunches_users", id: false, force: :cascade do |t|
+    t.integer "lunch_id"
+    t.integer "user_id"
+  end
+
+  add_index "lunches_users", ["lunch_id"], name: "index_lunches_users_on_lunch_id"
+  add_index "lunches_users", ["user_id"], name: "index_lunches_users_on_user_id"
 
   create_table "menus", force: :cascade do |t|
     t.datetime "created_at", null: false

@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
 
+  
   resources :days 
-  resources :lunches 
+  resources :lunches do
+    resources :lunch_choices 
+  end
   resources :menu 
-
   devise_for :users
   resources :welcome 
   root 'welcome#index'
