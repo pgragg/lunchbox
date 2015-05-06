@@ -5,7 +5,7 @@
 </div>
 
 <div class="col-md-12 jumbotron">
-  <% @lunches.each do |lunch| %>
+  <% @lunches_by_day.each do |lunch| %>
     <div class="col-md-3"><h6><%= link_to lunch.name, lunch %></h6></div> 
     <div class="col-md-3"><%= lunch.description %></div> 
     <div class="col-md-3"><%= lunch.date %></div> 
@@ -14,3 +14,5 @@
     <hr>
   <% end %>
 </div>
+
+<!-- scope :by_day ->{ |date| where(date: date)} -->

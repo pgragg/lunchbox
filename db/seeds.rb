@@ -25,6 +25,17 @@ Menu.delete_all
    )
  end
 
+# @month = 0 
+# @year = 2015
+#   12.times do  #Trying to create all the dates in the year. 
+#     day = 0 
+#    (Time.days_in_month(@month)).times do
+#     day += 1 
+#     Day.create!(date: Date.new(@year,@month,day))
+#    end 
+#    month += 1 
+#  end
+
  admin = User.new(
    name:     'Admin User',
    email:    'admin@example.com',

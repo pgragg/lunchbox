@@ -2,7 +2,7 @@
   <div class="lunch_choice">
     <% if lunch_choice = current_user.chose(lunch) %>
       <%= link_to [lunch, lunch_choice], class: 'btn btn-danger', method: :delete do %>
-        <i class="glyphicon glyphicon-star-empty"> </i>&nbsp; Nope
+        <i class="glyphicon glyphicon-star-empty"> </i>&nbsp; Undo choice
       <% end %>
     <% else %>
       <%= link_to [lunch, LunchChoice.new], class: 'btn btn-primary', method: :post do %>

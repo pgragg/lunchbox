@@ -1,11 +1,13 @@
 class LunchChoicesController < ApplicationController
   def create
     lunch = Lunch.find(params[:lunch_id])
-    lunch_choice = current_user.lunch_choices.build(lunch: lunch)
+    lunch_choice = LunchChoice.build_choice(lunch, current_user)
+    #lunch_choice = current_user.lunch_choices.build(lunch: lunch)
     if lunch_choice.save
-      flash[:notice] = "Lunch saved."
+      flash[:notice] = "You picked #{lunch.name} for #{lunch.weekday}"
+      redirect_to menu_index_path
     else 
-      flash[:error] = "Favorite couldn't be saved."
+      flash[:error] = "Lunch couldn't be saved."
     end
    end
 
@@ -13,9 +15,12 @@ class LunchChoicesController < ApplicationController
     lunch = Lunch.find(params[:lunch_id])
     lunch_choice = current_user.lunch_choices.find(params[:id])
     if lunch_choice.destroy 
-      flash[:notice] = "No longer your lunch choice for #{lunch.weekday}"
+      flash[:notice] = "#{lunch.name} is no longer your lunch choice for #{lunch.weekday}"
+      redirect_to menu_index_path
     else 
       flash[:error] = "Couldn't change lunch choice right now."
     end 
   end
 end
+
+

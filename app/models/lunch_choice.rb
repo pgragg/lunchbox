@@ -2,6 +2,12 @@ class LunchChoice < ActiveRecord::Base
   belongs_to :user
   belongs_to :day
   belongs_to :lunch
+
+
+  def self.build_choice(lunch, current_user)
+    current_user.lunch_choices.build(lunch: lunch)
+  end 
+
 end
 
 
