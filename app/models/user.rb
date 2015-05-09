@@ -21,6 +21,13 @@ class User < ActiveRecord::Base
       lunch_choices.where(lunch_id: lunch.id).last 
   end
 
+  def destroy_lunch_choices_on(date)
+    self.lunch_choices.each do |lc|
+      lc.destroy if lc.date == date 
+    end
+  end 
+
+
   # def what_was_chosen
   #   self.lunch_choices.select{|lc| lc.lunch.date = @lunch.date}
   # end 

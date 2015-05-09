@@ -20,6 +20,6 @@ class Lunch < ActiveRecord::Base
     end 
   end 
 
-
+  
  
 end
