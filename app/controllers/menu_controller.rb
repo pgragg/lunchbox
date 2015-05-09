@@ -1,4 +1,10 @@
 class MenuController < ApplicationController
+
+  def date_generator(y,m,d)
+    (Date.today..Time.new(y,m,d).to_date).map{|date| date.strftime("%Y-%m-%d")}
+  end 
+
+
   def index
     @menus = Menu.all
 
@@ -7,7 +13,7 @@ class MenuController < ApplicationController
 #   NewsMailer.weekly(user).deliver_now
 # end
 @lunches_by_day = []
-[Date.today, Date.tomorrow].each do |d|
+(date_generator(2015,07,01)).each do |d|
   @lunches_by_day << Lunch.by_day(d).load.to_a
 end
 @lunches_by_day.flatten!

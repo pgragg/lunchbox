@@ -2,13 +2,15 @@ Rails.application.routes.draw do
 
   
   resources :days 
-  resources :lunches do
-    resources :lunch_choices 
-  end
   resources :menu 
   devise_for :users
   resources :welcome 
   root 'welcome#index'
+
+  resources :lunches do
+    resources :lunch_choices 
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

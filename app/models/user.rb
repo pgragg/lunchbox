@@ -18,8 +18,12 @@ class User < ActiveRecord::Base
   end 
 
   def chose(lunch)
-    lunch_choices.where(lunch_id: lunch.id).first
+      lunch_choices.where(lunch_id: lunch.id).last 
   end
+
+  # def what_was_chosen
+  #   self.lunch_choices.select{|lc| lc.lunch.date = @lunch.date}
+  # end 
 
 #Roles should include, at some point, information about whether the user is ECD,
 #or Dwight main, or faculty, etc. This will help #show the right @lunch. 
