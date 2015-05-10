@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     end
   end 
 
+  def after_signin_path_for
+    redirect_to menu_index_path
+  end
+
 
   # def what_was_chosen
   #   self.lunch_choices.select{|lc| lc.lunch.date = @lunch.date}

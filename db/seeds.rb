@@ -1,5 +1,4 @@
 require 'faker'
-Day.delete_all
 Lunch.delete_all
 User.delete_all #Deleting all your data before a reset is pretty much necessary. 
 Menu.delete_all 
@@ -16,10 +15,10 @@ Menu.delete_all
  end
  users = User.all
 
- 1000.times do
+ 50.times do
    Lunch.create!(
      #user: users.sample,
-     date: Faker::Date.forward(365),
+     date: Faker::Date.forward(10),
      description: Faker::Lorem.sentences(1),
      name: Faker::Commerce.product_name
    )
@@ -51,7 +50,6 @@ puts "Seed finished"
 puts "#{User.count} users created"
  puts "#{Lunch.count} lunches created"
  puts "#{Menu.count} menus created"
- puts "#{Day.count} days created"
  puts "Created the following users"
  population.each do |user|
   print "#{user.name}'s email: #{user.email}."

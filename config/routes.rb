@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-
   resources :days 
   resources :menu 
   devise_for :users
   resources :welcome 
-  root 'welcome#index'
+  
+  devise_scope :user do
+    #root "devise/registrations#new"
+    root 'welcome#index'
+  end
 
   resources :lunches do
     resources :lunch_choices 

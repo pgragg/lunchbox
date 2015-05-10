@@ -1,3 +1,36 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.background_image {
+  background-image: url("http://i.imgur.com/EzM6MSZ.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height:100%;
+  background-position-y: -700px;
+}
+
+
+.square {
+  height:380px;
+  width:600px;
+  margin: 5% auto;
+  padding: 2% 0 0 0;
+  background-color: rgba(255, 255, 255, 0.9); 
+}
+
+.actions {
+  margin: 5% 0 0 0; 
+}
+
+.sign-up-box:after {
+  background-color:grey;
+  height:50px;
+  width:1px;
+}
+
+input {
+  border-radius: 5px;
+}

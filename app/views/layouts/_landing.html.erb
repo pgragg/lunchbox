@@ -1,0 +1,22 @@
+<%= stylesheet_link_tag params[:controller] %>
+
+<div class="container">
+
+<div class="background_image">
+  <div class="container text-center">
+    <div class ="square">
+      <div class="title-top white_box">
+        <h2> Dwight Lunchbox </h2> 
+      </div>
+
+        <div class= "form col-sm-6 text-center sign-up-box"> 
+          <%= render partial: 'devise/registrations/register', locals: {user: current_user } %> 
+
+        </div> 
+        <div class= "form col-sm-6 text-center sign-in-box"> 
+          <%= render partial: 'devise/sessions/signin', locals: {user: current_user } %> 
+        </div> 
+      </div> 
+    </div>
+  </div>
+</div>

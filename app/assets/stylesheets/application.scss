@@ -12,8 +12,10 @@
  *
 
  */
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "welcome.scss";
 
 .alert {
   margin: 5% 0 2% 1.6%;

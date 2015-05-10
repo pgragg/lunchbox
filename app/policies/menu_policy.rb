@@ -1,5 +1,8 @@
 class MenuPolicy < ApplicationPolicy 
   def create? 
-    true 
+    user.role == "admin" 
+  end 
+  def index? 
+    user.present?
   end 
 end 
