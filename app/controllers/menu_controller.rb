@@ -9,14 +9,16 @@ class MenuController < ApplicationController
     @menus = Menu.all
 
     @lunches = Lunch.all #Later, the choices will have a day_id, so I can make sure that a user will have all day IDs possible. 
-#     User.where(weekly_subscriber: true).find_each do |user|
+#    User.where(weekly_subscriber: true).find_each do |user|
 #   NewsMailer.weekly(user).deliver_now
 # end
-@lunches_by_day = []
-(date_generator(2015,07,01)).each do |d|
-  @lunches_by_day << Lunch.by_day(d).load.to_a
-end
-@lunches_by_day.flatten!
+    @dates = Menu.lunch_date_list
+
+    @lunches_by_day = []
+    (date_generator(2015,07,01)).each do |d|
+      @lunches_by_day << Lunch.by_day(d).load.to_a
+    end
+    @lunches_by_day.flatten!
     @user = current_user
   end
   

@@ -7,17 +7,6 @@ class LunchChoice < ActiveRecord::Base
   def self.build_choice(lunch, current_user, date)
     current_user.lunch_choices.build(lunch: lunch, date: date)
   end 
-
-  def self.chosen_for_day?(user) 
-  # does user.lunch_choices have lunch.date
-    user.lunch_choices.select{|lc| lc.lunch.date = @lunch.date}.any?
-  end
-
-  def self.will_delete
-    choice.destroy
-    redirect_to menu_index_path
-  end 
-
    
  
   

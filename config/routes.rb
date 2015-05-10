@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  
   resources :days 
   resources :menu 
   devise_for :users

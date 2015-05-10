@@ -14,3 +14,12 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+// $(document).ready(function(){
+//     $(".col-md-12").hover(function(){
+//         $(".lunch_description").hide();
+//     });
+//     $(".lunch_box").hover(function(){
+//         $(".lunch_description").show();
+//     });
+// });
