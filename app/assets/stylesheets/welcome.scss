@@ -4,6 +4,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.title-top {
+  font-size: 46px;
+}
+
 .background_image {
   background-image: url("http://i.imgur.com/EzM6MSZ.jpg");
   background-size: 100%;
@@ -29,6 +33,14 @@
   background-color:grey;
   height:50px;
   width:1px;
+}
+
+.md-btn {
+  width: 57%;
+}
+
+.sign-in-btn {
+  margin: 8.8% 0 0 0;
 }
 
 input {
