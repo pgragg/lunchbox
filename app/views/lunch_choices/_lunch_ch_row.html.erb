@@ -1,14 +1,6 @@
-<% if lunch_choice = current_user.chose(lunch) %>
-  <div class="col-sm-1.8 lunch_box chosen">
-  <%= link_to [lunch, lunch_choice], class: '', method: :delete do %>
-      <h5><%= lunch.name %></h5>
-    </div> 
-
-  <% end %>
-<% else %>
- <div class="col-sm-1.8 lunch_box unchosen">
-  <%= link_to [lunch, LunchChoice.new], class: '', method: :post do %>
-      <h5><%= lunch.name %></h5> 
-    </div>
-  <% end %>
+<div class="col-sm-1.8 lunch_box <%= lunch_choice = current_user.chose(lunch) ? 'chosen' : 'unchosen'%> lunch_id_<%=lunch.id%>">
+  <%= link_to [lunch, LunchChoice.new], class: '', method: :post, remote: true do %>
+    <h5><%= lunch.name %></h5>
+  </div> 
 <% end %>
+

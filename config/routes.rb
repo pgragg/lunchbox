@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     root 'welcome#index'
   end
 
-  resources :lunches do
+  resources :lunches do 
     resources :lunch_choices 
   end
 
