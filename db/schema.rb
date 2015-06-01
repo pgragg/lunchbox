@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150509213313) do
+ActiveRecord::Schema.define(version: 20150601021609) do
 
   create_table "days", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150509213313) do
     t.boolean  "smart"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "menu_id"
   end
 
   create_table "lunches_users", id: false, force: :cascade do |t|
