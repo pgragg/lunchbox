@@ -1,0 +1,19 @@
+
+<div class="jumbotron text-center"> 
+  <h2> Admin Panel </h2> 
+
+  <ul class = "nav navbar"> 
+  <li> <a href="#">Lunch summaries</a></li> 
+  <li><a href="#">New menu </a></li> 
+
+  <li><a href="#">Add or edit accounts </a></li> 
+  <li><a href="#">Enter school holidays </a></li> 
+  <li><a href="#">View users who haven't ordered</a></li> 
+  </ul>
+
+  <div class="col-md-12">
+  <% if policy(Menu.new).create? %>
+    <%= link_to "New Menu", new_menu_path, class: 'btn btn-success' %>
+  <% end %>
+</div>
+</div>

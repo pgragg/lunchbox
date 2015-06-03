@@ -1,24 +1,11 @@
 class MenuController < ApplicationController
 
-  def date_generator(y,m,d)
-    (Date.today..Time.new(y,m,d).to_date).map{|date| date.strftime("%Y-%m-%d")}
-  end 
-
 
   def index
-    @menus = Menu.all
-
-    @lunches = Lunch.all #Later, the choices will have a day_id, so I can make sure that a user will have all day IDs possible. 
+    @menus = Menu.all #Later, the choices will have a day_id, so I can make sure that a user will have all day IDs possible. 
 #    User.where(weekly_subscriber: true).find_each do |user|
 #   NewsMailer.weekly(user).deliver_now
 # end
-    @dates = Menu.lunch_date_list
-
-    @lunches_by_day = []
-    (date_generator(2015,07,01)).each do |d|
-      @lunches_by_day << Lunch.by_day(d).load.to_a
-    end
-    @lunches_by_day.flatten!
     @user = current_user
   end
   
@@ -28,6 +15,9 @@ class MenuController < ApplicationController
 
   def show
     @menu = Menu.find(params[:id])
+    @dates = @menu.lunch_date_list #Makes an array of dates on which lunches exist. 
+    @lunches_by_day = @menu.lunch_for_the_day 
+    @lunches_by_day.flatten!
   end
 
   def edit

@@ -1,30 +1,12 @@
-<div class="col-md-12">
-  <% if policy(Menu.new).create? %>
-    <%= link_to "New Menu", new_menu_path, class: 'btn btn-success' %>
+<% @menus.each do |menu| %> 
+  <% if policy(Menu.new).edit? %>
+  </br></br>
+    <%= link_to "#{menu.name}", edit_menu_path(menu), class: 'btn btn-success' %>
+  </br></br>
   <% end %>
-</div>
+<%end%>
 
 
-<div class="col-md-12 container">
-  <div class="row lunch_row text-center jumbotron">
-    <div class="col-sm-2 text-center"><h4>Date</h4></div>
-    <div class="col-sm-10 text-center"><h4>Lunches</h4></div>  
-  </div>
 
-  <% @dates.each do |date| %> 
-  <div class="col-sm-2 date_box text-center">
-      <h4><%= date %> </h4>
-    </div>
-    <div class="row lunch_row text-center date_id_<%=date.to_s%>">
-    <% Menu.lunches_for_day(date).each do |lunch| %>
-      <%= render partial: 'lunch_choices/lunch_ch_row', locals: { lunch: lunch, user: current_user } %> 
-    <% end %>
-
-    </div>
-    <br>
-    <hr>
-    
-  <% end %>
-</div>
 
 <!-- scope :by_day ->{ |date| where(date: date)} -->

@@ -1,4 +1,6 @@
 require 'faker'
+require 'date' 
+
 Lunch.delete_all
 User.delete_all #Deleting all your data before a reset is pretty much necessary. 
 Menu.delete_all 
@@ -15,12 +17,22 @@ Menu.delete_all
  end
  users = User.all
 
+
+ 4.times do 
+  Menu.create!(
+    name: Faker::Commerce.product_name
+    )
+  end 
+  menus = Menu.all
+
+
+
  50.times do
    Lunch.create!(
-     #user: users.sample,
-     date: Faker::Date.forward(10),
+     date: Faker::Date.between(Date.today + 3, Date.today + 10),   #date_generator(2015,06,12), #Faker::Date.forward(10),
      description: Faker::Lorem.sentences(1),
-     name: Faker::Commerce.product_name
+     name: Faker::Commerce.product_name,
+     menu: menus.sample
    )
  end
 

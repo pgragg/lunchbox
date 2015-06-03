@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   resources :days 
-  resources :menu 
+  resources :menu
   devise_for :users
   resources :welcome 
-  
+  resources :admin_panel 
   devise_scope :user do
     #root "devise/registrations#new"
     root 'welcome#index'

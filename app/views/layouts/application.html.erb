@@ -15,7 +15,7 @@
       <li> <%= link_to "Menu", menu_index_path %> </li> 
     <% end %>
     <% if current_user %>
-      <li>Hello <%= link_to (current_user.name || current_user.email), edit_user_registration_path %>!</li> 
+      <li><%= link_to (current_user.name || current_user.email), edit_user_registration_path %></li> 
       <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
       <%end%>
     
