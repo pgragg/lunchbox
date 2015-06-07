@@ -17,6 +17,6 @@ class MenuPolicy < ApplicationPolicy
   end 
 
   def link?
-    !user.admin? && user.present? 
+    user.present? && !user.admin? 
   end 
 end 
