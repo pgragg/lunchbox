@@ -6,6 +6,12 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :lunches, through: :lunch_choices
   has_many :lunch_choices, dependent: :destroy 
+  belongs_to :menu 
+
+  scope :by_menu, ->(id) { where(menu_id: id)}
+  scope :by_campus, ->(campus) { where(campus: campus)}
+  scope :by_role, ->(role) { where(role: role)}
+  scope :by_grade, ->(grade) { where(grade: grade)}
   #has_many :lunch_choices #This relationship is currently not working. 
   #I think I need to drop and remigrate the table. 
 
@@ -17,6 +23,15 @@ class User < ActiveRecord::Base
     self.role == "student"
   end 
 
+  def faculty? 
+    self.role == "faculty"
+  end 
+
+  def meets_grade_deliv_requirements
+    return true if (self.role == "student" || (self.role == "faculty" && self.campus = "DWT" && Random.rand(1..3)== 1))
+  end 
+
+
   def chose(lunch)
       lunch_choices.where(lunch_id: lunch.id).last 
   end
@@ -27,9 +42,39 @@ class User < ActiveRecord::Base
     end
   end 
 
-  def after_signin_path_for
-    redirect_to menu_index_path
-  end
+  # def after_signin_path_for
+  #   if (user.role == "admin")
+  #     redirect_to menu_path(self.menu_id)
+  #   else 
+  #     redirect_to admin_panel_path
+  #   end 
+  # end
+
+  def choose_grade #Just using this for the seeds.rb file to determine a random campus for students. 
+    if self.campus == "DWT"
+      g = Random.rand(1..7)
+    else 
+      determinant = Random.rand(1..3)
+      g = "k" if determinant == 3
+      g = "4s" if determinant == 2
+      g = "3s" if determinant == 1
+    end 
+    self.grade = g
+  end 
+
+  def choose_menu_id
+    if self.campus == "DWT"
+      self.menu_id = (self.role == "faculty" ? 1 : 2) # Setting the user menu id depending on their role. 
+    else 
+      self.menu_id = (self.role == "faculty" ? 3 : 4) #self.role == faculty is checked because of the ID of the different menus. 
+    end 
+  end 
+
+#Menu_ids are set in the order that they are created: 
+  # DWT FAC -> 1
+  # DWT STUD -> 2
+  # ECD FAC -> 3
+  # ECD STUD -> 4
 
 
   # def what_was_chosen

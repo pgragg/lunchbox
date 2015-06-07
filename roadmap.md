@@ -20,14 +20,15 @@
 ## v0.7 - Admin menu, signin information, update user model for OU purposes (Friday, June 19)
 
 - Draft the site map and wireframes (1.0);
-* Admins should be able to see a list of menus. (0.5);
-* Add first + last name, parent email, and campus to user model. Make users to create this info on signin (0.5);
+- Admins should be able to see a list of menus. (0.5);
+* Add first + last name, parent email, and campus to user model. Make users create this info on signin (0.5);
 * Add teacher? and student? methods and scopes ;
 * Add campus scopes for ECD and DWT; 
 * Add alphabetical scope for user names; 
 * Allow users to edit their account info by clicking on their names.;
 * Create method to calculate user's grade based on the first four characters of their email and today's date.;
-* Clean up notifications.
+* Clean up notifications.;
+* Users should be automatically routed to the menu associated with them. 
 
 
 ## v0.72 - Refactor (Friday, June 26)
@@ -38,6 +39,7 @@
 
 ## v0.8 - Roles, summaries (Friday, July 3)
 
+- Add lunch summaries controller and index pages. 
 * Add lunch summaries pages (2.0) ECD students, ECD faculty, DWT students, DWT faculty, Grand totals.; 
 * Menus should be available to users according to their role. (2.0).
 * Student menus should include Bagel choices every day, water milk or juice Mon-Thurs, water ch. milk or juice on Fri.  
@@ -88,6 +90,9 @@ eg. a user model with a student role might have parent_email_1, parent_email_2, 
 * Minify JS and CSS if necessary. 
 * Batch data access if necessary. 
 * Reduce over-fetching if necessary. 
+
+
+http://stackoverflow.com/questions/24545127/setting-devise-after-sign-in-path-for-with-multiple-models
 
 
 

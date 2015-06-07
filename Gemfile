@@ -15,7 +15,6 @@ gem 'devise'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'redcarpet'
 gem 'factory_girl_rails'
 
 group :production do
@@ -31,7 +30,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0'
+gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
 end
 

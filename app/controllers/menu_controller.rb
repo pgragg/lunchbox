@@ -11,13 +11,24 @@ class MenuController < ApplicationController
   
   def new
     @menu = Menu.new
+    authorize @menu
   end
 
   def show
-    @menu = Menu.find(params[:id])
-    @dates = @menu.lunch_date_list #Makes an array of dates on which lunches exist. 
-    @lunches_by_day = @menu.lunch_for_the_day 
-    @lunches_by_day.flatten!
+    @user = current_user 
+    if @user.role == "admin"
+      @menu = Menu.find(params[:id])
+    else 
+      @menu = Menu.find(@user.menu_id)
+    end
+    
+    @dates = @menu.lunch_date_list
+#Makes an array of dates on which lunches exist. 
+    # @lunches_by_day = @menu.lunch_for_the_day 
+    # @lunches_by_day.flatten!
+    # authorize @menu
+    # render :menu 
+    
   end
 
   def edit
@@ -26,6 +37,7 @@ class MenuController < ApplicationController
 
   def update
     @menu = Menu.find(params[:id])
+    authorize @menu
   end
 
   def create

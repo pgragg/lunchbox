@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :summaries 
   resources :days 
   resources :menu
   devise_for :users

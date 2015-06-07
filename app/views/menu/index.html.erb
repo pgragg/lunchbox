@@ -1,12 +1,18 @@
-<% @menus.each do |menu| %> 
-  <% if policy(Menu.new).edit? %>
-  </br></br>
-    <%= link_to "#{menu.name}", edit_menu_path(menu), class: 'btn btn-success' %>
-  </br></br>
-  <% end %>
-<%end%>
+<div class="jumbotron text-center">
 
+  <h2> Menus listed here </h2> 
 
+  <% @menus.each do |menu| %> 
+    <% if policy(Menu.new).edit? %>
+    </br></br>
+      <%= link_to "#{menu.name}", edit_menu_path(menu), class: 'btn btn-success' %>
+    </br></br>
+    <% end %>
+  <%end%>
+</div>
 
+<!-- AJAX call can have a target div  -->
+
+<!-- http://stackoverflow.com/questions/13909354/rails-updating-div-w-ajax-and-remote-true -->
 
 <!-- scope :by_day ->{ |date| where(date: date)} -->

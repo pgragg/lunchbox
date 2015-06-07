@@ -6,11 +6,16 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     sign_in_url = new_user_session_url
-    return menu_index_path
+    return (current_user.admin? ? menu_index_path : menu_path(current_user.menu_id)) 
+    #Everything after here is unused. 
     if request.referer == sign_in_url
       super
     else
       stored_location_for(resource) || request.referer || menu_index_path
     end
   end
+
+  def index
+    @menu = Menu.find(@user.menu_id)
+  end 
 end
