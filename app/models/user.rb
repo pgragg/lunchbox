@@ -78,7 +78,6 @@ class User < ActiveRecord::Base
   end 
 
   def choose_menu_id
-    self.choose_role
     if self.campus == "DWT"
       self.menu_id = (self.role == "faculty" ? 1 : 2) # Setting the user menu id depending on their role. 
     else 
