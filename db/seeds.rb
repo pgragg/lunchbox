@@ -27,7 +27,7 @@ def create_user_sample
      email:    Faker::Internet.email,
      password: "Changeme2015",#Faker::Lorem.characters(10),
      campus:  ([true, false].sample ? "DWT" : "ECD"),
-     role: "" #([true, false].sample ? "faculty" : "student")
+     #role: "" #([true, false].sample ? "faculty" : "student")
    )
    user.choose_role
    user.choose_menu_id
