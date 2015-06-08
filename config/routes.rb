@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  resources :registrations
   resources :summaries 
   resources :days 
   resources :menu
-  devise_for :users, :controllers => {:registrations => "registrations"} 
+  devise_for :users #, :controllers => {:registrations => "registrations"} 
   resources :welcome 
   resources :admin_panel 
   devise_scope :user do
