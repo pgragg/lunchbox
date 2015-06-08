@@ -2,7 +2,7 @@ require 'faker'
 require 'date' 
 
 def flip_a_coin
-  Random.rand(1..2) == 1
+  [true, false].sample
 end  
 
 # def choose_grade 
@@ -20,20 +20,31 @@ Lunch.delete_all
 User.delete_all #Deleting all your data before a reset is pretty much necessary. 
 Menu.delete_all 
 
-90.times do
-   user = User.new(
+
+def create_user_sample 
+  user = User.new(
      name:     Faker::Name.name,
      email:    Faker::Internet.email,
      password: "Changeme2015",#Faker::Lorem.characters(10),
-     campus:  (flip_a_coin ? "DWT" : "ECD"),
-     role: (flip_a_coin ? "faculty" : "student")
+     campus:  ([true, false].sample ? "DWT" : "ECD"),
+     role: "" #([true, false].sample ? "faculty" : "student")
    )
-  
+   user.choose_role
    user.choose_menu_id
-   user.choose_grade # If I try to make this contingent on the user being a certain kind of user, the CAMPUS gets screwed up (possible "t" or "f" instead of "DWT" or "ECD")
+   # user.choose_grade # If I try to make this contingent on the user being a certain kind of user, the CAMPUS gets screwed up (possible "t" or "f" instead of "DWT" or "ECD")
    #user.skip_confirmation!
 
    user.save! 
+end 
+
+def 
+
+end 
+
+
+
+90.times do
+   create_user_sample
  end
  users = User.all
 

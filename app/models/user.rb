@@ -60,10 +60,21 @@ class User < ActiveRecord::Base
       g = "3s" if determinant == 1
     end 
     self.grade = g
+    
   end 
 
   def choose_role
-    self.role = (self.email.include? "2" ? "student" : "faculty")
+    if self.email.include? "2"
+      self.role = "student" 
+    elsif self.role != "admin"
+      self.role = "faculty" 
+    else
+      self.role = "error"
+    end
+
+    #self.role = "faculty" if (self.role != "student" && self.role != "admin")
+    #self.role = (self.email.to_s.include? "2" ? "student" : "faculty")
+    return nil
   end 
 
   def choose_menu_id
@@ -73,7 +84,7 @@ class User < ActiveRecord::Base
     else 
       self.menu_id = (self.role == "faculty" ? 3 : 4) #self.role == faculty is checked because of the ID of the different menus. 
     end 
-    self.save! 
+
   end 
 
 #Menu_ids are set in the order that they are created: 
