@@ -62,12 +62,18 @@ class User < ActiveRecord::Base
     self.grade = g
   end 
 
+  def choose_role
+    self.role = (self.email.include? "2" ? "student" : "faculty")
+  end 
+
   def choose_menu_id
+    self.choose_role
     if self.campus == "DWT"
       self.menu_id = (self.role == "faculty" ? 1 : 2) # Setting the user menu id depending on their role. 
     else 
       self.menu_id = (self.role == "faculty" ? 3 : 4) #self.role == faculty is checked because of the ID of the different menus. 
     end 
+    self.save! 
   end 
 
 #Menu_ids are set in the order that they are created: 

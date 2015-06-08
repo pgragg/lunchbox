@@ -8,6 +8,14 @@
     <%= f.email_field :email, class: "form-control", autofocus: true, placeholder: "eg. \"2020jsmith@dwight.edu\"" %>
   </div>
 
+  <div class="field form-group">
+    <%= f.label :campus %><br />
+    <%= f.radio_button :campus, "DWT", :checked => true %>
+    <%= f.label :campus, "Main Campus |", :value => "DWT" %>
+    <%= f.label :campus, "ECD", :value => "ECD"  %>
+    <%= f.radio_button :campus, "ECD" %>
+  </div>
+
 
   <div class="field">
     <%= f.label :password %>

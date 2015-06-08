@@ -7,7 +7,7 @@ class MenuPolicy < ApplicationPolicy
   end
 
   def create? 
-    user.admin?
+    false#user.admin?
   end 
   def index? 
     user.present?
