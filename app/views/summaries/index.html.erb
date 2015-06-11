@@ -1,10 +1,8 @@
 <div class="jumbotron text-center">
   <h1> Lunch Summaries </h1> 
-
-  <a class="sum_button" href="#"><div class="btn btn-success"> ECD Students (<%=@users1.count%>)</div> </a>
-  <a class="sum_button" href="#"><div class="btn btn-success"> ECD Faculty (<%=@users2.count%>)</div> </a>
-  <a class="sum_button" href="#"><div class="btn btn-success"> Main Campus Students and homeroom teachers (<%=@users3.count%>)</div> </a>
-  <a class="sum_button" href="#"><div class="btn btn-success"> Main Campus Faculty (<%=@users4.count%>)</div> </a>
+    <% @menus.each do |menu|%>
+      <a class="sum_button" href="#"><div class="btn btn-success"> <%=menu.name%> ( <%=menu.users.count%> )</div> </a>
+    <%end%>
   <a class="sum_button" href="#"><div class="btn btn-warning"> Grand Totals (<%=@users.count%>)</div> </a>
 </div>
 <!-- Add lunch summaries pages (2.0) ECD students, ECD faculty, DWT students, DWT faculty, 

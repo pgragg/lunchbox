@@ -21,14 +21,14 @@
 
 - Draft the site map and wireframes (1.0);
 - Admins should be able to see a list of menus. (0.5);
-* Add first + last name, parent email, and campus to user model. Make users create this info on signin (0.5);
-* Add teacher? and student? methods and scopes ;
-* Add campus scopes for ECD and DWT; 
+- Add first + last name, parent email, and campus to user model. Make users create this info on signin (0.5);
+- Add teacher? and student? methods and scopes ;
+- Add campus scopes for ECD and DWT; 
 * Add alphabetical scope for user names; 
 * Allow users to edit their account info by clicking on their names.;
 * Create method to calculate user's grade based on the first four characters of their email and today's date.;
 * Clean up notifications.;
-* Users should be automatically routed to the menu associated with them. 
+- Users should be automatically routed to the menu associated with them. 
 
 
 ## v0.72 - Refactor (Friday, June 26)
@@ -42,7 +42,7 @@
 - Add lunch summaries controller and index pages. 
 * Add lunch summaries pages (2.0) ECD students, ECD faculty, DWT students, DWT faculty, Grand totals.; 
 * Menus should be available to users according to their role. (2.0).
-* Student menus should include Bagel choices every day, water milk or juice Mon-Thurs, water ch. milk or juice on Fri.  
+* Student menus should include Bagel choices every day, water milk or juice Mon-Thurs, water ch. milk or juice on Fri.
 * Faculty should have a "paid" attribute so we don't send lunches to unpaid accounts.
 * Faculty should have a "grade" attribute so we can lump them in with their grade if 1-5. 
 
