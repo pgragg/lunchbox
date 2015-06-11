@@ -7,11 +7,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     sign_in_url = new_user_session_url
-    current_user.choose_role unless current_user.admin? 
-    current_user.save!
-    current_user.choose_menu_id
-    current_user.save!
-    return (current_user.admin? ? menu_index_path : menu_path(current_user.menu_id)) 
+    return (current_user.admin? ? menu_index_path : user_children_path(current_user.id)) 
     #Everything after here is unused. 
     if request.referer == sign_in_url
       super
@@ -22,6 +18,7 @@ class ApplicationController < ActionController::Base
 
   def index
     @menu = Menu.find(@user.menu_id)
+    @children = current_user.children
   end 
 
   protected

@@ -1,6 +1,6 @@
 class Menu < ActiveRecord::Base
   has_many :lunches
-  has_many :users 
+  has_many :children 
 
   def lunch_date_list
     dates = Array.new 

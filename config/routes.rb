@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+  
   resources :summaries 
-  resources :days 
   resources :menu
-  devise_for :users #, :controllers => {:registrations => "registrations"} 
+  devise_for :users 
+  resources :users do #, :controllers => {:registrations => "registrations"} 
+    resources :children do 
+      resources :menu, only: [:show]
+    end 
+  end 
   resources :welcome 
   resources :admin_panel 
   devise_scope :user do

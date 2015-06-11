@@ -29,17 +29,16 @@ def create_user_sample
      campus:  ([true, false].sample ? "DWT" : "ECD"),
      #role: "" #([true, false].sample ? "faculty" : "student")
    )
-   user.choose_role
-   user.choose_menu_id
    # user.choose_grade # If I try to make this contingent on the user being a certain kind of user, the CAMPUS gets screwed up (possible "t" or "f" instead of "DWT" or "ECD")
    #user.skip_confirmation!
 
    user.save! 
 end 
 
-def 
 
-end 
+
+# user.choose_role
+#    user.choose_menu_id
 
 
 
@@ -89,7 +88,6 @@ end
       LunchChoice.build_choice(lunch, user, date) 
     end 
     user.save!
-  end 
  end 
 
 
@@ -140,4 +138,4 @@ end
 puts "#{LunchChoice.count} lunch choices created"
 puts "#{LunchChoice.count/User.count} lunch choices per user"
 puts "#{User.all.by_campus("ECD").count} ECD, #{User.all.by_campus("DWT").count} DWT"
-
+end 

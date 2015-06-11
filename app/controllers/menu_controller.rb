@@ -1,12 +1,18 @@
 class MenuController < ApplicationController
 
 
+  def define_user
+    @child = current_user.children.find(params[:child_id])
+    @user = (current_user.role == "faculty" ? current_user : @child)
+  end 
+
+
   def index
     @menus = Menu.all #Later, the choices will have a day_id, so I can make sure that a user will have all day IDs possible. 
 #    User.where(weekly_subscriber: true).find_each do |user|
 #   NewsMailer.weekly(user).deliver_now
 # end
-    @user = current_user
+    define_user
   end
   
   def new
@@ -15,8 +21,9 @@ class MenuController < ApplicationController
   end
 
   def show
-    @user = current_user 
-    if @user.role == "admin"
+    define_user
+
+    if @user.menu_id != 2 && @user.menu_id != 4 && @user.role == "admin"
       @menu = Menu.find(params[:id])
     else 
       @menu = Menu.find(@user.menu_id)

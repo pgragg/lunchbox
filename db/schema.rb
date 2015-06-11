@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150606180650) do
+ActiveRecord::Schema.define(version: 20150611145944) do
+
+  create_table "children", force: :cascade do |t|
+    t.integer  "grade"
+    t.string   "campus"
+    t.integer  "menu_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+    t.string   "email"
+    t.integer  "user_id"
+  end
+
+  create_table "children_lunches", id: false, force: :cascade do |t|
+    t.integer "lunch_id"
+    t.integer "child_id",    null: false
+    t.integer "children_id"
+  end
+
+  add_index "children_lunches", ["children_id"], name: "index_children_lunches_on_children_id"
+  add_index "children_lunches", ["lunch_id"], name: "index_children_lunches_on_lunch_id"
 
   create_table "days", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -26,8 +46,10 @@ ActiveRecord::Schema.define(version: 20150606180650) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date     "date"
+    t.integer  "child_id"
   end
 
+  add_index "lunch_choices", ["child_id"], name: "index_lunch_choices_on_child_id"
   add_index "lunch_choices", ["day_id"], name: "index_lunch_choices_on_day_id"
   add_index "lunch_choices", ["lunch_id"], name: "index_lunch_choices_on_lunch_id"
   add_index "lunch_choices", ["user_id"], name: "index_lunch_choices_on_user_id"

@@ -17,6 +17,21 @@
 - Test models in console (1.0);
 * Write RSpec specs for models (3.0);
 
+## v0.65 - Parents with many students (Tuesday, June 15)
+- Add Child model * Add grade, campus and menu_id to Child 
+- Users have many Children
+- Children have one User 
+- Take away grade, campus, and menu_id from User
+- Take away lunch choices from User
+- Add Lunch choices to Child. 
+* Change routes and views so that menu_id is not necessary in order to access menus page. 
+* Add Child controller and child_index view accessible by parents who can see their own children. 
+* From the Child_index view, parents should be able to click on the correct menu for their child if child.menu.id != nil.  
+* Allow parents to choose menu items for all children. 
+* Parents should be able to edit their child's details. 
+* Parents should see a warning if their child doesn't have a menu_id. 
+* Update the rest of this roadmap with new structural considerations.
+
 ## v0.7 - Admin menu, signin information, update user model for OU purposes (Friday, June 19)
 
 - Draft the site map and wireframes (1.0);

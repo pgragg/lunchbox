@@ -10,9 +10,8 @@
 <body>
   <div class="container">
   <ul class="nav nav-tabs"> 
-    <li> <%= link_to "Root", root_path %> </li>
     <% if policy(Menu.new).link? %>
-      <li> <%= link_to "My Menu", menu_path(@user.menu_id) %> </li> 
+      <li> <%= link_to "My Children (#{current_user.children.count})", user_children_path(current_user.id) %> </li> 
     <% end %>
     <% if policy(Menu.new).create? %>
       <li> <%= link_to "Menus", menu_index_path %> </li> 

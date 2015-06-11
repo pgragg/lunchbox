@@ -4,14 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_and_belongs_to_many :lunches, through: :lunch_choices
-  has_many :lunch_choices, dependent: :destroy 
-  belongs_to :menu 
-
-  scope :by_menu, ->(id) { where(menu_id: id)}
-  scope :by_campus, ->(campus) { where(campus: campus)}
+  has_many :children
   scope :by_role, ->(role) { where(role: role)}
-  scope :by_grade, ->(grade) { where(grade: grade)}
+
   #has_many :lunch_choices #This relationship is currently not working. 
   #I think I need to drop and remigrate the table. 
 
@@ -19,12 +14,12 @@ class User < ActiveRecord::Base
     self.role == "admin"
   end 
 
-  def student? 
-    self.role == "student"
-  end 
-
   def faculty? 
     self.role == "faculty"
+  end 
+
+  def parent? 
+    self.role == "parent"
   end 
 
   def meets_grade_deliv_requirements
@@ -42,6 +37,10 @@ class User < ActiveRecord::Base
     end
   end 
 
+  def define_menu_id
+      self.menu_id = (self.campus == "DWT" ? 1 : 3)
+  end 
+
   # def after_signin_path_for
   #   if (user.role == "admin")
   #     redirect_to menu_path(self.menu_id)
@@ -50,41 +49,7 @@ class User < ActiveRecord::Base
   #   end 
   # end
 
-  def choose_grade #Just using this for the seeds.rb file to determine a random campus for students. 
-    if self.campus == "DWT"
-      g = Random.rand(1..7)
-    else 
-      determinant = Random.rand(1..3)
-      g = "k" if determinant == 3
-      g = "4s" if determinant == 2
-      g = "3s" if determinant == 1
-    end 
-    self.grade = g
-    
-  end 
-
-  def choose_role
-    if self.email.include? "2"
-      self.role = "student" 
-    elsif self.role != "admin"
-      self.role = "faculty" 
-    else
-      self.role = "error"
-    end
-
-    #self.role = "faculty" if (self.role != "student" && self.role != "admin")
-    #self.role = (self.email.to_s.include? "2" ? "student" : "faculty")
-    return nil
-  end 
-
-  def choose_menu_id
-    if self.campus == "DWT"
-      self.menu_id = (self.role == "faculty" ? 1 : 2) # Setting the user menu id depending on their role. 
-    else 
-      self.menu_id = (self.role == "faculty" ? 3 : 4) #self.role == faculty is checked because of the ID of the different menus. 
-    end 
-
-  end 
+  
 
 #Menu_ids are set in the order that they are created: 
   # DWT FAC -> 1
