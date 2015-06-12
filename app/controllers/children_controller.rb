@@ -49,10 +49,10 @@ class ChildrenController < ApplicationController
    @child = @user.children.find(params[:id])
    @children = @user.children
    if @child.destroy
-     flash[:notice] = "\"#{@child.name}\" was removed successfully."
+     flash[:notice] = "\"#{@child.first_name}\" was removed successfully."
      redirect_to user_children_path(@user.id, @children)
    else
-     flash[:error] = "Couldn't unchild right now."
+     flash[:error] = "Couldn't remove child right now."
    end
  end
 
@@ -70,6 +70,6 @@ class ChildrenController < ApplicationController
   private 
 
   def child_params
-    params.require(:child).permit(:name, :grade, :campus, :menu_id, :email)
+    params.require(:child).permit(:first_name, :last_name, :grade, :campus, :menu_id, :email)
   end
 end

@@ -2,7 +2,9 @@ class MenuController < ApplicationController
 
 
   def define_user
-    @child = current_user.children.find(params[:child_id])
+    if current_user.children.count >= 1
+      @child = current_user.children.find(params[:child_id])
+    end
     @user = (current_user.role == "faculty" ? current_user : @child)
   end 
 

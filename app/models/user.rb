@@ -1,11 +1,15 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  after_save :define_role
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :children
+  has_one :menu 
+  has_many :lunch_choices
   scope :by_role, ->(role) { where(role: role)}
+  scope :by_campus, ->(campus) { where(campus: campus)}
 
   #has_many :lunch_choices #This relationship is currently not working. 
   #I think I need to drop and remigrate the table. 
@@ -48,7 +52,14 @@ class User < ActiveRecord::Base
   #     redirect_to admin_panel_path
   #   end 
   # end
-
+  private 
+  
+  def define_role
+    if self.role == nil
+      self.role = (self.email.include?("dwight.edu") ? "faculty" : "parent")
+      self.save!
+    end 
+  end 
   
 
 #Menu_ids are set in the order that they are created: 
@@ -64,7 +75,7 @@ class User < ActiveRecord::Base
 
 #Roles should include, at some point, information about whether the user is ECD,
 #or Dwight main, or faculty, etc. This will help #show the right @lunch. 
-
+  
 
 
 end

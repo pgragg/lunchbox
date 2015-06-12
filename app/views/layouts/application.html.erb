@@ -10,11 +10,17 @@
 <body>
   <div class="container">
   <ul class="nav nav-tabs"> 
-    <% if policy(Menu.new).link? %>
+    <% if policy(Menu.new).children? %>
       <li> <%= link_to "My Children (#{current_user.children.count})", user_children_path(current_user.id) %> </li> 
     <% end %>
-    <% if policy(Menu.new).create? %>
+    <% if current_user.faculty? %>
+      <li> <%= link_to "My Menu", menu_path(current_user.id) %> </li> 
+    <% end %>
+    <% if policy(Menu.new).create? && current_user.menu_id != nil %>
       <li> <%= link_to "Menus", menu_index_path %> </li> 
+    <% end %>
+    <% if policy(Menu.new).create? && current_user.menu_id == nil %>
+      <li> <%= link_to "Get Started", edit_user_path(current_user.id) %> </li> 
     <% end %>
     <% if policy(Menu.new).create? %>
       <li> <%= link_to "Summaries", summaries_path %> </li> 

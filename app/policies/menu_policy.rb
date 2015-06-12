@@ -16,7 +16,7 @@ class MenuPolicy < ApplicationPolicy
     (user.present? && @menu.id == @user.menu_id)
   end 
 
-  def link?
-    user.present? && !user.admin? 
+  def children?
+    user.present? && user.parent? && !user.admin? 
   end 
 end 

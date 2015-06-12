@@ -1,6 +1,10 @@
 class SummariesController < ApplicationController
+
+
   def index
-    @users = User.all 
+    @faculty = User.all.where("role = ?", "faculty") 
+    @children = Child.all 
+    @users = @faculty + @children
     @menus = Menu.all 
     # @menu1 = Menu.find(1)
     # @menu2 = Menu.find(2)

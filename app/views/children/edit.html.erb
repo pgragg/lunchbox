@@ -1,16 +1,20 @@
 <div class="col-md-8">
  <%= form_for [@user, @child] do |f| %><!--   , remote: true -->
    <div class="form-group">
-     <%= f.label :name %>
-     <%= f.text_field :name, class: 'form-control', placeholder: "eg. \"Susan Smith\"" %>
+     <%= f.label :first_name %>
+     <%= f.text_field :first_name, class: 'form-control', placeholder: "eg. \"Susan\"" %>
+   </div>
+   <div class="form-group">
+     <%= f.label :last_name %>
+     <%= f.text_field :last_name, class: 'form-control', placeholder: "eg. \"Appleseed\"" %>
    </div>
    <div class="form-group">
      <%= f.label :grade %>
-     <%= f.text_field :grade, class: 'form-control', placeholder: "eg. \"7\"" %>
+     <%= f.select(:grade, Child::GRADES, {include_blank: false}, { :class => 'form-control' }) %>
    </div>
    <div class="form-group">
      <%= f.label :email %>
-     <%= f.email_field :email, class: 'form-control', placeholder: "eg. \"2019ssmith@dwight.edu\"" %>
+     <%= f.email_field :email, class: 'form-control', placeholder: "eg. \"2019sappleseed@dwight.edu\"" %>
    </div>
    <div class="form-group">
      <%= f.submit "Save", class: 'btn btn-success' %>

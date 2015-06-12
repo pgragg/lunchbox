@@ -31,14 +31,15 @@ def create_user_sample
    )
    # user.choose_grade # If I try to make this contingent on the user being a certain kind of user, the CAMPUS gets screwed up (possible "t" or "f" instead of "DWT" or "ECD")
    #user.skip_confirmation!
+   # user.choose_role
+  # user.choose_menu_id
+
 
    user.save! 
 end 
 
 
 
-# user.choose_role
-#    user.choose_menu_id
 
 
 
@@ -67,7 +68,7 @@ menus = Menu.all
 
 
 
-50.times do
+60.times do
  Lunch.create!(
    date: Faker::Date.between(Date.today + 3, Date.today + 10),   #date_generator(2015,06,12), #Faker::Date.forward(10),
    description: Faker::Lorem.sentences(1),
@@ -77,18 +78,18 @@ menus = Menu.all
 end
 
 
- users.each do |user|
-  unless user.role == "admin"
+ # users.each do |user|
+ #  unless user.role == "admin"
 
-    menu_id = user.menu_id
-    menu = Menu.find(menu_id)
-    lunches = Lunch.all.by_menu(menu_id)
-    menu.lunch_date_list.each do |date|
-      lunch = menu.lunches.by_day(date).sample
-      LunchChoice.build_choice(lunch, user, date) 
-    end 
-    user.save!
- end 
+ #    menu_id = user.menu_id
+ #    menu = Menu.find(menu_id)
+ #    lunches = Lunch.all.by_menu(menu_id)
+ #    menu.lunch_date_list.each do |date|
+ #      lunch = menu.lunches.by_day(date).sample
+ #      LunchChoice.build_choice(lunch, user, date) 
+ #    end 
+ #    user.save!
+ # end 
 
 
 user = User.new(
@@ -96,11 +97,10 @@ user = User.new(
      email:    "pipergragg@gmail.com",
      password: "password",#Faker::Lorem.characters(10),
      campus:  (flip_a_coin ? "DWT" : "ECD"),
-     role: (flip_a_coin ? "faculty" : "student")
+     role: "faculty"
    )
   
-   user.choose_menu_id
-   user.choose_grade # If I try to make this contingent on the user being a certain kind of user, the CAMPUS gets screwed up (possible "t" or "f" instead of "DWT" or "ECD")
+   user.define_menu_id # If I try to make this contingent on the user being a certain kind of user, the CAMPUS gets screwed up (possible "t" or "f" instead of "DWT" or "ECD")
    #user.skip_confirmation!
 
    user.save!
@@ -138,4 +138,4 @@ end
 puts "#{LunchChoice.count} lunch choices created"
 puts "#{LunchChoice.count/User.count} lunch choices per user"
 puts "#{User.all.by_campus("ECD").count} ECD, #{User.all.by_campus("DWT").count} DWT"
-end 
+

@@ -18,19 +18,22 @@
 * Write RSpec specs for models (3.0);
 
 ## v0.65 - Parents with many students (Tuesday, June 15)
-- Add Child model * Add grade, campus and menu_id to Child 
+- Add Child model 
+- Add grade, campus and menu_id to Child 
 - Users have many Children
 - Children have one User 
 - Take away grade, campus, and menu_id from User
 - Take away lunch choices from User
 - Add Lunch choices to Child. 
 * Change routes and views so that menu_id is not necessary in order to access menus page. 
-* Add Child controller and child_index view accessible by parents who can see their own children. 
-* From the Child_index view, parents should be able to click on the correct menu for their child if child.menu.id != nil.  
-* Allow parents to choose menu items for all children. 
-* Parents should be able to edit their child's details. 
+- Add Child controller and child_index view accessible by parents who can see their own children. 
+- From the Child_index view, parents should be able to click on the correct menu for their child if child.menu.id != nil.  
+- Allow parents to choose menu items for all children. 
+- Parents should be able to edit their child's details. 
 * Parents should see a warning if their child doesn't have a menu_id. 
 * Update the rest of this roadmap with new structural considerations.
+* Upon first accessing the menu, faculty should be prompted to a define their name and campus. 
+* If faculty member has already signed up, 
 
 ## v0.7 - Admin menu, signin information, update user model for OU purposes (Friday, June 19)
 
@@ -46,25 +49,26 @@
 - Users should be automatically routed to the menu associated with them. 
 
 
-## v0.72 - Refactor (Friday, June 26)
+## v0.72 - Refactor (Friday, June 21)
 
 * Clean up controllers. 
 * Delete unused partials. 
 * Create and enforce permissions for all users. 
+* Heroku soft deploy 
 
-## v0.8 - Roles, summaries (Friday, July 3)
+## v0.8 - Roles, summaries (Friday, June 26)
 
 - Add lunch summaries controller and index pages. 
 * Add lunch summaries pages (2.0) ECD students, ECD faculty, DWT students, DWT faculty, Grand totals.; 
-* Menus should be available to users according to their role. (2.0).
+- Menus should be available to users according to their role. (2.0).
 * Student menus should include Bagel choices every day, water milk or juice Mon-Thurs, water ch. milk or juice on Fri.
 * Faculty should have a "paid" attribute so we don't send lunches to unpaid accounts.
 * Faculty should have a "grade" attribute so we can lump them in with their grade if 1-5. 
 
 
-## v0.9 (Friday, July 10)
+## v0.9 (Friday, July 3)
 
-* Add admin panel with access to lunch summaries (2.0) ;
+- Add admin panel with access to lunch summaries (2.0) ;
 * Allow admin to edit users lunches from within the admin panel. ;
 * Add progress indication to admin panel which lists menus filled out. ;
 * Admin should be able to activate and deactivate an account's ability to order. 
@@ -80,7 +84,7 @@
 eg. a user model with a student role might have parent_email_1, parent_email_2, and campus.  
 
 
-## v1.0 Deploy (Friday, July 17)
+## v1.0 Deploy (Friday, July 10)
 
 * Allow admins to add a "bagged lunch" to certain users for certain days, which would make their lunch choice for that day "bagged." 
 * A seperate totals page would display all bagged lunches for the day. 
