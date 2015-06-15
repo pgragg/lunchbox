@@ -51,6 +51,11 @@ class Child < ActiveRecord::Base
       self.save!
     end 
   end 
+  def destroy_lunch_choices_on(date)
+    self.lunch_choices.each do |lc|
+      lc.destroy if lc.date == date 
+    end
+  end 
 
   private
     

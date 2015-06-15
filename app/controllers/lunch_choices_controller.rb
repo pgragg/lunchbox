@@ -1,21 +1,14 @@
 class LunchChoicesController < ApplicationController
 
-  # def define_user
-
-  #   @children = current_user.children
-  #   puts "Current children are #{@children}"
-  #   if @children.count >= 1
-  #     paramet = params[:child_id]
-  #     puts "Getting ready to define child with #{paramet}"
-  #     @child = @children.find(params[:child_id]) #:child_id is nil here because it's not defined in lunch_choice params. 
-  #     puts "Child is @child"
-  #   end
-  #   @user = (current_user.role == "faculty" ? current_user : @child)
-  # end 
-
-  
+  def define_user
+    if current_user.children.count >= 1
+      child = current_user.children.find(session[:user_id]) #Set in the menu_controller
+    end
+    @user = (current_user.role == "faculty" ? current_user : child)
+  end 
+ 
   def create
-    puts "#{@user} is your currently defined user."
+    define_user
     @lunch = Lunch.find(params[:lunch_id])
     @date = @lunch.date 
     @user.destroy_lunch_choices_on(@date) #So that we only have one lunch per day

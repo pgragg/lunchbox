@@ -3,6 +3,7 @@ class MenuController < ApplicationController
 
   def define_user
     if current_user.children.count >= 1
+      session[:user_id] = params[:child_id] #For use in the lunch_choices controller.
       @child = current_user.children.find(params[:child_id])
     end
     @user = (current_user.role == "faculty" ? current_user : @child)
