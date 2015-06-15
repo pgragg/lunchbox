@@ -57,6 +57,16 @@ class Child < ActiveRecord::Base
     end
   end 
 
+  def ecd_children 
+    Child.by_grade(Child::ECD_GRADES)
+  end
+  def dwt_lower
+    Child.by_grade(%w[1 2 3 4])
+  end 
+  def dwt_mid
+    Child.by_grade(%w[5 6 7])
+  end 
+
   private
     
    

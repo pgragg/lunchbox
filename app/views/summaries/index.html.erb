@@ -1,9 +1,11 @@
 <div class="jumbotron text-center">
   <h1> Lunch Summaries </h1> 
     <% @menus.each do |menu|%>
-      <a class="sum_button" href="#"><div class="btn btn-success"> <%=menu.name%> ( <%=menu.users.count%> )</div> </a>
+      <a class="sum_button" href=<%=summary_path(menu.id)%>>
+        <div class="btn btn-success"> <%=menu.name%> ( <%=menu.users_count%> )</div> 
+      </a>
     <%end%>
-  <a class="sum_button" href="#"><div class="btn btn-warning"> Grand Totals (<%=@users.count%>)</div> </a>
+  <a class="sum_button" href= <%=summary_path(5)%> %><div class="btn btn-warning"> Grand Totals (<%=@users.count%>)</div> </a>
 </div>
 <!-- Add lunch summaries pages (2.0) ECD students, ECD faculty, DWT students, DWT faculty, 
  Grand totals.;  -->

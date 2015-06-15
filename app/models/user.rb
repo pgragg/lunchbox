@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :lunch_choices, dependent: :destroy 
   scope :by_role, ->(role) { where(role: role)}
   scope :by_campus, ->(campus) { where(campus: campus)}
+  scope :by_grade, ->(grade) { where(grade: grade)}
 
   #has_many :lunch_choices #This relationship is currently not working. 
   #I think I need to drop and remigrate the table. 
@@ -30,7 +31,6 @@ class User < ActiveRecord::Base
     return true if (self.role == "student" || (self.role == "faculty" && self.campus = "DWT" && Random.rand(1..3)== 1))
   end 
 
-
   def chose(lunch)
       lunch_choices.where(lunch_id: lunch.id).last 
   end
@@ -45,13 +45,18 @@ class User < ActiveRecord::Base
       self.menu_id = (self.campus == "DWT" ? 1 : 3)
   end 
 
-  # def after_signin_path_for
-  #   if (user.role == "admin")
-  #     redirect_to menu_path(self.menu_id)
-  #   else 
-  #     redirect_to admin_panel_path
-  #   end 
-  # end
+  def all_faculty
+    User.by_role('faculty').by_grade(nil)
+  end
+
+  def ecd_sp_deliv 
+    User.by_role('faculty').by_grade(Child::ECD_GRADES)
+  end
+
+  def dwt_sp_deliv 
+    User.by_role('faculty').by_grade(Child::DWT_GRADES)
+  end 
+
   private 
   
   def define_role

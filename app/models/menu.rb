@@ -9,9 +9,21 @@ class Menu < ActiveRecord::Base
     dates.uniq! 
   end 
 
-  # def lunches
-  #   Lunch.all #I'd like to filter this by lunches where the menu matches the current menu.
-  # end 
+  def self.master_date_list
+    dates = Array.new 
+    self.all.each do |menu|  
+      menu.lunches.each {|lunch| dates << lunch.date}
+    end 
+    dates.sort.uniq! 
+  end 
+
+  def users_count
+    self.children.count + self.users.count 
+  end 
+
+  def lunches_count
+    self.lunches.count
+  end 
 
   def date_array(y,m,d)
     (Date.today..Time.new(y,m,d).to_date).map{|date| date.strftime("%Y-%m-%d")}
@@ -21,12 +33,6 @@ class Menu < ActiveRecord::Base
     date_array(y,m,d).sample 
   end 
 
-  # def all_in_menu
-  #   all = []
-  #   all << Lunch.by_menu(self.id).load.to_a 
-  #   all 
-  # end 
-
   def lunch_count
     self.lunches.count 
   end 
@@ -35,16 +41,6 @@ class Menu < ActiveRecord::Base
     #5 lunches (bagels are implied as a 6th) per day for students
     #3 lunches for faculty.  
   end 
-
-
-
-  # def lunch_for_the_day
-  #   day = []
-  #   (date_array(2015,06,13)).each do |d|
-  #     day << Lunch.by_day(d).load.to_a
-  #   end
-  #   day
-  # end 
 
   def lunches_for_day(date)
 

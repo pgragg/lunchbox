@@ -67,6 +67,9 @@ Menu.create!(
 menus = Menu.all
 
 
+5.times do 
+  Summary.create! 
+end 
 
 60.times do
  Lunch.create!(

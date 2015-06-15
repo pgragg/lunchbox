@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   
-  resources :summaries 
+  resources :summaries do 
+    post '/next_day' => 'summaries#next_day', as: :next_day
+    post '/previous-day' => 'summaries#previous_day', as: :previous_day
+   end 
   resources :menu
   devise_for :users 
   resources :users do #, :controllers => {:registrations => "registrations"} 

@@ -19,7 +19,7 @@
     <% if policy(Menu.new).create? && current_user.menu_id != nil %>
       <li> <%= link_to "Menus", menu_index_path %> </li> 
     <% end %>
-    <% if policy(Menu.new).create? && current_user.menu_id == nil %>
+    <% if policy(Menu.new).create? && current_user.menu_id == nil && current_user.role == "faculty" %>
       <li> <%= link_to "Get Started", edit_user_path(current_user.id) %> </li> 
     <% end %>
     <% if policy(Menu.new).create? %>

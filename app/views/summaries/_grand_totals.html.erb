@@ -1,0 +1,133 @@
+<div class = "container text-center"> 
+  <div class = "row"> 
+    <div class = "col-md-2 col-sm-2"> 
+      <%= link_to "Back to Admin Panel", admin_panel_index_path, class:"btn btn-success"%>
+
+    </div>
+    <div class = "col-md-10 col-sm-10"> 
+      <div class = "col-md-3 col-sm-3"> 
+        <%= link_to "Previous Day", summary_previous_day_path(@summary), class: "btn btn-success", method: :post  %>
+      </div>
+
+      <div class = "col-md-6 col-sm-6"> 
+        <h1> <%= "#{@weekday}, #{@month} #{@date.day}" %> </h1> 
+      </div>
+
+      <div class = "col-md-3 col-sm-3"> 
+        <%= link_to "Next Day", summary_next_day_path(@summary), class: "btn btn-success", method: :post  %>
+      </div>
+    </div>
+  </div>
+  <table class ="table"> 
+  <tr>
+    <th>MENU OU</th>
+    <th>Lunch 2 </th>
+    <th>Lunch 3 </th>
+    <th>Lunch 4 </th>
+    <th>Lunch 5 </th>
+    <th>Lunch 5</th>
+    <th>Bagels </th>
+    <th>TOTAL</th>
+  </tr>
+  <tr>
+    <td>ECD </td>
+    <td>Lunch 2 </td>
+    <td>Lunch 3 </td>
+    <td>Lunch 4 </td>
+    <td>Lunch 5 </td>
+    <td>Lunch 5</td>
+    <td>Bagels </td>
+    <td>TOTAL</td>
+  </tr>
+  <tr>
+    <td>DWT 1-4 </td>
+    <td>Lunch 2 </td>
+    <td>Lunch 3 </td>
+    <td>Lunch 4 </td>
+    <td>Lunch 5 </td>
+    <td>Lunch 5</td>
+    <td>Bagels </td>
+    <td>TOTAL</td>
+  </tr>
+  <tr>
+    <td>DWT 5-7 </td>
+    <td>Lunch 2 </td>
+    <td>Lunch 3 </td>
+    <td>Lunch 4 </td>
+    <td>Lunch 5 </td>
+    <td>Lunch 5</td>
+    <td>Bagels </td>
+    <td>TOTAL</td>
+  </tr>
+  <tr>
+    <td>DWT/ECD Fac </td>
+    <td>Lunch 2 </td>
+    <td>Lunch 3 </td>
+    <td>Lunch 4 </td>
+    <td>Lunch 5 </td>
+    <td>Lunch 5</td>
+    <td>Bagels </td>
+    <td>TOTAL</td>
+  </tr>
+  <tr>
+    <td>ECD sp. deliv </td>
+    <td>Lunch 2 </td>
+    <td>Lunch 3 </td>
+    <td>Lunch 4 </td>
+    <td>Lunch 5 </td>
+    <td>Lunch 5</td>
+    <td>Bagels </td>
+    <td>TOTAL</td>
+  </tr>
+  <tr>
+    <td>DWT sp. deliv </td>
+    <td>Lunch 2 </td>
+    <td>Lunch 3 </td>
+    <td>Lunch 4 </td>
+    <td>Lunch 5 </td>
+    <td>Lunch 5</td>
+    <td>Bagels </td>
+    <td>TOTAL</td>
+  </tr>
+  <tr>
+    <th>Portion Totals </th>
+    <td>Lunch 2 </td>
+    <td>Lunch 3 </td>
+    <td>Lunch 4 </td>
+    <td>Lunch 5 </td>
+    <td>Lunch 5</td>
+    <td>Bagels </td>
+    <td>TOTAL</td>
+  </tr>
+  <tr>
+    <td>Pre-k + K </td>
+    <td>Lunch 2 </td>
+    <td>Lunch 3 </td>
+    <td>Lunch 4 </td>
+    <td>Lunch 5 </td>
+    <td>Lunch 5</td>
+    <td>Bagels </td>
+    <td>TOTAL</td>
+  </tr>
+  <tr>
+    <td>1st - 4th </td>
+    <td>Lunch 2 </td>
+    <td>Lunch 3 </td>
+    <td>Lunch 4 </td>
+    <td>Lunch 5 </td>
+    <td>Lunch 5</td>
+    <td>Bagels </td>
+    <td>TOTAL</td>
+  </tr>
+  <tr>
+    <td>5th-adult </td>
+    <td>Lunch 2 </td>
+    <td>Lunch 3 </td>
+    <td>Lunch 4 </td>
+    <td>Lunch 5 </td>
+    <td>Lunch 5</td>
+    <td>Bagels </td>
+    <td>TOTAL</td>
+  </tr>
+  </table> 
+</div>

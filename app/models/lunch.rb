@@ -1,5 +1,6 @@
 class Lunch < ActiveRecord::Base
   has_and_belongs_to_many :children, through: :lunch_choices
+  has_and_belongs_to_many :users, through: :lunch_choices
   belongs_to :menu
 
   default_scope { order('date ASC') } 
