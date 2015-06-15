@@ -4,12 +4,9 @@ class LunchChoice < ActiveRecord::Base
   belongs_to :lunch
 
 
-  def self.build_choice(lunch, current_user, date)
-    current_user.lunch_choices.build(lunch: lunch, date: date)
+  def self.build_choice(lunch, user, date)
+    user.lunch_choices.build(lunch: lunch, date: date)
   end 
-   
- 
-  
 
 end
 

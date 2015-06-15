@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :children
-  has_one :menu 
-  has_many :lunch_choices
+  belongs_to :menu 
+  has_many :lunch_choices, dependent: :destroy 
   scope :by_role, ->(role) { where(role: role)}
   scope :by_campus, ->(campus) { where(campus: campus)}
 

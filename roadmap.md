@@ -46,6 +46,8 @@
 * Allow users to edit their account info by clicking on their names.;
 * Create method to calculate user's grade based on the first four characters of their email and today's date.;
 * Clean up notifications.;
+* SimpleForm
+* ActiveAdmin
 - Users should be automatically routed to the menu associated with them. 
 
 
