@@ -5,72 +5,62 @@ def flip_a_coin
   [true, false].sample
 end  
 
-# def choose_grade 
-#   if self.campus == "DWT"
-#     Random.rand(1..7)
-#   else 
-#     determinant = Random.rand(1..3)
-#     "k" if determinant == 3
-#     "4s" if determinant == 2
-#     "3s" if determinant == 1
-#   end 
-# end 
-
 Lunch.delete_all
 User.delete_all #Deleting all your data before a reset is pretty much necessary. 
 Menu.delete_all 
+Child.delete_all
+LunchChoice.delete_all
 
-
-def create_user_sample 
+def create_parent_sample 
   user = User.new(
      name:     Faker::Name.name,
      email:    Faker::Internet.email,
-     password: "Changeme2015",#Faker::Lorem.characters(10),
-     campus:  ([true, false].sample ? "DWT" : "ECD"),
-     #role: "" #([true, false].sample ? "faculty" : "student")
+     password: "password",#Faker::Lorem.characters(10),
    )
-   # user.choose_grade # If I try to make this contingent on the user being a certain kind of user, the CAMPUS gets screwed up (possible "t" or "f" instead of "DWT" or "ECD")
-   #user.skip_confirmation!
-   # user.choose_role
-  # user.choose_menu_id
+   user.save! 
+end 
+parents = User.all 
 
-
+def create_faculty_sample 
+  user = User.new(
+     name:     Faker::Name.name,
+     email:    Faker::Internet.email,
+     password: "password",#Faker::Lorem.characters(10),
+     campus:  "ECD", #([true, false].sample ? "DWT" : "ECD"),
+     role: "faculty" #([true, false].sample ? "faculty" : "student")
+   )
+   user.define_menu_id
    user.save! 
 end 
 
+#####Creating parents and faculty 
 
-
-
-
-
-90.times do
-   create_user_sample
+faculty = User.all.where("role = ?", 'faculty')
+20.times do
+   create_parent_sample
+   create_faculty_sample
  end
- users = User.all
 
-Menu.create!(
-  name: "Dwight Faculty Menu"
-  )
+#####Creating children 
 
-Menu.create!(
-  name: "Dwight Student Menu"
-  )
- 
-Menu.create!(
-  name: "ECD Faculty Menu"
-  )
- 
-Menu.create!(
-  name: "ECD Student Menu"
-  )
- 
+ parents.each do |parent| 
+  parent.children.create(grade: '3s', campus:'ECD')
+  parent.children.create(grade: '4', campus:'DWT')
+  parent.children.create(grade: '7', campus:'DWT')
+ end 
+
+ children = Child.all
+
+#####Creating menus 
+
+Menu.create!(name: "Dwight Faculty Menu")
+Menu.create!(name: "Dwight Student Menu")
+Menu.create!(name: "ECD Faculty Menu")
+Menu.create!(name: "ECD Student Menu")
 menus = Menu.all
 
 
-5.times do 
-  Summary.create!(
-    date: Date.today)
-end 
+#####Creating lunches 
 
 i = 0 
 30.times do #30 days of lunches created
@@ -90,6 +80,36 @@ i = 0
    end 
   end
 end 
+
+######Ordering lunches for children and faculty
+
+children.each do |child|
+   menu = Menu.find(child.menu_id)
+   i = 0
+   29.times do 
+     date = menu.lunch_date_list[i]
+     child.lunch_choices.create(lunch: menu.lunches.by_day(date)[0], date: date)
+     i += 1
+   end
+ end 
+
+ faculty.each do |fac|
+   menu = Menu.find(fac.menu_id)
+   i = 0
+   29.times do 
+     date = menu.lunch_date_list[i]
+     fac.lunch_choices.create(lunch: menu.lunches.by_day(date)[0], date: date)
+     i += 1
+   end
+ end 
+
+
+
+5.times do 
+  Summary.create!(date: Date.today) #This just starts the summary on a date. 
+end 
+
+
 
 
  # users.each do |user|

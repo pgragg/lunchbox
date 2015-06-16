@@ -143,7 +143,7 @@
     <td><%=LunchChoice.column_totals(3, @date)%></td>
     <td><%=LunchChoice.column_totals(4, @date)%></td>
     <td><%=LunchChoice.column_totals(5, @date)%></td>
-    <td><%=LunchChoice.column_totals_RH_sum(@date)%></td>
+    <td><%=LunchChoice.all.by_date(@date).count%></td>
   </tr>
   </table> 
 </div>

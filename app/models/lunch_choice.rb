@@ -22,10 +22,13 @@ class LunchChoice < ActiveRecord::Base
   end 
 
   def self.all_faculty_count_by_date_and_grade(num, date, grade)
+    output = 0
     ids = User.ids_in_grade(grade)
     lunch_id_1 = Menu.id_by_date(num, date, 1) #DWT fac
     lunch_id_2 = Menu.id_by_date(num, date, 3) #ECD fac
-    self.all.by_user_group(ids).where("lunch_id = ?", (lunch_id_1 || lunch_id_2)).to_a.count
+    output += self.all.by_user_group(ids).where("lunch_id = ?", lunch_id_1).to_a.count
+    output += self.all.by_user_group(ids).where("lunch_id = ?", lunch_id_2).to_a.count
+    output 
   end
 
 
@@ -36,9 +39,12 @@ class LunchChoice < ActiveRecord::Base
   end 
   #Only used in the grand_totals method since it counts ALL faculty.
   def self.all_faculty_count_by_date(num, date) #Grade agnostic. 
+    output = 0
     lunch_id_1 = Menu.id_by_date(num, date, 1) #DWT fac
     lunch_id_2 = Menu.id_by_date(num, date, 3) #ECD fac
-    self.all.where("lunch_id = ?", (lunch_id_1 || lunch_id_2)).to_a.count
+    output += self.all.where("lunch_id = ?", lunch_id_1).to_a.count
+    output += self.all.where("lunch_id = ?", lunch_id_2).to_a.count
+    output 
   end
 
   def self.big_lunch_totals(num, date) #Totals 5th through adult 
@@ -68,16 +74,17 @@ class LunchChoice < ActiveRecord::Base
     all_lunches
   end 
 
-  def self.RH_sum(date)
-    #num is always 0 here, since we're summing all the columns. 
-    grand_total = 0 
-    i = 0 #Iterates through the columns, starting on 0th. 
-    6.times do 
-      grand_total += self.column_totals(i, date)
-      i += 1
-    end
-    grand_total
-  end
+  # def self.RH_sum(date, &block) 
+  #   #num is always 0 here, since we're summing all the columns. 
+  #   grand_total = 0  #Iterates through the columns, starting on 0th. 
+  #   6.times do 
+  #     grand_total += self.send(capture(&block(date))) 
+  #     i += 1
+  #   end
+  #   grand_total
+  # end
+
+  # LunchChoice.RH_sum(:column_totals, 0, @date)  
 
  
 
