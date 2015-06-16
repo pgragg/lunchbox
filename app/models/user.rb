@@ -15,6 +15,14 @@ class User < ActiveRecord::Base
   #has_many :lunch_choices #This relationship is currently not working. 
   #I think I need to drop and remigrate the table. 
 
+  def self.ids_in_grade(grade)
+    ids = []
+    self.by_grade(grade).each do |user|
+      ids << user.id
+    end 
+    ids
+  end 
+
   def admin? 
     self.role == "admin"
   end 

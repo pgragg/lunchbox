@@ -3,6 +3,24 @@ class Menu < ActiveRecord::Base
   has_many :children 
   has_many :users
 
+  def self.lunch_by_date(num, date, menu_id)
+    self.find(menu_id).lunches.by_day(date)[num]
+  end 
+  def self.id_by_date(num, date, menu_id)
+    lunch = self.lunch_by_date(num, date, menu_id)
+    if lunch
+      return lunch.id 
+    end
+  end 
+
+  def self.lunch_name_on(num, date, menu_id)
+    lunch = self.lunch_by_date(num, date, menu_id)
+    if lunch 
+      return lunch.name
+    end 
+  end 
+
+
   def lunch_date_list
     dates = Array.new 
     self.lunches.each {|lunch| dates << lunch.date}

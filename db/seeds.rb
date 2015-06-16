@@ -68,17 +68,28 @@ menus = Menu.all
 
 
 5.times do 
-  Summary.create! 
+  Summary.create!(
+    date: Date.today)
 end 
 
-60.times do
- Lunch.create!(
-   date: Faker::Date.between(Date.today + 3, Date.today + 10),   #date_generator(2015,06,12), #Faker::Date.forward(10),
-   description: Faker::Lorem.sentences(1),
-   name: Faker::Commerce.product_name,
-   menu: menus.sample
- )
-end
+i = 0 
+30.times do #30 days of lunches created
+  i += 1
+  6.times do #6 lunches a day for all menus
+    m = 0 
+    date = Date.today + i 
+    name = Faker::Commerce.product_name
+   4.times do #4 menus all have the same lunch 
+     menu = menus[m]  
+      Lunch.create!(
+       date: date,   #Faker::Date.between(Date.today + 3, Date.today + 10)
+       name: name,
+       menu: menu 
+     )
+     m += 1
+   end 
+  end
+end 
 
 
  # users.each do |user|

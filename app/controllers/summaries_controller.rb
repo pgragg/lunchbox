@@ -8,26 +8,23 @@ class SummariesController < ApplicationController
   end 
 
   def month_on(time)
-    months = %w[January February March April May June July August September October November December]
+    months = %w[December January February March April May June July August September October November]
     months[time.month]
   end 
 
   
 
   def index 
-    @faculty = User.all.where("role = ?", "faculty") 
+    @faculty = User.all.where("role = ?", "faculty") #TODO: refactor with scope. 
     @children = Child.all 
     @users = @faculty + @children
     @menus = Menu.all
   end
 
-  def grand_totals
-    @users = User.all 
-    #self.lunches.by_day(date).load.to_a 
-  end
+
 
   def show 
-    @summary = Summary.find(params[:id]) #This is a weird way to determine the partial I'm using. Not sure I'll keep it. 
+    @summary = Summary.find(params[:id]) 
     @menus = Menu.all 
     @partial = @summary.summary_partial_for(@summary.id)
     @date = @summary.date

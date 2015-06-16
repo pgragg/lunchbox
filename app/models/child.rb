@@ -16,6 +16,14 @@ class Child < ActiveRecord::Base
   ECD_GRADES = %w[3s 4s k]
   DWT_GRADES = %w[1 2 3 4 5 6 7]
 
+  def self.ids_in_grade(grade)
+    ids = []
+    self.by_grade(grade).each do |child|
+      ids << child.id
+    end 
+    ids
+  end 
+
   def choose_seed_grade #Just using this for the seeds.rb file to determine a random campus for students. 
     if self.campus == "DWT"
       g = Random.rand(1..7)
