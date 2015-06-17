@@ -23,6 +23,14 @@ class User < ActiveRecord::Base
     ids
   end 
 
+  def self.ids_in_role(role)
+    ids = []
+    self.by_role(role).each do |user|
+      ids << user.id
+    end 
+    ids
+  end 
+
   def admin? 
     self.role == "admin"
   end 

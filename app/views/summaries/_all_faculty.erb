@@ -1,0 +1,42 @@
+
+<%= render partial: 'header'%>
+
+<table class ="table"> 
+<tr>
+  <th><h3> Faculty and/or Staff </h3></th>
+  <th> <%=Menu.lunch_name_on(0, @date, 1)%> </th>
+  <th><%=Menu.lunch_name_on(1, @date, 1)%></th>
+  <th><%=Menu.lunch_name_on(2, @date, 1)%></th>
+  <th> <%=Menu.lunch_name_on(3, @date, 1)%> </th>
+  <th><%=Menu.lunch_name_on(4, @date, 1)%></th>
+  <th><%=Menu.lunch_name_on(5, @date, 1)%></th>
+  <th>TOTAL</th>
+</tr>
+<tr>
+  <td>ECD staff</td> <!-- Here she wants just staff, not ECD faculty  -->
+  <td><%= LunchChoice.ecd_faculty(0, @date, "staff", nil)%></td>
+  <td><%= LunchChoice.ecd_faculty(1, @date, "staff", nil)%></td>
+  <td><%= LunchChoice.ecd_faculty(2, @date, "staff", nil)%></td>
+  <td><%= LunchChoice.ecd_faculty(3, @date, "staff", nil)%></td>
+  <td><%= LunchChoice.ecd_faculty(4, @date, "staff", nil)%></td>
+  <td><%= LunchChoice.ecd_faculty(5, @date, "staff", nil)%></td>
+</tr>
+<tr>
+  <td>DWT faculty and staff</td> <!-- This means DWT faculty and staff -->
+  <td><%= LunchChoice.dwt_faculty(0, @date)%></td>
+  <td><%= LunchChoice.dwt_faculty(1, @date)%></td>
+  <td><%= LunchChoice.dwt_faculty(2, @date)%></td>
+  <td><%= LunchChoice.dwt_faculty(3, @date)%></td>
+  <td><%= LunchChoice.dwt_faculty(4, @date)%></td>
+  <td><%= LunchChoice.dwt_faculty(5, @date)%></td>
+</tr>
+<tr>
+  <td>TOTAL </td>
+  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(0, @date, nil)%></td>
+  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(1, @date, nil)%></td>
+  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(2, @date, nil)%></td>
+  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(4, @date, nil)%></td>
+  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(5, @date, nil)%></td>
+  <td><%= LunchChoice.faculty_lunch_RH_sum(@date)%></td>
+</tr>
+</table>

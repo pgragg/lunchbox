@@ -10,6 +10,7 @@ User.delete_all #Deleting all your data before a reset is pretty much necessary.
 Menu.delete_all 
 Child.delete_all
 LunchChoice.delete_all
+Summary.delete_all
 
 def create_parent_sample 
   user = User.new(
@@ -26,7 +27,7 @@ def create_faculty_sample
      name:     Faker::Name.name,
      email:    Faker::Internet.email,
      password: "password",#Faker::Lorem.characters(10),
-     campus:  "ECD", #([true, false].sample ? "DWT" : "ECD"),
+     campus:  ([true, false].sample ? "DWT" : "ECD"),
      role: "faculty" #([true, false].sample ? "faculty" : "student")
    )
    user.define_menu_id
@@ -88,7 +89,7 @@ children.each do |child|
    i = 0
    29.times do 
      date = menu.lunch_date_list[i]
-     child.lunch_choices.create(lunch: menu.lunches.by_day(date)[0], date: date)
+     child.lunch_choices.create(lunch: menu.lunches.by_day(date)[rand(0..5)], date: date)
      i += 1
    end
  end 
@@ -98,32 +99,19 @@ children.each do |child|
    i = 0
    29.times do 
      date = menu.lunch_date_list[i]
-     fac.lunch_choices.create(lunch: menu.lunches.by_day(date)[0], date: date)
+     fac.lunch_choices.create(lunch: menu.lunches.by_day(date)[rand(0..5)], date: date)
      i += 1
    end
  end 
 
+####### Creating summary models.  
 
-
-5.times do 
-  Summary.create!(date: Date.today) #This just starts the summary on a date. 
-end 
-
-
-
-
- # users.each do |user|
- #  unless user.role == "admin"
-
- #    menu_id = user.menu_id
- #    menu = Menu.find(menu_id)
- #    lunches = Lunch.all.by_menu(menu_id)
- #    menu.lunch_date_list.each do |date|
- #      lunch = menu.lunches.by_day(date).sample
- #      LunchChoice.build_choice(lunch, user, date) 
- #    end 
- #    user.save!
- # end 
+Summary.create!(date: Date.today, name: "All Faculty") #This just starts the summary on a date. 
+Summary.create!(date: Date.today, name: "Dwight Students")
+Summary.create!(date: Date.today, name: "ECD Faculty")
+Summary.create!(date: Date.today, name: "ECD Students")
+Summary.create!(date: Date.today, name: "Dwight Students and Teachers (list)")
+Summary.create!(date: Date.today, name: "Grand Totals")
 
 
 user = User.new(

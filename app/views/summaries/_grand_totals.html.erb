@@ -1,26 +1,11 @@
-<div class = "container text-center"> 
-  <div class = "row"> 
-    <div class = "col-md-2 col-sm-2"> 
-      <%= link_to "Back to Admin Panel", admin_panel_index_path, class:"btn btn-success"%>
 
-    </div>
-    <div class = "col-md-10 col-sm-10"> 
-      <div class = "col-md-3 col-sm-3"> 
-        <%= link_to "Previous Day", summary_previous_day_path(@summary), class: "btn btn-success", method: :post  %>
-      </div>
 
-      <div class = "col-md-6 col-sm-6"> 
-        <h1> <%= "#{@weekday}, #{@month} #{@date.day}" %> </h1> 
-      </div>
+<%= render partial: 'header'%>
 
-      <div class = "col-md-3 col-sm-3"> 
-        <%= link_to "Next Day", summary_next_day_path(@summary), class: "btn btn-success", method: :post  %>
-      </div>
-    </div>
-  </div>
+
   <table class ="table"> 
   <tr>
-    <th>MENU OU for <%=@date%></th>
+    <th><%=@date%></th>
     <th> <%=Menu.lunch_name_on(0, @date, 4)%> </th>
     <th><%=Menu.lunch_name_on(1, @date, 4)%></th>
     <th><%=Menu.lunch_name_on(2, @date, 4)%></th>
@@ -97,12 +82,12 @@
   </tr>
   <tr>
     <th>Portion Totals </th>
-    <th>Lunch 2 </th>
-    <th>Lunch 3 </th>
-    <th>Lunch 4 </th>
-    <th>Lunch 5 </th>
-    <th>Lunch 5</th>
-    <th>Bagels </th>
+    <th> <%=Menu.lunch_name_on(0, @date, 4)%> </th>
+    <th><%=Menu.lunch_name_on(1, @date, 4)%></th>
+    <th><%=Menu.lunch_name_on(2, @date, 4)%></th>
+    <th><%=Menu.lunch_name_on(3, @date, 4)%></th>
+    <th><%=Menu.lunch_name_on(4, @date, 4)%></th>
+    <th><%=Menu.lunch_name_on(5, @date, 4)%></th>
     <th>TOTAL</th>
   </tr>
   <tr>

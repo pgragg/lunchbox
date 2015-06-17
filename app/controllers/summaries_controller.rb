@@ -19,6 +19,7 @@ class SummariesController < ApplicationController
     @children = Child.all 
     @users = @faculty + @children
     @menus = Menu.all
+    @summaries = Summary.all 
   end
 
 
