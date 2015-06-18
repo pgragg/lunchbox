@@ -31,7 +31,6 @@ class SummariesController < ApplicationController
     @date = @summary.date
     @weekday = weekday_on(@date)
     @month = month_on(@date)
-    
     # ecd_children
     # dwt_lower
     # dwt_mid

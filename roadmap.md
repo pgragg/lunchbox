@@ -100,6 +100,7 @@ eg. a user model with a student role might have parent_email_1, parent_email_2, 
 
 * Get feedback from Nick, Azra and Scholastic. 
 * Refactor based on feedback.
+* Error handling : Redirect properly from all errors. 
 * Redeploy  
 
 ## v1.2 Bug fixing and fun additions (Friday, July 31)

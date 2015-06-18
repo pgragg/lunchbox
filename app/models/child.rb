@@ -9,7 +9,7 @@ class Child < ActiveRecord::Base
 
   scope :by_menu, ->(id) { where(menu_id: id)}
   scope :by_campus, ->(campus) { where(campus: campus)}
-
+  default_scope { order('last_name ASC') }
   scope :by_grade, ->(grade) { where(grade: grade)}
 
   GRADES = %w[threes fours k 1 2 3 4 5 6 7]
@@ -24,6 +24,11 @@ class Child < ActiveRecord::Base
     ids
   end 
 
+  def choice_for?(date, lunch_id)
+    lunches = Lunch.by_menu(2).by_day(date).to_a
+    return (self.chose(lunches[lunch_id]) ? "1" : "") 
+  end
+
   def choose_seed_grade #Just using this for the seeds.rb file to determine a random campus for students. 
     if self.campus == "DWT"
       g = Random.rand(1..7)
@@ -37,7 +42,7 @@ class Child < ActiveRecord::Base
   end
 
   def chose(lunch)
-    lunch_choices.where(lunch_id: lunch.id).last 
+    lunch_choices.where(lunch_id: lunch.id).last if lunch 
   end 
 
   def self.month_correct(grade)
@@ -113,8 +118,5 @@ class Child < ActiveRecord::Base
   end 
 
   private
-    
-   
-    
   
 end
