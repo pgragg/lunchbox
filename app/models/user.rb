@@ -12,8 +12,6 @@ class User < ActiveRecord::Base
   scope :by_campus, ->(campus) { where(campus: campus)}
   scope :by_grade, ->(grade) { where(grade: grade)}
 
-  #has_many :lunch_choices #This relationship is currently not working. 
-  #I think I need to drop and remigrate the table. 
 
   def self.ids_in_grade(grade)
     ids = []
@@ -43,12 +41,13 @@ class User < ActiveRecord::Base
     self.role == "parent"
   end 
 
-  def meets_grade_deliv_requirements
-    return true if (self.role == "student" || (self.role == "faculty" && self.campus = "DWT" && Random.rand(1..3)== 1))
-  end 
+  def choice_for?(date, lunch_id)
+    lunches = Lunch.by_menu(2).by_day(date).to_a
+    return (self.chose(lunches[lunch_id]) ? "1" : "") 
+  end
 
   def chose(lunch)
-      lunch_choices.where(lunch_id: lunch.id).last 
+    lunch_choices.where(lunch_id: lunch.id).last if lunch 
   end
 
   def destroy_lunch_choices_on(date)
