@@ -45,7 +45,7 @@ faculty = User.all.where("role = ?", 'faculty')
 #####Creating children 
 
  parents.each do |parent| 
-  parent.children.create(grade: '3s', campus:'ECD')
+  parent.children.create(grade: 'threes', campus:'ECD')
   parent.children.create(grade: '4', campus:'DWT')
   parent.children.create(grade: '7', campus:'DWT')
  end 

@@ -9,9 +9,14 @@ class LunchChoice < ActiveRecord::Base
   scope :by_user_group, ->(id_array) {where(user_id: id_array)}
 
 
+  #num stands for "lunch number." It's a way to reference which lunch we're referring to. 
+
+
   def self.build_choice(lunch, user, date)
     user.lunch_choices.build(lunch: lunch, date: date)
   end 
+
+  ## ## ## ## ## ## ## Students ## ## ## ## ## ## ## ## 
 
   def self.count_by_date_and_grade(num, date, menu_id, grade)
     ids = Child.ids_in_grade(grade)
@@ -19,7 +24,48 @@ class LunchChoice < ActiveRecord::Base
     self.all.where("lunch_id = ?", lunch_id).by_child_group(ids).to_a.count
   end 
 
-  def self.all_faculty_count_by_date(num, date) #Grade agnostic. Not a good idea to use. 
+  def self.count_by_date(num, date, menu_id)
+    lunch_id = Menu.id_by_date(num, date, menu_id)
+    self.all.where("lunch_id = ?", lunch_id).to_a.count
+  end  
+  #Can also be used in the grand_totals method 
+  #since it counts ALL DWT or ECD faculty regardless of grade-level delivery. 
+
+  def self.student_column_totals(num, date, menu_id, grade_range) 
+    grand_total = 0 
+    i = 0 # We start in 1st grade at DWT Campus. 
+    number_of_rows = grade_range.count 
+    number_of_rows.times do #Going down the num column, up the (number of rows) grade levels. 
+      grade = grade_range[i]
+      grand_total += LunchChoice.count_by_date_and_grade(num, date, menu_id, grade) #num, date, menu, grade. 
+      i += 1
+    end
+    grand_total
+  end 
+
+  def self.student_RH_sum(date, menu_id, grade_range, number_of_columns)
+    grand_total = 0 
+    i = 0 
+    number_of_columns.times do #Going across the 6 column totals. 
+      grand_total += LunchChoice.student_column_totals(i, date, menu_id, grade_range)
+      i += 1
+    end
+    grand_total
+  end 
+
+## ## ## ## ## ## ## Faculty ## ## ## ## ## ## ## ## 
+
+  def self.faculty_lunch_RH_sum(date, decision)
+    grand_total = 0 
+    i = 0 
+    6.times do 
+      grand_total += self.all_faculty_count_by_date_and_grade(i, date, nil, decision)
+      i += 1
+    end
+    grand_total
+  end
+
+  def self.all_faculty_count_by_date(num, date) #Grade agnostic. 
     output = 0
     lunch_id_1 = Menu.id_by_date(num, date, 1) #DWT fac
     lunch_id_2 = Menu.id_by_date(num, date, 3) #ECD fac
@@ -28,15 +74,26 @@ class LunchChoice < ActiveRecord::Base
     output  #Will output totals for all faculty in ECD and DWT regardless of sp. delivery status. 
   end
 
-  def self.all_faculty_count_by_date_and_grade(num, date, grade)
+  def self.all_faculty_count_by_date_and_grade(num, date, grade, decision = nil) 
+    exclude_fac = true if decision == "exclude_ecd_teachers"
     output = 0
-    ids = User.ids_in_grade(grade)
+    #Use nil for grade if not sp. delivery.
+    ids = User.ids_in_grade(grade)  
+    #We find ids for either faculty AND staff, or just staff
+    user_ids = (exclude_fac ?  User.ids_in_role("staff") : User.ids_in_role(["staff", "faculty"])) 
     lunch_id_1 = Menu.id_by_date(num, date, 1) #DWT fac
     lunch_id_2 = Menu.id_by_date(num, date, 3) #ECD fac
-    output += self.all.by_user_group(ids).where("lunch_id = ?", lunch_id_1).to_a.count
-    output += self.all.by_user_group(ids).where("lunch_id = ?", lunch_id_2).to_a.count
+    output += self.all.by_user_group(user_ids).by_user_group(ids).where("lunch_id = ?", lunch_id_1).to_a.count
+    output += self.all.by_user_group(user_ids).by_user_group(ids).where("lunch_id = ?", lunch_id_2).to_a.count
     output 
   end
+
+  def self.dwt_faculty(num, date)
+    lunch_id_1 = Menu.id_by_date(num, date, 1) #DWT fac
+    self.all.where("lunch_id = ?", lunch_id_1).to_a.count
+  end
+
+  ## ## ## ## ## ## ## ECD Faculty ## ## ## ## ## ## ## ## 
 
   def self.ecd_faculty(num, date, role, grade)
     grade_ids = User.ids_in_grade(grade)
@@ -45,17 +102,30 @@ class LunchChoice < ActiveRecord::Base
     self.all.by_user_group(ids).by_user_group(grade_ids).where("lunch_id = ?", lunch_id_2).to_a.count
   end
 
-  def self.dwt_faculty(num, date)
-    lunch_id_1 = Menu.id_by_date(num, date, 1) #DWT fac
-    self.all.where("lunch_id = ?", lunch_id_1).to_a.count
-  end
+  def self.ecd_faculty_column_totals(num, date, grade_range) 
+    grand_total = 0
+    i = 0
+    number_of_rows = grade_range.count
+    number_of_rows.times do 
+      grade = grade_range[i]
+      grand_total += self.ecd_faculty(num, date, "faculty", grade_range[i])
+      i += 1
+    end 
+    grand_total 
+  end 
+
+  def self.ecd_faculty_RH_sum(date, grade_range)
+    grand_total = 0
+    i = 0 
+    6.times do 
+      grand_total += self.ecd_faculty_column_totals(i, date, grade_range)
+      i += 1 
+    end 
+    grand_total 
+  end 
 
 
-  def self.count_by_date(num, date, menu_id)
-    lunch_id = Menu.id_by_date(num, date, menu_id)
-    self.all.where("lunch_id = ?", lunch_id).to_a.count
-  end  #Only used in the grand_totals method since it counts ALL faculty.
-  
+    ## ## ## ## ## ## ## Grand Totals Page ## ## ## ## ## ## ## ## 
 
   def self.big_lunch_totals(num, date) #Totals 5th through adult 
     big_lunches = 0
@@ -76,15 +146,6 @@ class LunchChoice < ActiveRecord::Base
     grand_total
   end
 
-  def self.faculty_lunch_RH_sum(date)
-    grand_total = 0 
-    i = 0 
-    6.times do 
-      grand_total += self.all_faculty_count_by_date_and_grade(i, date, nil)
-      i += 1
-    end
-    grand_total
-  end
 
    def self.column_totals(num, date)
     all_lunches = 0 
@@ -94,43 +155,7 @@ class LunchChoice < ActiveRecord::Base
     all_lunches
   end 
 
-  def self.dwt_student_column_totals(num, date)
-    grand_total = 0 
-    i = 1 # We start in 1st grade at DWT school. 
-    7.times do #Going down the num column, up the 7 grade levels. 
-      grand_total += LunchChoice.count_by_date_and_grade(num, date, 2, i) #num, date, menu, grade. 
-      i += 1
-    end
-    grand_total
-  end 
 
-  def self.dwt_student_RH_sum(date)
-    grand_total = 0 
-    i = 0 
-    6.times do #Going across the 6 column totals. 
-      grand_total += LunchChoice.dwt_student_column_totals(i, date)
-      i += 1
-    end
-    grand_total
-  end 
-#### Experiments past this point. 
-  def self.ecd_faculty_column_totals(num, date) 
-    grand_total = 0
-    i = 0
-    3.times do 
-      grand_total += self.ecd_faculty(num, @date, "faculty", i)
-      i += 1
-    end 
-    grand_total 
-  end 
-  def self.ecd_faculty_RH_sum(date)
-    grand_total = 0
-    i = 0 
-    6.times do 
-      grand_total += self.ecd_faculty_column_totals(i, @date)
-    end 
-    grand_total 
-  end 
 
   # def self.RH_sum(date, &block) 
   #   #num is always 0 here, since we're summing all the columns. 

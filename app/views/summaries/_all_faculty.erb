@@ -13,8 +13,8 @@
   <th>TOTAL</th>
 </tr>
 <tr>
-  <td>ECD staff</td> <!-- Here she wants just staff, not ECD faculty  -->
-  <td><%= LunchChoice.ecd_faculty(0, @date, "staff", nil)%></td>
+  <td>ECD staff</td> <!-- Here she wants just staff, not ECD faculty. Hence "exclude_ecd_teachers."  -->
+  <td><%= LunchChoice.ecd_faculty(0, @date, "staff", nil)%></td> 
   <td><%= LunchChoice.ecd_faculty(1, @date, "staff", nil)%></td>
   <td><%= LunchChoice.ecd_faculty(2, @date, "staff", nil)%></td>
   <td><%= LunchChoice.ecd_faculty(3, @date, "staff", nil)%></td>
@@ -32,11 +32,12 @@
 </tr>
 <tr>
   <td>TOTAL </td>
-  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(0, @date, nil)%></td>
-  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(1, @date, nil)%></td>
-  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(2, @date, nil)%></td>
-  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(4, @date, nil)%></td>
-  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(5, @date, nil)%></td>
-  <td><%= LunchChoice.faculty_lunch_RH_sum(@date)%></td>
+  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(0, @date, nil, "exclude_ecd_teachers")%></td>
+  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(1, @date, nil, "exclude_ecd_teachers")%></td>
+  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(2, @date, nil, "exclude_ecd_teachers")%></td>
+  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(3, @date, nil, "exclude_ecd_teachers")%></td>
+  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(4, @date, nil, "exclude_ecd_teachers")%></td>
+  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(5, @date, nil, "exclude_ecd_teachers")%></td>
+  <td><%= LunchChoice.faculty_lunch_RH_sum(@date, "exclude_ecd_teachers")%></td>
 </tr>
 </table>

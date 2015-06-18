@@ -77,12 +77,12 @@
 </tr>
 <tr>
   <td>TOTAL </td>
-  <td><%= LunchChoice.dwt_student_column_totals(0, @date)%></td>
-  <td><%= LunchChoice.dwt_student_column_totals(1, @date)%></td>
-  <td><%= LunchChoice.dwt_student_column_totals(2, @date)%></td>
-  <td><%= LunchChoice.dwt_student_column_totals(3, @date)%></td>
-  <td><%= LunchChoice.dwt_student_column_totals(4, @date)%></td>
-  <td><%= LunchChoice.dwt_student_column_totals(5, @date)%></td>
-  <td><%= LunchChoice.dwt_student_RH_sum(@date)%></td>
+  <td><%= LunchChoice.student_column_totals(0, @date, 2, Child::DWT_GRADES)%></td>
+  <td><%= LunchChoice.student_column_totals(1, @date, 2, Child::DWT_GRADES)%></td>
+  <td><%= LunchChoice.student_column_totals(2, @date, 2, Child::DWT_GRADES)%></td>
+  <td><%= LunchChoice.student_column_totals(3, @date, 2, Child::DWT_GRADES)%></td>
+  <td><%= LunchChoice.student_column_totals(4, @date, 2, Child::DWT_GRADES)%></td>
+  <td><%= LunchChoice.student_column_totals(5, @date, 2, Child::DWT_GRADES)%></td>
+  <td><%= LunchChoice.student_RH_sum(@date, 2, Child::DWT_GRADES, 6)%></td> 
 </tr>
 </table>

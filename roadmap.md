@@ -25,15 +25,11 @@
 - Take away grade, campus, and menu_id from User
 - Take away lunch choices from User
 - Add Lunch choices to Child. 
-* Change routes and views so that menu_id is not necessary in order to access menus page. 
+- Change routes and views so that menu_id is not necessary in order to access menus page. 
 - Add Child controller and child_index view accessible by parents who can see their own children. 
 - From the Child_index view, parents should be able to click on the correct menu for their child if child.menu.id != nil.  
 - Allow parents to choose menu items for all children. 
 - Parents should be able to edit their child's details. 
-* Parents should see a warning if their child doesn't have a menu_id. 
-* Update the rest of this roadmap with new structural considerations.
-* Upon first accessing the menu, faculty should be prompted to a define their name and campus. 
-* If faculty member has already signed up, 
 
 ## v0.7 - Admin menu, signin information, update user model for OU purposes (Friday, June 19)
 
@@ -44,28 +40,33 @@
 - Add campus scopes for ECD and DWT; 
 * Add alphabetical scope for user names; 
 * Allow users to edit their account info by clicking on their names.;
-* Create method to calculate user's grade based on the first four characters of their email and today's date.;
+* Create and implement method to calculate user's grade based on the first four characters of their email and today's date.;
 * Clean up notifications.;
-* SimpleForm
-* ActiveAdmin
 - Users should be automatically routed to the menu associated with them. 
 
 
-## v0.72 - Refactor (Friday, June 21)
+## v0.72 - (Sunday, June 21)
 
-* Clean up controllers. 
-* Delete unused partials. 
-* Create and enforce permissions for all users. 
-* Heroku soft deploy 
+- Heroku soft deploy 
+* SimpleForm
+* ActiveAdmin
+* Parents should see a warning if their child doesn't have a menu_id. 
+* Update the rest of this roadmap with new structural considerations.
+* Upon first accessing the menu, faculty should be prompted to a define their name and campus. 
+* If faculty member has already signed up, they should be able to change their name, campus, grade. 
 
 ## v0.8 - Roles, summaries (Friday, June 26)
 
 - Add lunch summaries controller and index pages. 
-* Add lunch summaries pages (2.0) ECD students, ECD faculty, DWT students, DWT faculty, Grand totals.; 
+- Add lunch summaries pages (2.0) ECD students, ECD faculty, DWT students, DWT faculty, Grand totals.; 
 - Menus should be available to users according to their role. (2.0).
+- Faculty should have a "grade" attribute so we can lump them in with their grade if 1-5. 
+* Admins should be able to create menus. 
 * Student menus should include Bagel choices every day, water milk or juice Mon-Thurs, water ch. milk or juice on Fri.
 * Faculty should have a "paid" attribute so we don't send lunches to unpaid accounts.
-* Faculty should have a "grade" attribute so we can lump them in with their grade if 1-5. 
+* Clean up controllers. 
+* Delete unused partials. 
+* Create and enforce permissions for all users. 
 
 
 ## v0.9 (Friday, July 3)

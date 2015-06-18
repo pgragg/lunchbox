@@ -12,8 +12,8 @@ class Child < ActiveRecord::Base
 
   scope :by_grade, ->(grade) { where(grade: grade)}
 
-  GRADES = %w[3s 4s k 1 2 3 4 5 6 7]
-  ECD_GRADES = %w[3s 4s k]
+  GRADES = %w[threes fours k 1 2 3 4 5 6 7]
+  ECD_GRADES = %w[threes fours k]
   DWT_GRADES = %w[1 2 3 4 5 6 7]
 
   def self.ids_in_grade(grade)
@@ -30,8 +30,8 @@ class Child < ActiveRecord::Base
     else 
       determinant = Random.rand(1..3)
       g = "k" if determinant == 3
-      g = "4s" if determinant == 2
-      g = "3s" if determinant == 1
+      g = "fours" if determinant == 2
+      g = "threes" if determinant == 1
     end 
     self.grade = g
   end
