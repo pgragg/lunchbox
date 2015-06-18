@@ -40,9 +40,46 @@ class Child < ActiveRecord::Base
     lunch_choices.where(lunch_id: lunch.id).last 
   end 
 
-  def choose_grade
-      self.grade ||= "7"
+  def self.month_correct(grade)
+    beginning_of_year = [6, 7, 8, 9, 10, 11, 12]
+    if beginning_of_year.include?(Time.now.month) 
+      grade += 1 
+    end 
+    grade 
   end 
+
+  def self.ecd_correct(grade)
+    case grade 
+       when 0
+        result = 'k'
+       when -1 
+        result = 'fours'
+       when -2 
+        result = 'threes'
+       else 
+        result = grade 
+      end 
+    result 
+  end 
+
+  def choose_grade 
+    if self.email.include?("@dwight.edu")
+      year = self.email.split('')[0..3].join.to_i 
+      return nil unless year.class == Fixnum 
+      years_til_grad = year - Time.now.year 
+      grade = 12-years_til_grad
+      grade = Child.month_correct(grade)
+      grade = Child.ecd_correct(grade)
+      self.grade = grade 
+    else 
+      self.grade = nil #could be a problem if choose_grade is hooked into updating faculty grades. 
+    end 
+  end 
+
+
+
+
+
   def choose_campus
     if Child::ECD_GRADES.include?(self.grade)
       self.campus = "ECD"
