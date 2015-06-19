@@ -16,8 +16,6 @@
   <%Child.by_grade(grade).each do |child| %>
     <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: child, date: @date}%> 
   <% end %>
-  <!-- Render the student totals partial for the grade. -->
-  <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: grade, type: "Students", date: @date}%>  
 <% end  %>
 <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: Child::ECD_GRADES, type: "Students", date: @date}%>
 </table>

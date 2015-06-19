@@ -117,11 +117,17 @@ menus = Menu.all
 date = menus[0].lunch_date_list[0]
 
 Summary.create!(date: date, name: "All Faculty") 
-Summary.create!(date: date, name: "Dwight Students")
-Summary.create!(date: date, name: "ECD Faculty")
+Summary.create!(date: date, name: "DWT Students")
+Summary.create!(date: date, name: "ECD Teachers")
 Summary.create!(date: date, name: "ECD Students")
-Summary.create!(date: date, name: "Dwight Students and Teachers (list)")
+Summary.create!(date: date, name: "DWT Students and Teachers (list)")
+Summary.create!(date: date, name: "ECD Teachers (list)")
+Summary.create!(date: date, name: "ECD Staff (list)")
+Summary.create!(date: date, name: "ECD Students (list)")
 Summary.create!(date: date, name: "Grand Totals")
+
+
+
 
 
  admin = User.new(

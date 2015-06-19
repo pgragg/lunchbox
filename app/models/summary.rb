@@ -12,14 +12,14 @@ class Summary < ActiveRecord::Base
                     "ecd_students"
                   when 5 
                     "dwight_students_and_teachers_list"
-                  when 6 
-                    "grand_totals"
-                  when 7
+                  when 6
                     "ecd_faculty_list"
-                  when 8
+                  when 7
                     "ecd_staff_list"
-                  when 9
+                  when 8
                     "ecd_student_list"
+                  when 9 
+                    "grand_totals"
     end
     "summaries/page_partials/#{suffix}"
   end 
