@@ -2,14 +2,14 @@
 
 <table class ="table"> 
 <tr>
-  <th><h3> DWT Students and Teachers list </h3></th>
+  <th><h3> DWT Students and Teachers list</h3></th>
+  <th> Grade </th> 
   <th><%=Menu.lunch_name_on(0, @date, 2)%> </th>
   <th><%=Menu.lunch_name_on(1, @date, 2)%> </th>
   <th><%=Menu.lunch_name_on(2, @date, 2)%> </th>
   <th><%=Menu.lunch_name_on(3, @date, 2)%> </th>
   <th><%=Menu.lunch_name_on(4, @date, 2)%> </th>
   <th><%=Menu.lunch_name_on(5, @date, 2)%> </th>
-  <th>TOTAL</th>
 </tr>
 
 <%Child::DWT_GRADES.each do |grade|%>
@@ -20,15 +20,15 @@
   <%User.by_grade(grade).each do |user| %>
     <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: user, date: @date}%> 
   <% end %>
-    <!-- Render the student totals partial for the grade. -->
-    <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: grade, type: "child", date: @date}%>  
-    <!-- Render the teacher totals partial for the grade. -->
-    <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: grade, type: "faculty", date: @date}%>  
-    <!-- Render the grand totals partial for the grade.  -->
-    <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: grade, type: nil, date: @date}%>  
+  <!-- Render the student totals partial for the grade. -->
+  <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: grade, type: "Students", date: @date}%>  
+  <!-- Render the teacher totals partial for the grade. -->
+  <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: grade, type: "Teachers", date: @date}%>  
+  <!-- Render the grand totals partial for the grade.  -->
+  <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: grade, type: "Grand", date: @date}%>  
 <% end  %>
-<%= render partial: 'summaries/line_partials/totals_row', locals: {grade: [1,2,3,4], type: "child", date: @date}%>
-<%= render partial: 'summaries/line_partials/totals_row', locals: {grade: [5,6,7], type: "child", date: @date}%>
-<%= render partial: 'summaries/line_partials/totals_row', locals: {grade: Child::DWT_GRADES, type: "faculty", date: @date}%>
-<%= render partial: 'summaries/line_partials/totals_row', locals: {grade: Child::DWT_GRADES, type: nil, date: @date}%>
+<%= render partial: 'summaries/line_partials/totals_row', locals: {grade: %w[1 2 3 4], type: "Students", date: @date}%>
+<%= render partial: 'summaries/line_partials/totals_row', locals: {grade: %w[5 6 7], type: "Students", date: @date}%>
+<%= render partial: 'summaries/line_partials/totals_row', locals: {grade: Child::DWT_GRADES, type: "Teachers", date: @date}%>
+<%= render partial: 'summaries/line_partials/totals_row', locals: {grade: Child::DWT_GRADES, type: "Grand", date: @date}%>
 </table>

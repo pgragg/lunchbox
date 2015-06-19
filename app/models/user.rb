@@ -42,8 +42,9 @@ class User < ActiveRecord::Base
   end 
 
   def choice_for?(date, lunch_id)
-    lunches = Lunch.by_menu(2).by_day(date).to_a
-    return (self.chose(lunches[lunch_id]) ? "1" : "") 
+    lunches = Lunch.by_menu(1).by_day(date).to_a if self.campus == "DWT"
+    lunches = Lunch.by_menu(3).by_day(date).to_a if self.campus == "ECD"
+    (self.chose(lunches[lunch_id]) == nil ? "" : "1") 
   end
 
   def chose(lunch)
@@ -71,6 +72,14 @@ class User < ActiveRecord::Base
   def dwt_sp_deliv 
     User.by_role('faculty').by_grade(Child::DWT_GRADES)
   end 
+  
+  def choose_campus
+    if Child::ECD_GRADES.include?(self.grade)
+      self.campus = "ECD"
+    else 
+      self.campus = "DWT"
+    end 
+  end
 
   private 
   

@@ -25,8 +25,9 @@ class Child < ActiveRecord::Base
   end 
 
   def choice_for?(date, lunch_id)
-    lunches = Lunch.by_menu(2).by_day(date).to_a
-    return (self.chose(lunches[lunch_id]) ? "1" : "") 
+    lunches = Lunch.by_menu(2).by_day(date).to_a if self.campus == "DWT"
+    lunches = Lunch.by_menu(4).by_day(date).to_a if self.campus == "ECD"
+    (self.chose(lunches[lunch_id]) == nil ? "" : "1") 
   end
 
   def choose_seed_grade #Just using this for the seeds.rb file to determine a random campus for students. 
@@ -42,7 +43,11 @@ class Child < ActiveRecord::Base
   end
 
   def chose(lunch)
-    lunch_choices.where(lunch_id: lunch.id).last if lunch 
+    if lunch 
+      lunch_choices.where(lunch_id: lunch.id).last 
+    else 
+      false 
+    end 
   end 
 
   def choose_grade

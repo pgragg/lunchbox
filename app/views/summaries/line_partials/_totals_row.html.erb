@@ -1,0 +1,21 @@
+ <tr> 
+  <td> <%="#{grade} Gr-#{type}"%></td>
+  <td> TOTALS </td> 
+  <%i = 0 %> 
+  <% 6.times do %> <!-- Once for each lunch choice. I really need a helper method here.--> 
+    <!-- i stands for lunch number.  -->
+      <% if type == "Students"%>
+      <td> <%= LunchChoice.count_by_date_and_grade(i, date, (Menu.id_for(grade, type)), grade)%></td> 
+      <% elsif type == "Teachers" %> 
+      <td> <%= LunchChoice.all_faculty_count_by_date_and_grade(i, date, grade, decision = nil) %></td> 
+      <% else%> 
+      <td> <%= LunchChoice.faculty_and_students_by_date_and_grade(i, date, grade) %></td> 
+      <% end %>
+    <%i += 1 %>
+
+  <% end %> 
+</tr>
+
+
+
+
