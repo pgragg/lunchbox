@@ -25,11 +25,11 @@ parents = User.all
 
 def create_faculty_sample 
   user = User.new(
-    first_name:     Faker::Name.name.split(' ')[0],
-    last_name:     Faker::Name.name.split(' ')[1],
+    first_name:  Faker::Name.name.split(' ')[0],
+    last_name:  Faker::Name.name.split(' ')[1],
     email:    Faker::Internet.email,
     password: "password",#Faker::Lorem.characters(10),
-    grade: [nil, "threes", "4", "6"].sample,
+    grade: [nil, "threes", "k", "4", "6", "7", nil].sample,
     role: "faculty" #([true, false].sample ? "faculty" : "student")
    )
   user.choose_campus
@@ -50,12 +50,13 @@ end
 #####Creating children 
 
 parents.each do |parent| 
-  parent.children.create(grade: 'threes', campus:'ECD', first_name: Faker::Address.state, last_name: Faker::Address.city_prefix )
-  parent.children.create(grade: '4', campus:'DWT', first_name: Faker::Address.state, last_name: Faker::Address.city_prefix)
-  parent.children.create(grade: '7', campus:'DWT', first_name: Faker::Address.state, last_name: Faker::Address.city_prefix)
+  parent.children.create(grade: Child::GRADES.sample, first_name: Faker::Address.state, last_name: Faker::Address.city_prefix )
 end 
+children = Child.all
 
- children = Child.all
+children.each do |child| 
+    child.choose_campus
+end 
 
 #####Creating menus 
 
@@ -111,28 +112,16 @@ children.each do |child|
 
 ####### Creating summary models.  
 
-Summary.create!(date: Date.today, name: "All Faculty") #This just starts the summary on a date. 
-Summary.create!(date: Date.today, name: "Dwight Students")
-Summary.create!(date: Date.today, name: "ECD Faculty")
-Summary.create!(date: Date.today, name: "ECD Students")
-Summary.create!(date: Date.today, name: "Dwight Students and Teachers (list)")
-Summary.create!(date: Date.today, name: "Grand Totals")
+menus = Menu.all 
 
+date = menus[0].lunch_date_list[0]
 
-user = User.new(
-     first_name:"Piper",
-     last_name: "Gragg",
-     email:     "pipergragg@gmail.com",
-     password:  "password",#Faker::Lorem.characters(10),
-     campus:    (flip_a_coin ? "DWT" : "ECD"),
-     role:      "faculty"
-   )
-  
-   user.define_menu_id # If I try to make this contingent on the user being a certain kind of user, the CAMPUS gets screwed up (possible "t" or "f" instead of "DWT" or "ECD")
-   #user.skip_confirmation!
-
-   user.save!
-
+Summary.create!(date: date, name: "All Faculty") 
+Summary.create!(date: date, name: "Dwight Students")
+Summary.create!(date: date, name: "ECD Faculty")
+Summary.create!(date: date, name: "ECD Students")
+Summary.create!(date: date, name: "Dwight Students and Teachers (list)")
+Summary.create!(date: date, name: "Grand Totals")
 
 
  admin = User.new(

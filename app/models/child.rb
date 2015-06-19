@@ -73,17 +73,19 @@ class Child < ActiveRecord::Base
   end 
 
   def choose_grade 
-    if self.email.include?("@dwight.edu")
-      year = self.email.split('')[0..3].join.to_i 
-      return nil unless year.class == Fixnum 
-      years_til_grad = year - Time.now.year 
-      grade = 12-years_til_grad
-      grade = Child.month_correct(grade)
-      grade = Child.ecd_correct(grade)
-      self.grade = grade 
+    if self.email 
+      if self.email.include?("@dwight.edu")
+        year = self.email.split('')[0..3].join.to_i 
+        return nil unless year.class == Fixnum 
+        years_til_grad = year - Time.now.year 
+        grade = 12-years_til_grad
+        grade = Child.month_correct(grade)
+        grade = Child.ecd_correct(grade)
+        self.grade = grade 
+      end 
     else 
       self.grade = nil #could be a problem if choose_grade is hooked into updating faculty grades. 
-    end 
+    end
   end 
 
 
