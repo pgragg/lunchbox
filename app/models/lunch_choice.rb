@@ -20,8 +20,8 @@ class LunchChoice < ActiveRecord::Base
 
   def self.count_by_date_and_grade(num, date, menu_id, grade)
     ids = Child.ids_in_grade(grade)
-    lunch_id = Menu.id_by_date(num, date, menu_id)
-    self.all.where("lunch_id = ?", lunch_id).by_child_group(ids).to_a.count
+    lunch_id = Menu.lunch_by_date(num, date, menu_id).id
+    self.by_child_group(ids).where("lunch_id = ?", lunch_id).to_a.count
   end 
 
   def self.count_by_date(num, date, menu_id)
@@ -155,21 +155,15 @@ class LunchChoice < ActiveRecord::Base
     all_lunches
   end 
 
-
-
-  # def self.RH_sum(date, &block) 
-  #   #num is always 0 here, since we're summing all the columns. 
-  #   grand_total = 0  #Iterates through the columns, starting on 0th. 
-  #   6.times do 
-  #     grand_total += self.send(capture(&block(date))) 
-  #     i += 1
-  #   end
-  #   grand_total
-  # end
-
-  # LunchChoice.RH_sum(:column_totals, 0, @date)  
-
- 
+  def self.faculty_and_students_by_date_and_grade(num, date, grade) 
+    output = 0
+    faculty_ids = User.ids_in_grade(grade)  
+    faculty_menu_id = Menu.id_for(grade, "Teachers") 
+    faculty_lunch_id =  Menu.id_by_date(num, date, faculty_menu_id)
+    output += self.all.by_user_group(faculty_ids).where("lunch_id = ?", faculty_lunch_id).to_a.count
+    output += LunchChoice.count_by_date_and_grade(num, date, (Menu.id_for(grade, "Students")), grade)
+    output 
+  end
 
 end
 

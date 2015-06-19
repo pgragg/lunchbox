@@ -14,7 +14,8 @@ Summary.delete_all
 
 def create_parent_sample 
   user = User.new(
-     name:     Faker::Name.name,
+     first_name:     Faker::Name.name.split(' ')[0],
+     last_name:     Faker::Name.name.split(' ')[1],
      email:    Faker::Internet.email,
      password: "password",#Faker::Lorem.characters(10),
    )
@@ -24,31 +25,35 @@ parents = User.all
 
 def create_faculty_sample 
   user = User.new(
-     name:     Faker::Name.name,
-     email:    Faker::Internet.email,
-     password: "password",#Faker::Lorem.characters(10),
-     campus:  ([true, false].sample ? "DWT" : "ECD"),
-     role: "faculty" #([true, false].sample ? "faculty" : "student")
+    first_name:     Faker::Name.name.split(' ')[0],
+    last_name:     Faker::Name.name.split(' ')[1],
+    email:    Faker::Internet.email,
+    password: "password",#Faker::Lorem.characters(10),
+    grade: [nil, "threes", "4", "6"].sample,
+    role: "faculty" #([true, false].sample ? "faculty" : "student")
    )
-   user.define_menu_id
-   user.save! 
+  user.choose_campus
+  user.define_menu_id
+  user.save! 
 end 
 
 #####Creating parents and faculty 
 
 faculty = User.all.where("role = ?", 'faculty')
 20.times do
-   create_parent_sample
-   create_faculty_sample
+  create_parent_sample
  end
+40.times do 
+  create_faculty_sample
+end 
 
 #####Creating children 
 
- parents.each do |parent| 
+parents.each do |parent| 
   parent.children.create(grade: 'threes', campus:'ECD', first_name: Faker::Address.state, last_name: Faker::Address.city_prefix )
   parent.children.create(grade: '4', campus:'DWT', first_name: Faker::Address.state, last_name: Faker::Address.city_prefix)
   parent.children.create(grade: '7', campus:'DWT', first_name: Faker::Address.state, last_name: Faker::Address.city_prefix)
- end 
+end 
 
  children = Child.all
 
@@ -115,11 +120,12 @@ Summary.create!(date: Date.today, name: "Grand Totals")
 
 
 user = User.new(
-     name:     "Piper Gragg",
-     email:    "pipergragg@gmail.com",
-     password: "password",#Faker::Lorem.characters(10),
-     campus:  (flip_a_coin ? "DWT" : "ECD"),
-     role: "faculty"
+     first_name:"Piper",
+     last_name: "Gragg",
+     email:     "pipergragg@gmail.com",
+     password:  "password",#Faker::Lorem.characters(10),
+     campus:    (flip_a_coin ? "DWT" : "ECD"),
+     role:      "faculty"
    )
   
    user.define_menu_id # If I try to make this contingent on the user being a certain kind of user, the CAMPUS gets screwed up (possible "t" or "f" instead of "DWT" or "ECD")
@@ -130,10 +136,11 @@ user = User.new(
 
 
  admin = User.new(
-   name:     'Admin User',
-   email:    'admin@example.com',
-   password: 'password',
-   role:     'admin'
+   first_name: 'Admin',
+   last_name:  'User',
+   email:      'admin@example.com',
+   password:   'password',
+   role:       'admin'
  )
  #admin.skip_confirmation!
  admin.save!
@@ -148,7 +155,7 @@ puts "--------------------------------"
 puts "Created the following users"
 
 population.each do |user|
-  print "#{user.name}'s email: #{user.email}."
+  print "#{user.first_name}'s email: #{user.email}."
   if user.role != nil 
     print "(**#{user.role}**)"
   end 

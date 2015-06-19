@@ -10,7 +10,21 @@ class Menu < ActiveRecord::Base
     lunch = self.lunch_by_date(num, date, menu_id)
     if lunch
       return lunch.id 
+    else 
+      nil
     end
+  end 
+
+  def self.id_for(grade, type)
+    campus = "DWT"
+    campus = "ECD" if Child::ECD_GRADES.include?(grade)
+    case type 
+          when "Students"
+          output = (campus == "ECD" ? 4 : 2)
+          when "Teachers"
+          output = (campus == "ECD" ? 3 : 1)
+    end 
+    output 
   end 
 
   def self.lunch_name_on(num, date, menu_id)

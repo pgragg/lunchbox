@@ -1,14 +1,14 @@
 <tr> 
   <td> <%="#{user.first_name} #{user.last_name}"%></td>
   <td> <%="#{user.grade}"%> </td> <!-- Could be updated later to add teacher or faculty status to people.  -->
-  <% 5.times do %> 
-    <%i = 1 %>
-  <td> <%= row_marker(user, date, i) %></td> 
+
+  <%i = 0 %> 
+  <% 6.times do %> <!-- Once for each lunch choice. --> 
+    <!-- i stands for lunch number.  -->
+      <td> <%= user.choice_for?(date, i) %></td> 
     <%i += 1 %>
   <% end %> 
 </tr>
-
-
 
 
 
