@@ -14,69 +14,64 @@
   </tr>
   <tr>
     <td>ECD </td>
-    <td><%= LunchChoice.count_by_date(0, @date, 4)%></td>
-    <td><%= LunchChoice.count_by_date(1, @date, 4)%></td>
-    <td><%= LunchChoice.count_by_date(2, @date, 4)%></td>
-    <td><%= LunchChoice.count_by_date(3, @date, 4)%> </td>
-    <td><%= LunchChoice.count_by_date(4, @date, 4)%></td>
-    <td><%= LunchChoice.count_by_date(5, @date, 4)%> </td>
-    <td>TOTAL</td>
-  </tr>
-<!-- def self.count_by_date_and_grade(num, date, menu_id, grade)
-    ids = Child.ids_in_grade(grade)
-    lunch_id = Menu.id_by_date(num, date, menu_id)
-    self.all.where("lunch_id = ?", lunch_id).by_grade(ids).to_a.count
-  end  -->
+    <td><%= LunchChoice.count_by_date_and_grade(0, @date, 4, Child::ECD_GRADES, "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(1, @date, 4, Child::ECD_GRADES, "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(2, @date, 4, Child::ECD_GRADES, "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(3, @date, 4, Child::ECD_GRADES, "students")%> </td>
+    <td><%= LunchChoice.count_by_date_and_grade(4, @date, 4, Child::ECD_GRADES, "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(5, @date, 4, Child::ECD_GRADES, "students")%> </td>
+    <td><%=LunchChoice.sum(6, @date, 4, Child::ECD_GRADES, "students"){|x,y,a,b,c|LunchChoice.count_by_date_and_grade(x, y, a, b, c) }%></td>
+  </tr>  <!-- self.count_by_date_and_grade(num, date, menu_id, grade_range, role, decision=nil) -->
 
   <tr>
     <td>DWT 1-4 </td>
-    <td><%= LunchChoice.count_by_date_and_grade(0, @date, 2, [1,2,3,4])%></td>
-    <td><%= LunchChoice.count_by_date_and_grade(1, @date, 2, [1,2,3,4])%></td>
-    <td><%= LunchChoice.count_by_date_and_grade(2, @date, 2, [1,2,3,4])%></td>
-    <td><%= LunchChoice.count_by_date_and_grade(3, @date, 2, [1,2,3,4])%></td>
-    <td><%= LunchChoice.count_by_date_and_grade(4, @date, 2, [1,2,3,4])%></td>
-    <td><%= LunchChoice.count_by_date_and_grade(5, @date, 2, [1,2,3,4])%></td>
-    <td>TOTAL</td>
+    <td><%= LunchChoice.count_by_date_and_grade(0, @date, 2, [1,2,3,4], "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(1, @date, 2, [1,2,3,4], "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(2, @date, 2, [1,2,3,4], "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(3, @date, 2, [1,2,3,4], "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(4, @date, 2, [1,2,3,4], "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(5, @date, 2, [1,2,3,4], "students")%></td>
+    <td><%=LunchChoice.sum(6, @date, 2, [1,2,3,4], "students"){|x,y,a,b,c|LunchChoice.count_by_date_and_grade(x, y, a, b, c) }%></td>
   </tr>
   <tr>
     <td>DWT 5-7 </td>
-    <td><%= LunchChoice.count_by_date_and_grade(0, @date, 2, [5,6,7])%></td>
-    <td><%= LunchChoice.count_by_date_and_grade(1, @date, 2, [5,6,7])%></td>
-    <td><%= LunchChoice.count_by_date_and_grade(2, @date, 2, [5,6,7])%></td>
-    <td><%= LunchChoice.count_by_date_and_grade(3, @date, 2, [5,6,7])%> </td>
-    <td><%= LunchChoice.count_by_date_and_grade(4, @date, 2, [5,6,7])%></td>
-    <td><%= LunchChoice.count_by_date_and_grade(5, @date, 2, [5,6,7])%></td>
-    <td>TOTAL</td>
+    <td><%= LunchChoice.count_by_date_and_grade(0, @date, 2, [5,6,7], "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(1, @date, 2, [5,6,7], "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(2, @date, 2, [5,6,7], "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(3, @date, 2, [5,6,7], "students")%> </td>
+    <td><%= LunchChoice.count_by_date_and_grade(4, @date, 2, [5,6,7], "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(5, @date, 2, [5,6,7], "students")%></td>
+    <td><%=LunchChoice.sum(6, @date, 2, [5,6,7], "students"){|x,y,a,b,c|LunchChoice.count_by_date_and_grade(x, y, a, b, c) }%></td>
   </tr>
   <tr>
     <td>DWT/ECD Fac </td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(0, @date, nil)%></td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(1, @date, nil)%></td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(2, @date, nil)%></td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(3, @date, nil)%></td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(4, @date, nil)%></td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(5, @date, nil)%></td>
-    <td>TOTAL</td>
+    <td><%=LunchChoice.count_by_date_and_grade(0, @date, [1, 3], nil, "faculty")%></td>
+    <td><%=LunchChoice.count_by_date_and_grade(1, @date, [1, 3], nil, "faculty")%></td>
+    <td><%=LunchChoice.count_by_date_and_grade(2, @date, [1, 3], nil, "faculty")%></td>
+    <td><%=LunchChoice.count_by_date_and_grade(3, @date, [1, 3], nil, "faculty")%></td>
+    <td><%=LunchChoice.count_by_date_and_grade(4, @date, [1, 3], nil, "faculty")%></td>
+    <td><%=LunchChoice.count_by_date_and_grade(5, @date, [1, 3], nil, "faculty")%></td>
+    <td><%=LunchChoice.sum(6, @date, [1, 3], nil, "faculty"){|x,y,a,b,c|LunchChoice.count_by_date_and_grade(x, y, a, b, c) }%></td>
   </tr>
-  <tr>
+  <tr> <!-- num, date, menu_id, grade_range, role, decision=nil -->
     <td>ECD sp. deliv </td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(0, @date, Child::ECD_GRADES)%></td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(1, @date, Child::ECD_GRADES)%></td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(2, @date, Child::ECD_GRADES)%></td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(3, @date, Child::ECD_GRADES)%></td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(4, @date, Child::ECD_GRADES)%></td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(5, @date, Child::ECD_GRADES)%></td>
-    <td>TOTAL</td>
+    <td><%=LunchChoice.count_by_date_and_grade(0, @date, 3, Child::ECD_GRADES, "faculty")%></td>
+    <td><%=LunchChoice.count_by_date_and_grade(1, @date, 3, Child::ECD_GRADES, "faculty")%></td>
+    <td><%=LunchChoice.count_by_date_and_grade(2, @date, 3, Child::ECD_GRADES, "faculty")%></td>
+    <td><%=LunchChoice.count_by_date_and_grade(3, @date, 3, Child::ECD_GRADES, "faculty")%></td>
+    <td><%=LunchChoice.count_by_date_and_grade(4, @date, 3, Child::ECD_GRADES, "faculty")%></td>
+    <td><%=LunchChoice.count_by_date_and_grade(5, @date, 3, Child::ECD_GRADES, "faculty")%></td>
+    <td><%=LunchChoice.sum(6, @date, 3, Child::ECD_GRADES, "faculty"){|x,y,a,b,c|LunchChoice.count_by_date_and_grade(x, y, a, b, c) }%></td>
   </tr>
   <tr>
     <td>DWT sp. deliv </td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(0, @date, Child::DWT_GRADES)%></td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(1, @date, Child::DWT_GRADES)%></td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(2, @date, Child::DWT_GRADES)%></td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(3, @date, Child::DWT_GRADES)%></td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(4, @date, Child::DWT_GRADES)%></td>
-    <td><%=LunchChoice.all_faculty_count_by_date_and_grade(5, @date, Child::DWT_GRADES)%></td>
-    <td>TOTAL</td>
+    <td><%=LunchChoice.count_by_date_and_grade(0, @date, 1, Child::DWT_GRADES, "faculty")%></td>
+    <td><%=LunchChoice.count_by_date_and_grade(1, @date, 1, Child::DWT_GRADES, "faculty")%></td>
+    <td><%=LunchChoice.count_by_date_and_grade(2, @date, 1, Child::DWT_GRADES, "faculty")%></td>
+    <td><%=LunchChoice.count_by_date_and_grade(3, @date, 1, Child::DWT_GRADES, "faculty")%></td>
+    <td><%=LunchChoice.count_by_date_and_grade(4, @date, 1, Child::DWT_GRADES, "faculty")%></td>
+    <td><%=LunchChoice.count_by_date_and_grade(5, @date, 1, Child::DWT_GRADES, "faculty")%></td>
+    <td><%=LunchChoice.sum(6, @date, 1, Child::DWT_GRADES, "faculty"){|x,y,a,b,c|LunchChoice.count_by_date_and_grade(x, y, a, b, c) }%></td>
   </tr>
   <tr>
     <th>Portion Totals </th>
@@ -86,27 +81,27 @@
     <th><%=Menu.lunch_name_on(3, @date, 4)%></th>
     <th><%=Menu.lunch_name_on(4, @date, 4)%></th>
     <th><%=Menu.lunch_name_on(5, @date, 4)%></th>
-    <th>TOTAL</th>
+    <th>Portion Totals</th>
   </tr>
   <tr>
     <td>Pre-k + K </td>
-    <td><%= LunchChoice.count_by_date(0, @date, 4)%></td>
-    <td><%= LunchChoice.count_by_date(1, @date, 4)%></td>
-    <td><%= LunchChoice.count_by_date(2, @date, 4)%></td>
-    <td><%= LunchChoice.count_by_date(3, @date, 4)%> </td>
-    <td><%= LunchChoice.count_by_date(4, @date, 4)%></td>
-    <td><%= LunchChoice.count_by_date(5, @date, 4)%> </td>
-    <td>TOTAL</td>
+    <td><%= LunchChoice.count_by_date_and_grade(0, @date, 4, Child::ECD_GRADES, "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(1, @date, 4, Child::ECD_GRADES, "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(2, @date, 4, Child::ECD_GRADES, "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(3, @date, 4, Child::ECD_GRADES, "students")%> </td>
+    <td><%= LunchChoice.count_by_date_and_grade(4, @date, 4, Child::ECD_GRADES, "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(5, @date, 4, Child::ECD_GRADES, "students")%> </td>
+    <td><%=LunchChoice.sum(6, @date, 4, Child::ECD_GRADES, "students"){|x,y,a,b,c|LunchChoice.count_by_date_and_grade(x, y, a, b, c) }%></td>
   </tr>
   <tr>
     <td>1st - 4th </td>
-    <td><%= LunchChoice.count_by_date_and_grade(0, @date, 2, [1,2,3,4])%></td>
-    <td><%= LunchChoice.count_by_date_and_grade(1, @date, 2, [1,2,3,4])%></td>
-    <td><%= LunchChoice.count_by_date_and_grade(2, @date, 2, [1,2,3,4])%></td>
-    <td><%= LunchChoice.count_by_date_and_grade(3, @date, 2, [1,2,3,4])%></td>
-    <td><%= LunchChoice.count_by_date_and_grade(4, @date, 2, [1,2,3,4])%></td>
-    <td><%= LunchChoice.count_by_date_and_grade(5, @date, 2, [1,2,3,4])%></td>
-    <td>TOTAL</td>
+    <td><%= LunchChoice.count_by_date_and_grade(0, @date, 2, [1,2,3,4], "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(1, @date, 2, [1,2,3,4], "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(2, @date, 2, [1,2,3,4], "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(3, @date, 2, [1,2,3,4], "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(4, @date, 2, [1,2,3,4], "students")%></td>
+    <td><%= LunchChoice.count_by_date_and_grade(5, @date, 2, [1,2,3,4], "students")%></td>
+    <td><%=LunchChoice.sum(6, @date, 2, [1,2,3,4], "students"){|x,y,a,b,c|LunchChoice.count_by_date_and_grade(x, y, a, b, c) }%></td>
   </tr>
   <tr>
     <td>5th-adult </td>
@@ -116,17 +111,17 @@
     <td><%=LunchChoice.big_lunch_totals(3, @date)%></td>
     <td><%=LunchChoice.big_lunch_totals(4, @date)%></td>
     <td><%=LunchChoice.big_lunch_totals(5, @date)%></td>
-    <td>TOTAL</td>
+    <td><%=LunchChoice.sum(6, @date){|x,y|LunchChoice.big_lunch_totals(x, y) }%></td>
   </tr>
-  <tr>
-    <td>TOTALS</td>
-    <td><%=LunchChoice.column_totals(0, @date)%></td>
-    <td><%=LunchChoice.column_totals(1, @date)%></td>
-    <td><%=LunchChoice.column_totals(2, @date)%></td>
-    <td><%=LunchChoice.column_totals(3, @date)%></td>
-    <td><%=LunchChoice.column_totals(4, @date)%></td>
-    <td><%=LunchChoice.column_totals(5, @date)%></td>
-    <td><%=LunchChoice.all.by_date(@date).count%></td>
+  <tr><!-- num, date, menu_id, grade_range, role. "Grand" role counts fac and students. -->
+    <td>TOTALS</td> 
+    <td><%=LunchChoice.agnostic_column_totals(0, @date)%></td>
+    <td><%=LunchChoice.agnostic_column_totals(1, @date)%></td>
+    <td><%=LunchChoice.agnostic_column_totals(2, @date)%></td>
+    <td><%=LunchChoice.agnostic_column_totals(3, @date)%></td>
+    <td><%=LunchChoice.agnostic_column_totals(4, @date)%></td>
+    <td><%=LunchChoice.agnostic_column_totals(5, @date)%></td>
+    <td><%=LunchChoice.sum(6, @date){|x,y|LunchChoice.agnostic_column_totals(x, y) }%></td>
   </tr>
   </table> 
 </div>

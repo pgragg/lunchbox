@@ -84,13 +84,9 @@ class Child < ActiveRecord::Base
         self.grade = grade 
       end 
     else 
-      self.grade = nil #could be a problem if choose_grade is hooked into updating faculty grades. 
+      self.grade ||= nil #could be a problem if choose_grade is hooked into updating faculty grades. 
     end
   end 
-
-
-
-
 
   def choose_campus
     if Child::ECD_GRADES.include?(self.grade)

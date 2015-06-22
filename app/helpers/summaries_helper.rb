@@ -7,35 +7,31 @@ module SummariesHelper
     end 
   end 
 
-  def render_appropriate_cells(date, grade, type)
+  def display_all(collection)
+    collection.collect {|value| 
+      content_tag(:td, value.to_s.html_safe)}
+    collection.to_s.html_safe
+  end
 
+  def render_appropriate_cells(date, grade, role)
     i = 0 
-    output = ""
+    output = []
     6.times do 
-
-      tcell = content_tag :td do 
-        case type 
-          when "Students"
-            LunchChoice.count_by_date_and_grade(i, date, (Menu.id_for(grade, type)), grade)
-          when "Teachers"
-            LunchChoice.all_faculty_count_by_date_and_grade(i, date, grade, decision = nil)
-          when "Staff"
-            LunchChoice.all_faculty_count_by_date_and_grade(i, date, grade, decision = nil)
-            #something else needs to go here.
-          else 
-            LunchChoice.faculty_and_students_by_date_and_grade(i, date, grade)
+        if role == "grand"
+          #Do Grand thing 
+        else #Role here is "students" or "faculty"
+          output << LunchChoice.column_totals(i, date, Menu.id_for(grade, role), grade, role)
         end 
-        output << tcell.to_s.html_safe
-
-      end 
     i += 1
     end 
-
-  content_tag :table, output.html_safe
+     
+  display_all(output)
   end 
+    
 
 
 end 
+
 
 
 # def display_standard_table(columns, collection = {})

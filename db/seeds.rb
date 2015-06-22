@@ -73,7 +73,7 @@ end
 children = Child.all
 
 children.each do |child| 
-    child.choose_campus
+    child.define_menu_id
 end 
 
 #####Creating menus 

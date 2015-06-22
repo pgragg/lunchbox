@@ -15,25 +15,24 @@ class Menu < ActiveRecord::Base
     end
   end 
 
-  def self.id_for(grade, type)
+  def self.id_for(grade, role)
     campus = "DWT"
     campus = "ECD" if Child::ECD_GRADES.include?(grade)
-    case type 
-          when "Students"
+    case role 
+          when "students"
           output = (campus == "ECD" ? 4 : 2)
-          when "Teachers"
+          when "faculty"
           output = (campus == "ECD" ? 3 : 1)
     end 
     output 
   end 
 
-  def self.lunch_name_on(num, date, menu_id)
+  def self.lunch_name_on(num, date, menu_id) #This method exists because it protects the output against nil. 
     lunch = self.lunch_by_date(num, date, menu_id)
     if lunch 
       return lunch.name
     end 
   end 
-
 
   def lunch_date_list
     dates = Array.new 

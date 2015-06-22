@@ -17,7 +17,7 @@
     <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: user, date: @date}%> 
   <% end %>
   <!-- Render the teacher totals partial for the grade. -->
-  <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: grade, type: "Teachers", date: @date}%>  
+  <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: grade, role: "Faculty", date: @date}%>  
 <% end  %>
-<%= render partial: 'summaries/line_partials/totals_row', locals: {grade: Child::ECD_GRADES, type: "Teachers", date: @date}%>
+<%= render partial: 'summaries/line_partials/totals_row', locals: {grade: Child::ECD_GRADES, role: "Faculty", date: @date}%>
 </table>
