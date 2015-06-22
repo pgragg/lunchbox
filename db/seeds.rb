@@ -37,15 +37,33 @@ def create_faculty_sample
   user.save! 
 end 
 
+def create_staff_sample 
+  user = User.new(
+    first_name:  Faker::Name.name.split(' ')[0],
+    last_name:  Faker::Name.name.split(' ')[1],
+    email:    Faker::Internet.email,
+    password: "password",
+    grade: [nil],
+    role: "staff",
+    campus: ["ECD", "DWT"].sample 
+   )
+  user.define_menu_id
+  user.save! 
+end 
+
 #####Creating parents and faculty 
 
-faculty = User.all.where("role = ?", 'faculty')
+
 20.times do
   create_parent_sample
  end
 40.times do 
   create_faculty_sample
+  create_staff_sample
 end 
+
+faculty = User.all.where("role = ?", 'faculty')
+staff = User.all.where("role = ?", 'staff')
 
 #####Creating children 
 
@@ -89,26 +107,19 @@ i = 0
 end 
 
 ######Ordering lunches for children and faculty
+lunch_users = [children, faculty, staff]
 
-children.each do |child|
-   menu = Menu.find(child.menu_id)
+lunch_users.each do |unit|
+  unit.each do |user|
+   menu = Menu.find(user.menu_id)
    i = 0
    29.times do 
      date = menu.lunch_date_list[i]
-     child.lunch_choices.create(lunch: menu.lunches.by_day(date)[rand(0..5)], date: date)
+     user.lunch_choices.create(lunch: menu.lunches.by_day(date)[rand(0..5)], date: date)
      i += 1
    end
  end 
-
- faculty.each do |fac|
-   menu = Menu.find(fac.menu_id)
-   i = 0
-   29.times do 
-     date = menu.lunch_date_list[i]
-     fac.lunch_choices.create(lunch: menu.lunches.by_day(date)[rand(0..5)], date: date)
-     i += 1
-   end
- end 
+end 
 
 ####### Creating summary models.  
 

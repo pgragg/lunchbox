@@ -67,10 +67,10 @@ class LunchChoice < ActiveRecord::Base
 
   def self.all_faculty_count_by_date(num, date) #Grade agnostic. 
     output = 0
-    lunch_id_1 = Menu.id_by_date(num, date, 1) #DWT fac
-    lunch_id_2 = Menu.id_by_date(num, date, 3) #ECD fac
-    output += self.all.where("lunch_id = ?", lunch_id_1).to_a.count
-    output += self.all.where("lunch_id = ?", lunch_id_2).to_a.count
+    dwt_lunch_id = Menu.id_by_date(num, date, 1) #DWT fac
+    ecd_lunch_id = Menu.id_by_date(num, date, 3) #ECD fac
+    output += self.all.where("lunch_id = ?", dwt_lunch_id).to_a.count
+    output += self.all.where("lunch_id = ?", ecd_lunch_id).to_a.count
     output  #Will output totals for all faculty in ECD and DWT regardless of sp. delivery status. 
   end
 
@@ -81,44 +81,46 @@ class LunchChoice < ActiveRecord::Base
     ids = User.ids_in_grade(grade)  
     #We find ids for either faculty AND staff, or just staff
     user_ids = (exclude_fac ?  User.ids_in_role("staff") : User.ids_in_role(["staff", "faculty"])) 
-    lunch_id_1 = Menu.id_by_date(num, date, 1) #DWT fac
-    lunch_id_2 = Menu.id_by_date(num, date, 3) #ECD fac
-    output += self.all.by_user_group(user_ids).by_user_group(ids).where("lunch_id = ?", lunch_id_1).to_a.count
-    output += self.all.by_user_group(user_ids).by_user_group(ids).where("lunch_id = ?", lunch_id_2).to_a.count
+    dwt_lunch_id = Menu.id_by_date(num, date, 1) #DWT fac
+    ecd_lunch_id = Menu.id_by_date(num, date, 3) #ECD fac
+    output += self.all.by_user_group(ids).where("lunch_id = ?", dwt_lunch_id).to_a.count
+    output += self.all.by_user_group(user_ids).by_user_group(ids).where("lunch_id = ?", ecd_lunch_id).to_a.count
     output 
   end
 
-  def self.dwt_faculty(num, date)
-    lunch_id_1 = Menu.id_by_date(num, date, 1) #DWT fac
-    self.all.where("lunch_id = ?", lunch_id_1).to_a.count
+  def self.dwt_adult(num, date, role, grade)
+    grade_ids = User.ids_in_grade(grade)
+    ids = User.ids_in_role(role)
+    dwt_lunch_id = Menu.id_by_date(num, date, 1) #DWT fac
+    self.all.by_user_group(ids).by_user_group(grade_ids).where("lunch_id = ?", dwt_lunch_id).to_a.count
   end
 
   ## ## ## ## ## ## ## ECD Faculty ## ## ## ## ## ## ## ## 
 
-  def self.ecd_faculty(num, date, role, grade)
+  def self.ecd_adult(num, date, role, grade)
     grade_ids = User.ids_in_grade(grade)
     ids = User.ids_in_role(role)
-    lunch_id_2 = Menu.id_by_date(num, date, 3) #ECD fac
-    self.all.by_user_group(ids).by_user_group(grade_ids).where("lunch_id = ?", lunch_id_2).to_a.count
+    ecd_lunch_id = Menu.id_by_date(num, date, 3) #ECD fac
+    self.all.by_user_group(ids).by_user_group(grade_ids).where("lunch_id = ?", ecd_lunch_id).to_a.count
   end
 
-  def self.ecd_faculty_column_totals(num, date, grade_range) 
+  def self.ecd_adult_column_totals(num, date, role, grade_range) 
     grand_total = 0
     i = 0
     number_of_rows = grade_range.count
     number_of_rows.times do 
       grade = grade_range[i]
-      grand_total += self.ecd_faculty(num, date, "faculty", grade_range[i])
+      grand_total += self.ecd_adult(num, date, role, grade_range[i])
       i += 1
     end 
     grand_total 
   end 
 
-  def self.ecd_faculty_RH_sum(date, grade_range)
+  def self.ecd_adult_RH_sum(date, role, grade_range)
     grand_total = 0
     i = 0 
     6.times do 
-      grand_total += self.ecd_faculty_column_totals(i, date, grade_range)
+      grand_total += self.ecd_adult_column_totals(i, date, role, grade_range)
       i += 1 
     end 
     grand_total 

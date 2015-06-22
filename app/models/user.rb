@@ -42,13 +42,14 @@ class User < ActiveRecord::Base
   end 
 
   def choice_for?(date, lunch_id)
-    lunches = Lunch.by_menu(1).by_day(date).to_a if self.campus == "DWT"
-    lunches = Lunch.by_menu(3).by_day(date).to_a if self.campus == "ECD"
+    lunches = Lunch.by_menu(self.menu_id).by_day(date).to_a
     (self.chose(lunches[lunch_id]) == nil ? "" : "1") 
   end
 
   def chose(lunch)
-    lunch_choices.where(lunch_id: lunch.id).last if lunch 
+    if lunch 
+      lunch_choices.where(lunch_id: lunch.id).last 
+    end 
   end
 
   def destroy_lunch_choices_on(date)

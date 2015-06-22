@@ -13,38 +13,38 @@
 </tr>
 <tr>
   <td>threes</td> <!-- Faculty teaching the 3 year olds  -->
-  <td><%= LunchChoice.ecd_faculty(0, @date, "faculty", 'threes')%></td>
-  <td><%= LunchChoice.ecd_faculty(1, @date, "faculty", 'threes')%></td>
-  <td><%= LunchChoice.ecd_faculty(2, @date, "faculty", 'threes')%></td>
-  <td><%= LunchChoice.ecd_faculty(3, @date, "faculty", 'threes')%></td>
-  <td><%= LunchChoice.ecd_faculty(4, @date, "faculty", 'threes')%></td>
-  <td><%= LunchChoice.ecd_faculty(5, @date, "faculty", 'threes')%></td>
+  <td><%= LunchChoice.ecd_adult(0, @date, "faculty", 'threes')%></td>
+  <td><%= LunchChoice.ecd_adult(1, @date, "faculty", 'threes')%></td>
+  <td><%= LunchChoice.ecd_adult(2, @date, "faculty", 'threes')%></td>
+  <td><%= LunchChoice.ecd_adult(3, @date, "faculty", 'threes')%></td>
+  <td><%= LunchChoice.ecd_adult(4, @date, "faculty", 'threes')%></td>
+  <td><%= LunchChoice.ecd_adult(5, @date, "faculty", 'threes')%></td>
 </tr>
 <tr>
   <td>fours</td> <!-- etc -->
-  <td><%= LunchChoice.ecd_faculty(0, @date, "faculty", 'fours')%></td>
-  <td><%= LunchChoice.ecd_faculty(1, @date, "faculty", 'fours')%></td>
-  <td><%= LunchChoice.ecd_faculty(2, @date, "faculty", 'fours')%></td>
-  <td><%= LunchChoice.ecd_faculty(3, @date, "faculty", 'fours')%></td>
-  <td><%= LunchChoice.ecd_faculty(4, @date, "faculty", 'fours')%></td>
-  <td><%= LunchChoice.ecd_faculty(5, @date, "faculty", 'fours')%></td>
+  <td><%= LunchChoice.ecd_adult(0, @date, "faculty", 'fours')%></td>
+  <td><%= LunchChoice.ecd_adult(1, @date, "faculty", 'fours')%></td>
+  <td><%= LunchChoice.ecd_adult(2, @date, "faculty", 'fours')%></td>
+  <td><%= LunchChoice.ecd_adult(3, @date, "faculty", 'fours')%></td>
+  <td><%= LunchChoice.ecd_adult(4, @date, "faculty", 'fours')%></td>
+  <td><%= LunchChoice.ecd_adult(5, @date, "faculty", 'fours')%></td>
 </tr>
 <tr>  
   <td>K</td> 
-  <td><%= LunchChoice.ecd_faculty(0, @date, "faculty", 'k')%></td>
-  <td><%= LunchChoice.ecd_faculty(1, @date, "faculty", 'k')%></td>
-  <td><%= LunchChoice.ecd_faculty(2, @date, "faculty", 'k')%></td>
-  <td><%= LunchChoice.ecd_faculty(3, @date, "faculty", 'k')%></td>
-  <td><%= LunchChoice.ecd_faculty(4, @date, "faculty", 'k')%></td>
-  <td><%= LunchChoice.ecd_faculty(5, @date, "faculty", 'k')%></td>
+  <td><%= LunchChoice.ecd_adult(0, @date, "faculty", 'k')%></td>
+  <td><%= LunchChoice.ecd_adult(1, @date, "faculty", 'k')%></td>
+  <td><%= LunchChoice.ecd_adult(2, @date, "faculty", 'k')%></td>
+  <td><%= LunchChoice.ecd_adult(3, @date, "faculty", 'k')%></td>
+  <td><%= LunchChoice.ecd_adult(4, @date, "faculty", 'k')%></td>
+  <td><%= LunchChoice.ecd_adult(5, @date, "faculty", 'k')%></td>
 </tr>
 <tr>
 <td>TOTALS</td> 
-  <td><%= LunchChoice.ecd_faculty_column_totals(0, @date, Child::ECD_GRADES)%></td>
-  <td><%= LunchChoice.ecd_faculty_column_totals(1, @date, Child::ECD_GRADES)%></td>
-  <td><%= LunchChoice.ecd_faculty_column_totals(2, @date, Child::ECD_GRADES)%></td>
-  <td><%= LunchChoice.ecd_faculty_column_totals(3, @date, Child::ECD_GRADES)%></td>
-  <td><%= LunchChoice.ecd_faculty_column_totals(4, @date, Child::ECD_GRADES)%></td>
-  <td><%= LunchChoice.ecd_faculty_column_totals(5, @date, Child::ECD_GRADES)%></td> 
-  <td><%= LunchChoice.ecd_faculty_RH_sum(@date, Child::ECD_GRADES)%></td>
+  <td><%= LunchChoice.ecd_adult_column_totals(0, @date, "faculty,", Child::ECD_GRADES)%></td>
+  <td><%= LunchChoice.ecd_adult_column_totals(1, @date, "faculty,", Child::ECD_GRADES)%></td>
+  <td><%= LunchChoice.ecd_adult_column_totals(2, @date, "faculty,", Child::ECD_GRADES)%></td>
+  <td><%= LunchChoice.ecd_adult_column_totals(3, @date, "faculty,", Child::ECD_GRADES)%></td>
+  <td><%= LunchChoice.ecd_adult_column_totals(4, @date, "faculty,", Child::ECD_GRADES)%></td>
+  <td><%= LunchChoice.ecd_adult_column_totals(5, @date, "faculty,", Child::ECD_GRADES)%></td> 
+  <td><%= LunchChoice.ecd_adult_RH_sum(@date, "faculty", Child::ECD_GRADES)%></td>
 </tr>
