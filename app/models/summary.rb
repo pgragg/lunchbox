@@ -24,5 +24,13 @@ class Summary < ActiveRecord::Base
     "summaries/page_partials/#{suffix}"
   end 
 
+  def self.all_menu_date_list
+    output = []
+    Menu.all.each do |menu| 
+      output << menu.lunch_date_list
+    end 
+    output.uniq!.flatten!
+  end 
+
   
 end

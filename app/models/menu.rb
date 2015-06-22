@@ -69,11 +69,6 @@ class Menu < ActiveRecord::Base
     self.lunches.count 
   end 
 
-  def lunch_count_expected
-    #5 lunches (bagels are implied as a 6th) per day for students
-    #3 lunches for faculty.  
-  end 
-
   def lunches_for_day(date)
 
     lunches_for_day = []

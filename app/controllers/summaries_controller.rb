@@ -1,5 +1,4 @@
 class SummariesController < ApplicationController
-  # before_action :load_summary_and_day
   respond_to :html, :js
 
   def weekday_on(time)
@@ -22,8 +21,6 @@ class SummariesController < ApplicationController
     @summaries = Summary.all 
   end
 
-
-
   def show 
     @summary = Summary.find(params[:id]) 
     @menus = Menu.all 
@@ -31,17 +28,9 @@ class SummariesController < ApplicationController
     @date = @summary.date
     @weekday = weekday_on(@date)
     @month = month_on(@date)
-    # ecd_children
-    # dwt_lower
-    # dwt_mid
-    # all_faculty
-    # ecd_sp_deliv
-    # dwt_sp_deliv
-    # dwt_mid + all_faculty + ecd_sp_deliv + dwt_sp_deliv
   end 
 
   def previous_day
-    # session[:date] -= 1 if session[:date] >= 1 
     update_summary!(-1)
     redirect_to :back
   end 
@@ -49,21 +38,22 @@ class SummariesController < ApplicationController
   def next_day
     update_summary!(1)
     redirect_to :back
-    # session[:date] += 1 if session[:date] < Menu.master_date_list.count 
   end 
-
 
   private 
 
   def update_summary!(new_value)
     @summary = Summary.find(params[:summary_id])
     authorize @summary, :update?
-    @summary.update_attribute(:date, (@summary.date + new_value))
+    new_date = @summary.date + new_value
+    first_day = Summary.all_menu_date_list.first 
+    last_date = Summary.all_menu_date_list.last 
+    if new_date >= first_day && new_date <= last_date
+      @summary.update_attribute(:date, (new_date))
+    else 
+      flash[:error] = "You may have tried to display a date which doesn't have any lunches."
+    end  
   end
-
-
 end
 
 
-# Add lunch summaries pages (2.0) ECD students, ECD faculty, DWT students, DWT faculty, 
-# Grand totals.; 
