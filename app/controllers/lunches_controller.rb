@@ -3,6 +3,7 @@ class LunchesController < ApplicationController
 
   def standardize_menus(lunches)
     names = []
+    
     lunches.each do |lunch| 
       names << lunch.name 
     end 
