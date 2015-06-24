@@ -43,7 +43,7 @@ def create_staff_sample
     last_name:  Faker::Name.name.split(' ')[1],
     email:    Faker::Internet.email,
     password: "password",
-    grade: [nil],
+    grade: nil,
     role: "staff",
     campus: ["ECD", "DWT"].sample 
    )
@@ -54,7 +54,7 @@ end
 #####Creating parents and faculty 
 
 
-20.times do
+400.times do
   create_parent_sample
  end
 40.times do 
@@ -68,8 +68,14 @@ staff = User.all.where("role = ?", 'staff')
 #####Creating children 
 
 parents.each do |parent| 
-  parent.children.create(grade: Child::GRADES.sample, first_name: Faker::Address.state, last_name: Faker::Address.city_prefix )
+  rand(3).times do 
+    parent.children.create(
+      grade: Child::GRADES.sample, 
+      first_name: Faker::Address.state, 
+      last_name: Faker::Address.city_prefix )
+  end
 end 
+
 children = Child.all
 
 children.each do |child| 

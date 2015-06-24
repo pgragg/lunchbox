@@ -2,13 +2,16 @@
   <td> <%="#{grade} Gr-#{role}"%></td>
   <td> TOTALS </td>  <!-- Once for each lunch choice. I really need a helper method here.--> 
     <!-- i stands for lunch number.  -->
+    <% campus ||= "DWT" %> 
     <td> <%= LunchChoice.column_totals(0, date, Menu.id_for(grade, role), grade, role) %> </td>
     <td> <%= LunchChoice.column_totals(1, date, Menu.id_for(grade, role), grade, role) %> </td> 
     <td> <%= LunchChoice.column_totals(2, date, Menu.id_for(grade, role), grade, role) %> </td> 
     <td> <%= LunchChoice.column_totals(3, date, Menu.id_for(grade, role), grade, role) %> </td> 
     <td> <%= LunchChoice.column_totals(4, date, Menu.id_for(grade, role), grade, role) %> </td>  
     <td> <%= LunchChoice.column_totals(5, date, Menu.id_for(grade, role), grade, role) %> </td> 
+    <td> <%=LunchChoice.sum(6, @date, Menu.id_for(grade, role), grade, role){|x,y,a,b,c|LunchChoice.column_totals(x, y, a, b, c) }%></td>
 </tr>
+
 
 
 

@@ -3,6 +3,7 @@
 <table class ="table"> 
 <tr>
   <th><h3> ECD Staff list</h3></th>
+  <th> Role </th> 
   <th><%=Menu.lunch_name_on(0, @date, 2)%> </th>
   <th><%=Menu.lunch_name_on(1, @date, 2)%> </th>
   <th><%=Menu.lunch_name_on(2, @date, 2)%> </th>
@@ -11,9 +12,9 @@
   <th><%=Menu.lunch_name_on(5, @date, 2)%> </th>
 </tr>
 
-<%User.by_role("staff").each do |user| %>
+<%User.by_role("staff").by_campus("ECD").each do |user| %>
   <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: user, date: @date}%> 
 <% end %>
-<!-- Render the teacher totals partial for the grade. -->
-<%= render partial: 'summaries/line_partials/totals_row', locals: {grade: nil, role: "Staff", date: @date}%>  
+<!-- Render the staff totals partial for the nil grade. -->
+<%= render partial: 'summaries/line_partials/totals_row', locals: {campus: "ECD", grade: nil, role: "staff", date: @date}%>  
 </table>

@@ -13,6 +13,11 @@ class User < ActiveRecord::Base
   scope :by_grade, ->(grade) { where(grade: grade)}
 
 
+
+  def show_grade_or_role 
+    (self.grade != Child::GRADES ? self.role : self.grade)
+  end 
+
   def self.ids_in_grade(grade)
     ids = []
     self.by_grade(grade).each do |user|

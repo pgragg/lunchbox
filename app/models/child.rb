@@ -1,7 +1,6 @@
 class Child < ActiveRecord::Base
   after_save :define_menu_id
   after_update :define_menu_id
-
   belongs_to :user
   has_and_belongs_to_many :lunches, through: :lunch_choices
   has_many :lunch_choices, dependent: :destroy 
@@ -23,6 +22,10 @@ class Child < ActiveRecord::Base
     end 
     ids
   end 
+
+  def show_grade_or_role
+    self.grade 
+  end
 
   def choice_for?(date, lunch_id)
     lunches = Lunch.by_menu(2).by_day(date).to_a if self.campus == "DWT"

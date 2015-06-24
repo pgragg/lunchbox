@@ -15,13 +15,17 @@ class Menu < ActiveRecord::Base
     end
   end 
 
-  def self.id_for(grade, role)
-    campus = "DWT"
+  def self.id_for(grade, role, campus="DWT")
+    if grade #Staff and most faculty don't have grades. 
+      grade = grade[0] #In case grade is entered as an array. 
+    end 
     campus = "ECD" if Child::ECD_GRADES.include?(grade)
     case role 
           when "students"
           output = (campus == "ECD" ? 4 : 2)
-          when "faculty"
+          when ("faculty")
+          output = (campus == "ECD" ? 3 : 1)
+          when ("staff")
           output = (campus == "ECD" ? 3 : 1)
     end 
     output 
