@@ -1,2 +1,25 @@
 <h1> Edit <%=@menu.name %> </h1>
 
+<div class="col-sm-12 col-md-12 container">
+  <div class="row lunch_row text-center jumbotron">
+    <div class="col-sm-2 col-md-2 text-center"><h4>Date</h4></div>
+    <div class="col-sm-10 col-md-10 text-center"><h4>Lunches</h4></div>  
+  </div>
+
+  <% @dates.each do |date| %> 
+  <div class="col-sm-2 col-md-2 col-lg-2 date_box text-center">
+      <h4><%= date %> </h4>
+    </div>
+    <div class="row lunch_row text-center date_id_<%=date.to_s%>">
+    <% @menu.lunches_for_day(date).each do |lunch| %>
+      <%= render partial: 'lunch_choices/edit_lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
+    <% end %>
+
+    </div>
+    <br>
+    <hr>
+    
+  <% end %>
+</div>
+
+<!-- Adding or editing things in menu.lunches collection.  -->

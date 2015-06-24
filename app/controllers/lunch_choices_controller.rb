@@ -25,6 +25,9 @@ class LunchChoicesController < ApplicationController
       format.js
     end
    end
+
+   
+    
 end
 
 

@@ -1,6 +1,17 @@
 class LunchesController < ApplicationController
   include LunchesHelper
 
+  def standardize_menus(lunches)
+    names = []
+    lunches.each do |lunch| 
+      names << lunch.name 
+    end 
+    Menu.all.each do |menu|
+      menu.lunches.each_with_index { |lunch,i| lunch.update_attributes(name: names[i]) }
+      menu.save!
+    end
+  end 
+
   def new
     @lunch = Lunch.new 
   end
@@ -14,9 +25,11 @@ class LunchesController < ApplicationController
   end
 
   def update
+    @menu = Menu.find(session[:menu_id])
     @lunch = Lunch.find(params[:id])
     if @lunch.update_attributes(lunch_params)
-      redirect_to @menu
+      standardize_menus(@menu.lunches)
+      redirect_to edit_menu_path(@menu)
     else 
       flash[:error] = "Error saving lunch. Please try again."
     end 
@@ -30,6 +43,18 @@ class LunchesController < ApplicationController
    else
      flash[:error] = "Error creating lunch. Please try again."
      render :new
+   end
+
+  end
+
+  def destroy
+    @menu = Menu.find(session[:menu_id])
+    @lunch = Lunch.find(params[:id])
+    if @lunch.delete
+     redirect_to edit_menu_path(@menu), notice: "Deleted #{@lunch.name}"
+   else
+     flash[:error] = "Error deleting lunch. Please try again."
+     redirect_to edit_menu_path(@menu)
    end
 
   end

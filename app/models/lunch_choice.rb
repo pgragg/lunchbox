@@ -17,18 +17,22 @@ class LunchChoice < ActiveRecord::Base
   end 
 
   ## ## ## ## ## ## ## Students ## ## ## ## ## ## ## ## 
-
+  def self.totals(num, date, menu_id_array, grade_range, role, decision=nil)
+    output = 0  
+    menu_id_array = [menu_id_array] unless menu_id_array.class == Array 
+    menu_id_array.flatten.each do |single_menu_id|
+      output += self.count_by_date_and_grade(num, date, single_menu_id, grade_range, role, decision=nil)
+    end
+    output 
+  end 
 # Totals 5th through adult. All fac including sp. deliveries. 
 # Should count lunch totals on a date for students or fac for any given grade range, or nil grade. 
   def self.count_by_date_and_grade(num, date, menu_id, grade_range, role, decision=nil)
-    if menu_id.class == Array
-      output = 0  
-      menu_id.each do |single_menu_id|
-        output += self.count_by_date_and_grade(num, date, single_menu_id, grade_range, role, decision=nil)
-      end
-      return output 
-    end 
-    lunch_id = Menu.lunch_by_date(num, date, menu_id).id
+    
+    lunch = Menu.lunch_by_date(num, date, menu_id)
+    if lunch 
+      lunch_id = lunch.id 
+    end
     user_group = []
     if role == "students"
       ids = Child.ids_in_grade(grade_range)
@@ -76,16 +80,16 @@ class LunchChoice < ActiveRecord::Base
 
   def self.big_lunch_totals(num, date) #Totals 5th through adult. All fac including sp. deliveries. 
     big_lunches = 0
-    big_lunches += self.count_by_date_and_grade(num, date, 1, [nil, Child::DWT_GRADES], "faculty") # faculty including sp. deliveries
-    big_lunches += self.count_by_date_and_grade(num, date, 2, [5,6,7], "students") #stud 5-7
+    big_lunches += self.totals(num, date, 1, [nil, Child::DWT_GRADES], "faculty") # faculty including sp. deliveries
+    big_lunches += self.totals(num, date, 2, [5,6,7], "students") #stud 5-7
     big_lunches
   end
 
   def self.agnostic_column_totals(num, date)
     all_lunches = 0 
     all_lunches += self.big_lunch_totals(num, date) #Totals 5th through adult 
-    all_lunches += self.count_by_date_and_grade(num, date, 2, [1,2,3,4], "students") #Totals 1-4th grade 
-    all_lunches += self.count_by_date_and_grade(num, date, 4, Child::ECD_GRADES, "students") #Totals ECD grades 
+    all_lunches += self.totals(num, date, 2, [1,2,3,4], "students") #Totals 1-4th grade 
+    all_lunches += self.totals(num, date, 4, Child::ECD_GRADES, "students") #Totals ECD grades 
     all_lunches
   end 
 

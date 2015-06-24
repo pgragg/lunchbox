@@ -117,5 +117,9 @@ eg. a user model with a student role might have parent_email_1, parent_email_2, 
 
 http://stackoverflow.com/questions/24545127/setting-devise-after-sign-in-path-for-with-multiple-models
 
+Git GUI - Sourcetree - Tower 
+Heroku GUI - Postico - lets you edit database graphically. 
+https://devcenter.heroku.com/articles/connecting-to-heroku-postgres-databases-from-outside-of-heroku
+
 
 

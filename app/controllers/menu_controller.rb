@@ -6,6 +6,7 @@ class MenuController < ApplicationController
       session[:user_id] = params[:child_id] #For use in the lunch_choices controller.
       @child = current_user.children.find(params[:child_id])
     end
+    return @user = current_user if current_user.admin? 
     @user = (current_user.role == "faculty" ? current_user : @child)
   end 
 
@@ -16,6 +17,7 @@ class MenuController < ApplicationController
 #   NewsMailer.weekly(user).deliver_now
 # end
     define_user
+
   end
   
   def new
@@ -42,14 +44,20 @@ class MenuController < ApplicationController
   end
 
   def edit
+    define_user
+    session[:menu_id] = params[:id]
     @menu = Menu.find(params[:id])
+    @dates = @menu.lunch_date_list
   end
 
   def update
     @menu = Menu.find(params[:id])
+    lunches = @menu.lunches 
     authorize @menu
   end
 
   def create
   end
+
+
 end
