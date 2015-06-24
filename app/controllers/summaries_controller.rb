@@ -54,6 +54,16 @@ class SummariesController < ApplicationController
     end  
   end
 
+  def weekday_on(time)
+    days = %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday]
+    days[time.wday]
+  end 
+
+  def month_on(time)
+    months = %w[December January February March April May June July August September October November]
+    months[time.month]
+  end 
+
 
 end
 

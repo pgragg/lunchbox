@@ -1,6 +1,6 @@
 # Lunchbox
 ## Now on Codeship! 
-### Heroku : https://radiant-thicket-1194.herokuapp.com/
+### Heroku : dwight-lunchbox.herokuapp.com
 
 
 

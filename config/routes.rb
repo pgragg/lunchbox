@@ -2,9 +2,13 @@ Rails.application.routes.draw do
   
   resources :summaries do 
     post '/next_day' => 'summaries#next_day', as: :next_day
-    post '/previous-day' => 'summaries#previous_day', as: :previous_day
+    post '/previous_day' => 'summaries#previous_day', as: :previous_day
    end 
-  resources :menu
+  resources :menu do 
+    post '/delete_all_lunches' => 'menu#delete_all_lunches', as: :delete_all_lunches
+    post '/populate_with_blanks' => 'menu#populate_with_blanks', as: :populate_with_blanks
+  end
+  
   devise_for :users 
   resources :users do #, :controllers => {:registrations => "registrations"} 
     resources :children do 

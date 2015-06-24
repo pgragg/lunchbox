@@ -3,6 +3,9 @@ class Menu < ActiveRecord::Base
   has_many :children 
   has_many :users
 
+
+  
+
   def self.lunch_by_date(num, date, menu_id)
     self.find(menu_id).lunches.by_day(date)[num]
   end 
@@ -42,6 +45,7 @@ class Menu < ActiveRecord::Base
     dates = Array.new 
     self.lunches.each {|lunch| dates << lunch.date}
     dates.uniq! 
+    dates 
   end 
 
   def self.master_date_list

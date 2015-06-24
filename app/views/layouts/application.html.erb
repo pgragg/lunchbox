@@ -25,6 +25,9 @@
     <% if policy(Menu.new).create? %>
       <li> <%= link_to "Summaries", summaries_path %> </li> 
     <% end %>
+    <% if policy(Menu.new).create? %>
+      <li> <%= link_to "Control Panel", admin_panel_index_path %> </li> 
+    <% end %>
     <% if current_user %>
       <li><%= link_to (current_user.first_name || current_user.email), edit_user_registration_path %></li> 
       <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>

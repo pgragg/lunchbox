@@ -12,12 +12,14 @@ class ApplicationController < ActionController::Base
     if request.referer == sign_in_url
       super
     else
-      stored_location_for(resource) || request.referer || menu_index_path
+      stored_location_for(resource) || request.referer || admin_panel_path
     end
   end
 
   def index
-    @menu = Menu.find(@user.menu_id)
+    if @user.menu_id
+      @menu = Menu.find(@user.menu_id)
+    end
     @children = current_user.children
   end 
 

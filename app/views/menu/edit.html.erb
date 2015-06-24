@@ -1,6 +1,9 @@
 <h1> Edit <%=@menu.name %> </h1>
 
 <div class="col-sm-12 col-md-12 container">
+  <%= link_to "Delete All Lunches", menu_delete_all_lunches_path(@menu.id), class: "btn btn-success", method: :post  %>
+  <%= link_to "Populate Menus With Blank Lunches", menu_populate_with_blanks_path(@menu.id), class: "btn btn-success", method: :post  %>
+
   <div class="row lunch_row text-center jumbotron">
     <div class="col-sm-2 col-md-2 text-center"><h4>Date</h4></div>
     <div class="col-sm-10 col-md-10 text-center"><h4>Lunches</h4></div>  

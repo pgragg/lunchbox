@@ -61,18 +61,18 @@
 - Add lunch summaries pages (2.0) ECD students, ECD faculty, DWT students, DWT faculty, Grand totals.; 
 - Menus should be available to users according to their role. (2.0).
 - Faculty should have a "grade" attribute so we can lump them in with their grade if 1-5. 
-* Admins should be able to create menus. 
+- Admins should be able to edit menus. 
 * Student menus should include Bagel choices every day, water milk or juice Mon-Thurs, water ch. milk or juice on Fri.
 * Faculty should have a "paid" attribute so we don't send lunches to unpaid accounts.
-* Clean up controllers. 
-* Delete unused partials. 
+- Clean up controllers. 
+- Delete unused partials. 
 * Create and enforce permissions for all users. 
 
 
 ## v0.9 (Friday, July 3)
 
 - Add admin panel with access to lunch summaries (2.0) ;
-* Allow admin to edit users lunches from within the admin panel. ;
+* Allow admin to edit users' lunches from within the admin panel. ;
 * Add progress indication to admin panel which lists menus filled out. ;
 * Admin should be able to activate and deactivate an account's ability to order. 
 * Admin should be able to enter school holidays into the system.  
@@ -80,18 +80,18 @@
 * Add ability for an Admin to create a new menu from the admin panel.;
 * Fix the look of the site (4.0);
 * Only faculty who have paid for lunches should receive them (1.0) ;
-* Add Google integrated login? https://www.twilio.com/blog/2014/09/gmail-api-oauth-rails.html
-* Give Scholastic a sample user login. 
+N/A Add Google integrated login? https://www.twilio.com/blog/2014/09/gmail-api-oauth-rails.html
+- Give Scholastic a sample user login. 
 * Load testing (Radview webload or Apache JMeter)
-* Student roles should require a parent email so we can send updates to accounts with incomplete menus.
+- Student roles should require a parent email so we can send updates to accounts with incomplete menus.
 eg. a user model with a student role might have parent_email_1, parent_email_2, and campus.  
 
 
 ## v1.0 Deploy (Friday, July 10)
 
 * Allow admins to add a "bagged lunch" to certain users for certain days, which would make their lunch choice for that day "bagged." 
-* A seperate totals page would display all bagged lunches for the day. 
-* Upload student information
+* A separate totals page would display all bagged lunches for the day. 
+N/A Upload student information
 * Extensive sanity testing as all user roles.
 * Delete testing users.  
 * Deploy 
