@@ -1,5 +1,8 @@
 class ChildrenController < ApplicationController
   def index
+    if current_user.faculty? 
+      current_user.redirect_if_menu_id_invalid
+    end 
     @user = current_user
     @children = @user.children
   end
@@ -19,10 +22,10 @@ class ChildrenController < ApplicationController
     if @child.update_attributes(child_params)
     flash[:notice] = "Child information was updated."
     redirect_to user_children_path
-  else
-    flash[:error] = "There was an error editing the child. Please try again."
-    render :edit
-  end 
+    else
+      flash[:error] = "There was an error editing the child. Please try again."
+      render :edit
+    end 
   end
 
   def new
@@ -38,10 +41,9 @@ class ChildrenController < ApplicationController
     if @child.save
      flash[:notice] = "You have added your child to the system."
      redirect_to user_children_path
-   else
+    else
      flash[:error] = "Error adding your child. Please check you have entered all the applicable fields"
-   end
-
+    end
   end
 
   def destroy

@@ -32,7 +32,7 @@ def create_faculty_sample
     grade: [nil, "threes", "k", "4", "6", "7", nil].sample,
     role: "faculty" #([true, false].sample ? "faculty" : "student")
    )
-  user.choose_campus
+  user.define_campus
   user.define_menu_id
   user.save! 
 end 

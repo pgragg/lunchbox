@@ -5,7 +5,9 @@
 
 <div class = "container"> 
   <div class = "col-md-12 col-sm-12 col-lg-12">
-    <%=link_to "Add a child", new_user_child_path(@user), class: button_class %>
+    <% if current_user.parent? %> 
+      <%=link_to "Add a child", new_user_child_path(current_user), class: button_class %>
+    <% end %>
   </div>
 </div>
 

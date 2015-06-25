@@ -5,6 +5,12 @@
 <div class="background_image">
   <div class="container text-center">
     <div class ="square">
+      <% if flash[:notice] %>
+          <p class="alert"><%= flash[:notice] %></p>
+     <% end %>
+     <% if flash[:alert] %>
+          <p class="alert"><%= flash[:alert] %></p>
+     <% end %>
       <div class="title-top white_box">
         <h1> Dwight Lunchbox </h1> 
       </div>

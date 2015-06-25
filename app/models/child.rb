@@ -75,7 +75,7 @@ class Child < ActiveRecord::Base
     result 
   end 
 
-  def choose_grade 
+  def define_grade 
     if self.email 
       if self.email.include?("@dwight.edu")
         year = self.email.split('')[0..3].join.to_i 
@@ -91,22 +91,26 @@ class Child < ActiveRecord::Base
     end
   end 
 
-  def choose_campus
-    if Child::ECD_GRADES.include?(self.grade)
-      self.campus = "ECD"
-    else 
-      self.campus = "DWT"
-    end 
+  def define_campus
+    if self.grade
+      if Child::ECD_GRADES.include?(self.grade)
+        self.campus = "ECD"
+      else 
+        self.campus = "DWT"
+      end 
+    end
   end
+  
   def define_menu_id
-    choose_grade
+    define_grade
     previous_campus = self.campus 
-    choose_campus
+    define_campus
     if (menu_id == nil || self.campus != previous_campus)
-      self.menu_id = (self.campus == "DWT" ? 2 : 4) #Updates menu if it detects that you've changed the child's campus. 
+      self.menu_id = Menu.id_for(self.grade, "students", self.campus) #Updates menu if it detects that you've changed the child's campus. 
       self.save!
     end 
   end 
+
   def destroy_lunch_choices_on(date)
     self.lunch_choices.each do |lc|
       lc.destroy if lc.date == date 

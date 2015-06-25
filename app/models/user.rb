@@ -13,6 +13,35 @@ class User < ActiveRecord::Base
   scope :by_grade, ->(grade) { where(grade: grade)}
 
 
+  def define_role
+    if self.role == nil 
+      self.role ||= (self.email.include?("dwight.edu") ? "faculty" : "parent")
+      self.save!
+    end 
+  end 
+
+  def define_campus
+    if self.grade 
+      if Child::ECD_GRADES.include?(self.grade)
+        self.campus = "ECD"
+      elsif Child::DWT_GRADES.include?(self.grade)
+        self.campus = "DWT"
+      else 
+        self.campus ||= nil 
+      end 
+    end
+  end
+
+  def define_menu_id
+    self.menu_id = Menu.id_for(self.grade, self.role, self.campus) #Updates menu if it detects that you've changed the child's campus. 
+    self.save! 
+  end 
+
+  def redirect_if_menu_id_invalid
+    self.define_campus 
+    self.define_menu_id
+    redirect_to user_path(self.id) if self.menu_id == nil
+  end 
 
   def show_grade_or_role 
     (self.grade != Child::GRADES ? self.role : self.grade)
@@ -42,8 +71,16 @@ class User < ActiveRecord::Base
     self.role == "faculty"
   end 
 
+  def staff? 
+    self.role == "staff"
+  end 
+
+  def faculty_or_staff? 
+    self.faculty? || self.staff? 
+  end 
+
   def parent? 
-    self.role == "parent"
+    self.role != "admin" && self.role != "faculty" && self.role != "staff"
   end 
 
   def choice_for?(date, lunch_id)
@@ -63,9 +100,7 @@ class User < ActiveRecord::Base
     end
   end 
 
-  def define_menu_id
-      self.menu_id = (self.campus == "DWT" ? 1 : 3)
-  end 
+ 
 
   def all_faculty
     User.by_role('faculty').by_grade(nil)
@@ -78,20 +113,18 @@ class User < ActiveRecord::Base
   def dwt_sp_deliv 
     User.by_role('faculty').by_grade(Child::DWT_GRADES)
   end 
-  
-  def choose_campus
-    if Child::ECD_GRADES.include?(self.grade)
-      self.campus = "ECD"
-    else 
-      self.campus = "DWT"
-    end 
-  end
+
+  # def add_child_button
+  #   if self.parent? 
+  #     return link_to "Add a child", new_user_child_path(self), class: button_class
+  #   end 
+  # end 
 
   private 
   
   def define_role
-    if self.role == nil
-      self.role = (self.email.include?("dwight.edu") ? "faculty" : "parent")
+    if self.role == nil 
+      self.role ||= (self.email.include?("dwight.edu") ? "faculty" : "parent")
       self.save!
     end 
   end 

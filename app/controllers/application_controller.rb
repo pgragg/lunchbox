@@ -7,8 +7,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     sign_in_url = new_user_session_url
-    return (current_user.admin? ? menu_index_path : user_children_path(current_user.id)) 
-    #Everything after here is unused. 
+    return user_root_path
     if request.referer == sign_in_url
       super
     else
@@ -23,9 +22,27 @@ class ApplicationController < ActionController::Base
     @children = current_user.children
   end 
 
+  def user_root_path
+    if current_user
+      return case current_user.role 
+        when "admin" 
+          admin_panel_path
+        when "faculty" 
+          current_user.redirect_if_menu_id_invalid
+          current_user.sign_in_count >= 2 ? menu_path(current_user.menu_id) : edit_user_registration_path(current_user.id)
+        when "staff" 
+          current_user.redirect_if_menu_id_invalid
+          current_user.sign_in_count >= 2 ? menu_path(current_user.menu_id) : edit_user_registration_path(current_user.id)
+        else 
+          user_children_path(current_user.id)
+      end
+    end
+  end
+
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << :campus
+    devise_parameter_sanitizer.for(:sign_up) << :campus << :role << :grade 
+    devise_parameter_sanitizer.for(:account_update) << :campus << :role << :grade 
   end
 end

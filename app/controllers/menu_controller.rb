@@ -17,7 +17,7 @@ class MenuController < ApplicationController
       @child = current_user.children.find(params[:child_id])
     end
     return @user = current_user if current_user.admin? 
-    @user = (current_user.role == "faculty" ? current_user : @child)
+    @user = (current_user.faculty_or_staff? ? current_user : @child)
   end 
 
   def index
@@ -34,17 +34,22 @@ class MenuController < ApplicationController
     authorize @menu
   end
 
-  def show
-    define_user
-
-    if @user.menu_id != 2 && @user.menu_id != 4 && @user.role == "admin"
+  def assign_correct_menu
+    if @user.class == Child
+      @menu = Menu.find(@user.menu_id)
+    elsif @user.role == "admin"
       @menu = Menu.find(params[:id])
     else 
+      @user.redirect_if_menu_id_invalid 
       @menu = Menu.find(@user.menu_id)
     end
-    
+    @menu 
+  end
+
+  def show
+    define_user
+    assign_correct_menu
     @dates = @menu.lunch_date_list
-    
   end
 
   def edit

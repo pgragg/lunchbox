@@ -19,12 +19,13 @@ Rails.application.routes.draw do
   resources :admin_panel 
   devise_scope :user do
     #root "devise/registrations#new"
+    
     root 'welcome#index'
   end
-
   resources :lunches do 
     resources :lunch_choices 
   end
+  
 
 
   # The priority is based upon order of creation: first created -> highest priority.
