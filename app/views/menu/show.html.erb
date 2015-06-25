@@ -3,19 +3,19 @@
     <div class="col-sm-2 text-center"><h4>Date</h4></div>
     <div class="col-sm-10 text-center"><h4>Lunches</h4></div>  
   </div>
+  <div class="container center_column">
 
   <% @dates.each do |date| %> 
   <div class="col-sm-2 date_box text-center">
-      <h4><%= date %> </h4>
-    </div>
-    <div class="row lunch_row text-center date_id_<%=date.to_s%>">
+    <h4><%= date %> </h4>
+  </div>
+  <div class="row lunch_row text-center date_id_<%=date.to_s%>">
     <% @menu.lunches_for_day(date).each do |lunch| %>
       <%= render partial: 'lunch_choices/lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
     <% end %>
-
-    </div>
-    <br>
-    <hr>
-    
+  </div>
+<br>
+<hr>
   <% end %>
+</div>
 </div>

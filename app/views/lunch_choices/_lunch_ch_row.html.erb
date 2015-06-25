@@ -1,6 +1,6 @@
-<div class="col-sm-1.8 lunch_box <%= lunch_choice = @user.chose(lunch) ? 'chosen' : 'unchosen'%> lunch_id_<%=lunch.id%>">
+<div class="col-sm-1 col-md-1 col-lg-1 lunch_box <%= lunch_choice = @user.chose(lunch) ? 'chosen' : 'unchosen'%> lunch_id_<%=lunch.id%>">
   <%= link_to [lunch, LunchChoice.new], class: '', method: :post, remote: true do %>
-    <h5><%= lunch.name %></h5>
+      <p><%= lunch.name %></p>
   </div> 
 <% end %>
 
