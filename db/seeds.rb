@@ -54,7 +54,7 @@ end
 #####Creating parents and faculty 
 
 
-400.times do
+50.times do
   create_parent_sample
  end
 40.times do 
@@ -68,7 +68,7 @@ staff = User.all.where("role = ?", 'staff')
 #####Creating children 
 
 parents.each do |parent| 
-  rand(3).times do 
+  rand(2).times do 
     parent.children.create(
       grade: Child::GRADES.sample, 
       first_name: Faker::Address.state, 
