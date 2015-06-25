@@ -13,7 +13,7 @@
     <% if policy(Menu.new).children? %>
       <li> <%= link_to "My Children (#{current_user.children.count})", user_children_path(current_user.id) %> </li> 
     <% end %>
-    <% if current_user.faculty? || current_user.staff? %>
+    <% if current_user && (current_user.faculty? || current_user.staff?) %>
       <li> <%= link_to "My Menu", menu_path(current_user.id) %> </li> 
     <% end %>
     <% if policy(Menu.new).create? && current_user.menu_id != nil %>

@@ -1,5 +1,5 @@
 class MenuController < ApplicationController
-
+  
 
   def delete_all_lunches 
     private_delete 

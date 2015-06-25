@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :auth_user
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -11,7 +12,7 @@ class ApplicationController < ActionController::Base
     if request.referer == sign_in_url
       super
     else
-      stored_location_for(resource) || request.referer || admin_panel_path
+      stored_location_for(resource) || request.referer || admin_panel_path(current_user.id)
     end
   end
 
@@ -19,14 +20,14 @@ class ApplicationController < ActionController::Base
     if @user.menu_id
       @menu = Menu.find(@user.menu_id)
     end
-    @children = current_user.children
+      @children = current_user.children
   end 
 
   def user_root_path
     if current_user
       return case current_user.role 
         when "admin" 
-          admin_panel_path
+          admin_panel_index_path(current_user.id)
         when "faculty" 
           current_user.redirect_if_menu_id_invalid
           current_user.sign_in_count >= 2 ? menu_path(current_user.menu_id) : edit_user_registration_path(current_user.id)
@@ -40,6 +41,10 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def auth_user
+    redirect_to welcome_index_path unless current_user
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :campus << :role << :grade 

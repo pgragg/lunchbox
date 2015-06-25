@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     post '/populate_with_blanks' => 'menu#populate_with_blanks', as: :populate_with_blanks
   end
   
-  devise_for :users 
+  devise_for :users, controllers: {
+                    sessions: 'users/sessions', 
+                    registrations: 'users/registrations'}
   resources :users do #, :controllers => {:registrations => "registrations"} 
     resources :children do 
       resources :menu, only: [:show]
@@ -19,12 +21,14 @@ Rails.application.routes.draw do
   resources :admin_panel 
   devise_scope :user do
     #root "devise/registrations#new"
-    
+    get '/users/sign_in' => 'welcome#index'
     root 'welcome#index'
   end
   resources :lunches do 
     resources :lunch_choices 
   end
+
+
   
 
 
