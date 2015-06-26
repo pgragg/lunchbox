@@ -1,5 +1,5 @@
 class MenuController < ApplicationController
-  
+  include ApplicationHelper
 
   def delete_all_lunches 
     private_delete 
@@ -7,7 +7,11 @@ class MenuController < ApplicationController
   end
 
   def populate_with_blanks
-    private_populate 
+    schoolyear = Year.first 
+    year = schoolyear.current_trimester.end_date.year.to_i  
+    month = schoolyear.current_trimester.end_date.month.to_i 
+    day = schoolyear.current_trimester.end_date.day.to_i 
+    private_populate(year, month, day)
     redirect_to :back
   end  
 
@@ -21,12 +25,8 @@ class MenuController < ApplicationController
   end 
 
   def index
-    @menus = Menu.all #Later, the choices will have a day_id, so I can make sure that a user will have all day IDs possible. 
-#    User.where(weekly_subscriber: true).find_each do |user|
-#   NewsMailer.weekly(user).deliver_now
-# end
+    @menus = Menu.all
     define_user
-
   end
   
   def new
@@ -71,6 +71,8 @@ class MenuController < ApplicationController
 
   private 
 
+  include ApplicationHelper
+
   def private_delete
     @menus = Menu.all
     @menus.each do |menu|
@@ -78,18 +80,25 @@ class MenuController < ApplicationController
     end  
   end 
 
+  def fill_day_with_lunches(date, name, menu_id)
+    menu = Menu.find(menu_id)
+    while menu.lunches.by_day(date).count <= 5
+      menu.lunches.create(date: date, name: name)
+    end 
+  end
 
-  def private_populate 
+  def private_populate(y, m, d) 
     @menus = Menu.all
+    date_array = @menus[0].date_array(y, m, d)
+    date_array.keep_if {|date| !holiday_or_weekend?(DateTime.parse(date)) }
     @menus.each do |menu|
-      date_array = menu.date_array(2015, 7, 25)
       date_array.each do |date| 
-        while menu.lunches.by_day(date).count <= 5
-          menu.lunches.create(date: date, name: "edit_me")
-        end 
+        fill_day_with_lunches(date, "edit_me", menu.id)
       end
     end 
   end
+
+
 
 
 end

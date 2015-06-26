@@ -9,6 +9,7 @@ class Menu < ActiveRecord::Base
   def self.lunch_by_date(num, date, menu_id)
     self.find(menu_id).lunches.by_day(date)[num]
   end 
+  
   def self.id_by_date(num, date, menu_id)
     lunch = self.lunch_by_date(num, date, menu_id)
     if lunch

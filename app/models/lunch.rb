@@ -7,7 +7,7 @@ class Lunch < ActiveRecord::Base
   scope :by_day, ->(date) { where(date: date)}
   scope :by_menu, ->(id) { where(menu_id: id)}
 
-
+  
   def weekday
     days = %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday]
     days[self.date.wday]

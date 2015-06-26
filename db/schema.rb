@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150619144229) do
+ActiveRecord::Schema.define(version: 20150626145721) do
 
   create_table "children", force: :cascade do |t|
     t.string   "grade"
@@ -38,6 +38,13 @@ ActiveRecord::Schema.define(version: 20150619144229) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date     "date"
+  end
+
+  create_table "holidays", force: :cascade do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "lunch_choices", force: :cascade do |t|
@@ -87,6 +94,15 @@ ActiveRecord::Schema.define(version: 20150619144229) do
     t.string   "name"
   end
 
+  create_table "trimesters", force: :cascade do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "number"
+    t.integer  "year_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -110,5 +126,13 @@ ActiveRecord::Schema.define(version: 20150619144229) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "years", force: :cascade do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+  end
 
 end

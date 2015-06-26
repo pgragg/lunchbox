@@ -11,6 +11,9 @@ Menu.delete_all
 Child.delete_all
 LunchChoice.delete_all
 Summary.delete_all
+Year.delete_all
+Trimester.delete_all
+Holiday.delete_all
 
 def create_parent_sample 
   user = User.new(
