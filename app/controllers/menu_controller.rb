@@ -71,20 +71,22 @@ class MenuController < ApplicationController
 
   private 
 
-  include ApplicationHelper
+  # include ApplicationHelper
 
   def private_delete
-    @menus = Menu.all
-    @menus.each do |menu|
-      menu.lunches.each {|lunch| lunch.delete}
+    Lunch.all.each do |lunch| 
+      lunch.delete 
     end  
   end 
 
   def fill_day_with_lunches(date, name, menu_id)
     menu = Menu.find(menu_id)
-    while menu.lunches.by_day(date).count <= 5
+    lunch_count = (menu_id == 4 ? 3 : 5)
+    while menu.lunches.by_day(date).count < lunch_count 
       menu.lunches.create(date: date, name: name)
-    end 
+    end
+
+    menu.bagels.create(date: date, name: "Bagel")
   end
 
   def private_populate(y, m, d) 
