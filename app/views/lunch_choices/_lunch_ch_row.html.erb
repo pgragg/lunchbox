@@ -1,7 +1,12 @@
 <div class="col-sm-1 col-md-1 col-lg-1 lunch_box <%= lunch_choice = @user.chose(lunch) ? 'chosen' : 'unchosen'%> lunch_id_<%=lunch.id%>">
   <%= link_to [lunch, LunchChoice.new], class: '', method: :post, remote: true do %>
-      <p><%= lunch.name %></p>
-  </div> 
-<% end %>
+    <p><%= lunch.name %></p>
+    <% if lunch.class == "Bagel" && @lunch_choice %> 
+    <p><%=link_to "Plain", [lunch, LunchChoice.new], {:bagel_filling => "Plain" }, class: '', method: :post%>
+  <% end %>
+  <% end %> 
+</div> 
+  
+
 
 <!-- Make another partial for this and use it in menu#edit.  -->

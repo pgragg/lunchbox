@@ -27,6 +27,7 @@ class MenuController < ApplicationController
   def index
     @menus = Menu.all
     define_user
+    authorize @menus
   end
   
   def new
@@ -50,6 +51,7 @@ class MenuController < ApplicationController
     define_user
     assign_correct_menu
     @dates = @menu.lunch_date_list
+    @lunch_choice = @user.lunch_choices.last 
   end
 
   def edit

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150626165322) do
+ActiveRecord::Schema.define(version: 20150626181756) do
 
   create_table "bagels", force: :cascade do |t|
     t.string   "bagel_filling"
@@ -57,10 +57,12 @@ ActiveRecord::Schema.define(version: 20150626165322) do
     t.integer  "user_id"
     t.integer  "day_id"
     t.integer  "lunch_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.date     "date"
     t.integer  "child_id"
+    t.string   "drink"
+    t.string   "bagel_filling"
   end
 
   add_index "lunch_choices", ["child_id"], name: "index_lunch_choices_on_child_id"
