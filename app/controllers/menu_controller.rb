@@ -36,6 +36,7 @@ class MenuController < ApplicationController
   end
 
   def assign_correct_menu
+    session[:menu_id] = params[:id]
     if @user.class == Child
       @menu = Menu.find(@user.menu_id)
     elsif @user.role == "admin"
@@ -48,6 +49,7 @@ class MenuController < ApplicationController
   end
 
   def show
+
     define_user
     assign_correct_menu
     @dates = @menu.lunch_date_list

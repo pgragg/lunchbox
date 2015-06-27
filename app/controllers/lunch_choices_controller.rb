@@ -26,7 +26,18 @@ class LunchChoicesController < ApplicationController
     end
    end
 
-   
+  def update
+    define_user
+    @menu = Menu.find(session[:menu_id])
+    @lunch_choice = LunchChoice.last
+    @lunch_choice.update_attributes!(bagel_filling: "Plain")
+    @lunch_choice.save! 
+
+    respond_to do |format|
+      format.js
+      format.html 
+    end
+  end 
     
 end
 

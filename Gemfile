@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 
 #Letter opener : for quick emails. 
@@ -16,6 +17,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'factory_girl_rails'
+gem 'newrelic_rpm'
 
 group :production do
   gem 'pg'
