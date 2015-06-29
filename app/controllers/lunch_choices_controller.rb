@@ -30,7 +30,9 @@ class LunchChoicesController < ApplicationController
     define_user
     @menu = Menu.find(session[:menu_id])
     @lunch_choice = LunchChoice.last
-    @lunch_choice.update_attributes!(bagel_filling: "Plain")
+    if @lunch_choice.update_attributes(lunch_choice_params)
+      
+    end
     @lunch_choice.save! 
 
     respond_to do |format|

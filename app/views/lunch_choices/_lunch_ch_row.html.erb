@@ -1,11 +1,6 @@
 <div class="col-sm-1 col-md-1 col-lg-1 lunch_box <%= lunch_choice = @user.chose(lunch) ? 'chosen' : 'unchosen'%> lunch_id_<%=lunch.id%>">
   <%= link_to [lunch, LunchChoice.new], class: '', method: :post, remote: true do %>
     <p><%= lunch.name %></p>
-    <% if lunch.name == "Bagel" && @lunch_choice %> 
-    <p><%=link_to [lunch, @lunch_choice], {method: :patch, :bagel_filling => "Plain" }, remote: true do %>
-      <p> Plain </p> 
-      <% end %>
-  <% end %>
   <% end %> 
 </div> 
   

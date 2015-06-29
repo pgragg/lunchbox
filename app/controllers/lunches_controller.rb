@@ -17,7 +17,7 @@ class LunchesController < ApplicationController
   
 
   def safe(name) 
-    name != nil && name != "Bagel"
+    name != nil
   end 
 
   def new

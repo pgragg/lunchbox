@@ -90,7 +90,7 @@ class MenuController < ApplicationController
       menu.lunches.create(date: date, name: name)
     end
 
-    menu.bagels.create(date: date, name: "Bagel")
+    # menu.bagels.create(date: date, name: "Bagel")
   end
 
   def private_populate(y, m, d) 

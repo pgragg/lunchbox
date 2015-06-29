@@ -25,8 +25,8 @@ Rails.application.routes.draw do
     root 'welcome#index'
   end
   resources :lunches do 
-    resources :lunch_choices do 
-      post '/bagel_choice' => 'lunch_choices#bagel_choice', as: :bagel_choice
+    resources :lunch_choices 
+      # post '/bagel_choice' => 'lunch_choices#bagel_choice', as: :bagel_choice
     end
   end
 

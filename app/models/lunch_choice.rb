@@ -12,8 +12,8 @@ class LunchChoice < ActiveRecord::Base
   #num stands for "lunch number." It's a way to reference which lunch we're referring to. 
 
 
-  def self.build_choice(lunch, user, date, drink=nil)
-    user.lunch_choices.build(lunch: lunch, date: date, drink: drink)
+  def self.build_choice(lunch, user, date)
+    user.lunch_choices.build(lunch: lunch, date: date)
   end 
 
   ## ## ## ## ## ## ## Students ## ## ## ## ## ## ## ## 

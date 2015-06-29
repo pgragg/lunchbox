@@ -2,7 +2,6 @@ class Menu < ActiveRecord::Base
   has_many :lunches
   has_many :children 
   has_many :users
-  has_many :bagels 
 
   def self.lunch_by_date(num, date, menu_id)
     self.find(menu_id).lunches.by_day(date)[num]
