@@ -27,8 +27,8 @@ Rails.application.routes.draw do
   resources :lunches do 
     resources :lunch_choices 
       # post '/bagel_choice' => 'lunch_choices#bagel_choice', as: :bagel_choice
-    end
   end
+end 
 
 
   
@@ -88,4 +88,3 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end
