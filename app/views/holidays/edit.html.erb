@@ -1,0 +1,20 @@
+<div class="col-md-8">
+ <%= form_for [@holiday] do |f| %><!--   , remote: true -->
+   <div class="form-group">
+     <%= f.label :name %>
+     <%= f.text_field :name, class: 'form-control', placeholder: "eg. \"Passover\"" %>
+   </div>
+   <div class="form-group">
+     <%= f.label :start_date %>
+     <%= f.text_field :start_date, class: 'form-control', placeholder: "eg. \"2015-04-03\"" %>
+   </div>
+   <div class="form-group">
+     <%= f.label :end_date %>
+     <%= f.text_field :end_date, class: 'form-control', placeholder: "eg. \"2015-04-11\"" %>
+   </div>
+   <div class="form-group">
+     <%= f.submit "Save", class: 'btn btn-success' %>
+   </div>
+ <% end %>
+</div>
+

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  resources :years 
+  resources :holidays 
+  
   resources :summaries do 
     post '/next_day' => 'summaries#next_day', as: :next_day
     post '/previous_day' => 'summaries#previous_day', as: :previous_day

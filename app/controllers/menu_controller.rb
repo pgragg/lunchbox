@@ -7,6 +7,7 @@ class MenuController < ApplicationController
   end
 
   def populate_with_blanks
+    check_for_year
     schoolyear = Year.first 
     year = schoolyear.current_trimester.end_date.year.to_i  
     month = schoolyear.current_trimester.end_date.month.to_i 
@@ -96,7 +97,7 @@ class MenuController < ApplicationController
   def private_populate(y, m, d) 
     @menus = Menu.all
     date_array = @menus[0].date_array(y, m, d)
-    date_array.keep_if {|date| !holiday_or_weekend?(DateTime.parse(date)) }
+    date_array.keep_if {|date| !holiday_or_weekend?(date)}
     @menus.each do |menu|
       date_array.each do |date| 
         fill_day_with_lunches(date, "edit_me", menu.id)

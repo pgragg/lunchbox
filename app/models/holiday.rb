@@ -1,4 +1,5 @@
 class Holiday < ActiveRecord::Base
+  include ApplicationHelper
   belongs_to :trimester
 
 
@@ -11,7 +12,7 @@ class Holiday < ActiveRecord::Base
     self.all.each do |holiday| 
       dates << holiday.dates
     end
-    dates 
+    dates.flatten
   end
 
 

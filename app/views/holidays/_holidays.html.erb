@@ -1,0 +1,18 @@
+<tr class=""> <h1> Holidays </h1> </tr>
+  <tr> 
+    <td><h3>Name</h3></td> 
+    <td><h3>Start Date </h3></td> 
+    <td><h3>End Date</h3></td> 
+    <td><h3> </h3></td> 
+    <td><h3> </h3></td> 
+  </tr> 
+  <%@holidays.each do |holiday| %> 
+    <tr> 
+    <td> <%="#{holiday.name}"%></td> 
+    <td> <%=holiday.start_date %> </td> 
+    <td> <%=holiday.end_date %> </td> 
+    <td> <%= link_to "Edit", edit_holiday_path(holiday), class:"btn btn-warning"%></td>
+    <td> <%= link_to "Remove", holiday_path(holiday), method: :delete, class:"btn btn-danger"%></td>
+    </tr> 
+  <% end %>
+</table>
