@@ -2,19 +2,18 @@ class LunchesController < ApplicationController
   include LunchesHelper
 
   def standardize_menus(lunches, date)
-    names = []
+    params= []
     lunches.by_day(date).each do |lunch| 
-      names << lunch.name 
+      params << [lunch.name, lunch.vegetarian, lunch.smart] 
     end 
     Menu.all.each do |menu|
       menu.lunches.by_day(date).each_with_index do |lunch,i| 
-        lunch.update_attributes(name: names[i]) unless safe(names[i]) == false
+        lunch.update_attributes(name: params[i][0]) unless safe(params[i][0]) == false
+        lunch.update_attributes(vegetarian: params[i][1], smart: params[i][2]) 
       end 
       menu.save!
     end
   end 
-
-  
 
   def safe(name) 
     name != nil
