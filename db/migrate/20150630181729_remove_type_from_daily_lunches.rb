@@ -8,7 +8,6 @@ class RemoveTypeFromDailyLunches < ActiveRecord::Migration
     add_column :daily_lunches, :vegetarian, :boolean
     add_column :daily_lunches, :smart, :boolean
     add_column :daily_lunches, :lunch_type, :string
-    add_column :daily_lunches, :date_array, :array
     add_column :lunches, :lunch_type, :string
   end
 end
