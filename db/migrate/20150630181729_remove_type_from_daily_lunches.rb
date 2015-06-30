@@ -1,5 +1,6 @@
 class RemoveTypeFromDailyLunches < ActiveRecord::Migration
   def change
+    drop_table :daily_lunches
     create_table :daily_lunches do |t|
       t.timestamps null: false
     end
