@@ -9,6 +9,8 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
+    authorize @user 
   end
 
   def update
@@ -16,4 +18,10 @@ class UsersController < ApplicationController
 
   def destroy
   end
+
+  def show 
+    @user = User.find(params[:id])
+    authorize @user 
+  end 
 end
+

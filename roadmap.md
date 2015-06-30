@@ -122,4 +122,24 @@ Heroku GUI - Postico - lets you edit database graphically.
 https://devcenter.heroku.com/articles/connecting-to-heroku-postgres-databases-from-outside-of-heroku
 
 
+* Lunch defaults page : gui for creating lunch options which are available on every day.* Dropdown in plain bagel box would make a create call for a new lunch option which would be bagel with cream cheese. 
+
+Lunch Default includes Bagel, Bagel w/ Cream cheese, etc. 
+[Bagel]
+[The rest]
+
+
+
+Lunch : rails g migration AddAlternateToLunch alternate:boolean 
+
+GUI CRUD Alternate lunches: pregenerate. 
+Name1, name2, name3 => [id 1, id 2, id 3]
+Name1, name2, name3 => [id 4, id 5, id 6]
+
+TODO: Make lunch alternates only when requested. 
+
+
+Drink model 
+DrinkChoice model / join table 
+
 

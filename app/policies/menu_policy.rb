@@ -20,3 +20,4 @@ class MenuPolicy < ApplicationPolicy
     user.present? && user.parent? && !user.admin? 
   end 
 end 
+
