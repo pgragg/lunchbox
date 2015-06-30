@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  
+
   resources :years 
-  resources :holidays 
+  resources :holidays   
+
   
   resources :summaries do 
     post '/next_day' => 'summaries#next_day', as: :next_day
@@ -31,6 +32,7 @@ Rails.application.routes.draw do
     resources :lunch_choices 
       # post '/bagel_choice' => 'lunch_choices#bagel_choice', as: :bagel_choice
   end
+  resources :daily_lunches 
 end 
 
 

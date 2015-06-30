@@ -1,0 +1,17 @@
+<table class = "table"> 
+<tr class=""> <h1> Lunches Recurring Daily</h1> </tr>
+  <tr> 
+    <td><h3>Name</h3></td> 
+    <td><h3>Vegetarian </h3></td> 
+    <td><h3>Smart</h3></td> 
+  </tr> 
+  <%@daily_lunches.each do |lunch| %> 
+    <tr> 
+    <td> <%=lunch.name%></td> 
+    <td> <%=lunch.vegetarian %> </td> 
+    <td> <%=lunch.smart %> </td> 
+    <td> <%= link_to "Edit", edit_daily_lunch_path(lunch), class:"btn btn-warning"%></td>
+    <td> <%= link_to "Remove", daily_lunch_path(lunch), method: :delete, class:"btn btn-danger"%></td>
+    </tr> 
+  <% end %>
+</table>

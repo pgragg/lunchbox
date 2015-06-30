@@ -107,12 +107,13 @@ N/A Upload student information
 
 * Add allergy information to admin panel (2.0) 
 * Should be able to reset account paid statuses at any time.
-* Add New Relic. 
+- Add New Relic. 
 * Identify slow aspects of site. Fix if possible. 
 * Cloudfront for CDN
 * Minify JS and CSS if necessary. 
 * Batch data access if necessary. 
 * Reduce over-fetching if necessary. 
+* Refactor to have a single choice class which is inherited by DrinkChoice and LunchChoice. 
 
 
 http://stackoverflow.com/questions/24545127/setting-devise-after-sign-in-path-for-with-multiple-models
@@ -129,8 +130,20 @@ Lunch Default includes Bagel, Bagel w/ Cream cheese, etc.
 [The rest]
 
 
+Lunch : 
+rails g model DailyLunch 
+DailyLunch < Lunch  
+Once per day: 
+  DailyLunch.all.each do |altlunch|  
+   menu.lunches.create(date: date, name: altlunch.name )
+  end
 
-Lunch : rails g migration AddAlternateToLunch alternate:boolean 
+Drink : 
+rails g model Drink name:string menu_id: integer 
+rails g model DrinkChoice [does not inherit from LunchChoice]
+
+
+
 
 GUI CRUD Alternate lunches: pregenerate. 
 Name1, name2, name3 => [id 1, id 2, id 3]
@@ -138,8 +151,9 @@ Name1, name2, name3 => [id 4, id 5, id 6]
 
 TODO: Make lunch alternates only when requested. 
 
-
 Drink model 
 DrinkChoice model / join table 
+
+AJAX is next. 
 
 

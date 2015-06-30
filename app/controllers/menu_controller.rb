@@ -90,8 +90,9 @@ class MenuController < ApplicationController
     while menu.lunches.by_day(date).count < lunch_count 
       menu.lunches.create(date: date, name: name)
     end
-
-    # menu.bagels.create(date: date, name: "Bagel")
+    DailyLunch.all.each do |altlunch|  
+     menu.lunches.create(date: date, name: altlunch.name )
+    end
   end
 
   def private_populate(y, m, d) 

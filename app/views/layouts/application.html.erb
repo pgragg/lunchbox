@@ -20,9 +20,6 @@
       <li> <%= link_to "Menus", menu_index_path %> </li> 
     <% end %>
     <% if policy(Menu.new).create? %>
-      <li> <%= link_to "Summaries", summaries_path %> </li> 
-    <% end %>
-    <% if policy(Menu.new).create? %>
       <li> <%= link_to "Control Panel", admin_panel_index_path %> </li> 
     <% end %>
     <% if current_user %>
