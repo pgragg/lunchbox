@@ -4,14 +4,14 @@ class LunchChoicesController < ApplicationController
     if current_user.children.count >= 1
       child = current_user.children.find(session[:user_id]) #Set in the menu_controller
     end
-    @user = (current_user.role == "faculty" ? current_user : child)
+    @user = (current_user.faculty_or_staff? ? current_user : child)
   end 
  
   def create
     define_user
     @lunch = Lunch.find(params[:lunch_id])
     @date = @lunch.date 
-    @user.destroy_lunch_choices_on(@date) #So that we only have one lunch per day
+    @user.destroy_lunch_choices_on(@date, @lunch.lunch_type)
     lunch_choice = LunchChoice.build_choice(@lunch, @user, @date)
     if lunch_choice.save
       flash[:notice] = "You picked #{@lunch.name} for #{@lunch.weekday}"

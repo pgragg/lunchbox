@@ -88,10 +88,18 @@ class MenuController < ApplicationController
     menu = Menu.find(menu_id)
     lunch_count = (menu_id == 4 ? 3 : 5)
     while menu.lunches.by_day(date).count < lunch_count 
-      menu.lunches.create(date: date, name: name)
+      menu.lunches.create(
+        date: date, 
+        name: name, 
+        lunch_type: "lunch" )
     end
     DailyLunch.all.each do |altlunch|  
-     menu.lunches.create(date: date, name: altlunch.name )
+     menu.lunches.create(
+      date: date, 
+      name: altlunch.name, 
+      lunch_type: altlunch.lunch_type, 
+      vegetarian: altlunch.vegetarian,
+      smart: altlunch.smart)
     end
   end
 

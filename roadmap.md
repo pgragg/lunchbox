@@ -38,9 +38,9 @@
 - Add first + last name, parent email, and campus to user model. Make users create this info on signin (0.5);
 - Add teacher? and student? methods and scopes ;
 - Add campus scopes for ECD and DWT; 
-* Add alphabetical scope for user names; 
-* Allow users to edit their account info by clicking on their names.;
-* Create and implement method to calculate user's grade based on the first four characters of their email and today's date.;
+- Add alphabetical scope for user names; 
+- Allow users to edit their account info by clicking on their names.;
+- Create and implement method to calculate user's grade based on the first four characters of their email and today's date.;
 * Clean up notifications.;
 - Users should be automatically routed to the menu associated with them. 
 
@@ -51,9 +51,9 @@
 * SimpleForm
 * ActiveAdmin
 * Parents should see a warning if their child doesn't have a menu_id. 
-* Update the rest of this roadmap with new structural considerations.
-* Upon first accessing the menu, faculty should be prompted to a define their name and campus. 
-* If faculty member has already signed up, they should be able to change their name, campus, grade. 
+- Update the rest of this roadmap with new structural considerations.
+- Upon first accessing the menu, faculty should be prompted to a define their name and campus. 
+- If faculty member has already signed up, they should be able to change their name, campus, grade. 
 
 ## v0.8 - Roles, summaries (Friday, June 26)
 
@@ -75,16 +75,16 @@
 * Allow admin to edit users' lunches from within the admin panel. ;
 * Add progress indication to admin panel which lists menus filled out. ;
 * Admin should be able to activate and deactivate an account's ability to order. 
-* Admin should be able to enter school holidays into the system.  
+- Admin should be able to enter school holidays into the system.  
 * Add list of users who have ordered and those who haven’t to the admin panel;
-* Add ability for an Admin to create a new menu from the admin panel.;
-* Fix the look of the site (4.0);
 * Only faculty who have paid for lunches should receive them (1.0) ;
 N/A Add Google integrated login? https://www.twilio.com/blog/2014/09/gmail-api-oauth-rails.html
 - Give Scholastic a sample user login. 
 * Load testing (Radview webload or Apache JMeter)
 - Student roles should require a parent email so we can send updates to accounts with incomplete menus.
 eg. a user model with a student role might have parent_email_1, parent_email_2, and campus.  
+- Lunch defaults page : gui for creating lunch options which are available on every day.
+
 
 
 ## v1.0 Deploy (Friday, July 10)
@@ -123,13 +123,6 @@ Heroku GUI - Postico - lets you edit database graphically.
 https://devcenter.heroku.com/articles/connecting-to-heroku-postgres-databases-from-outside-of-heroku
 
 
-* Lunch defaults page : gui for creating lunch options which are available on every day.* Dropdown in plain bagel box would make a create call for a new lunch option which would be bagel with cream cheese. 
-
-Lunch Default includes Bagel, Bagel w/ Cream cheese, etc. 
-[Bagel]
-[The rest]
-
-
 Lunch : 
 rails g model DailyLunch 
 DailyLunch < Lunch  
@@ -139,15 +132,10 @@ Once per day:
   end
 
 Drink : 
-rails g model Drink name:string menu_id: integer 
+rails g model Drink name:string menu_id:integer days:array 
 rails g model DrinkChoice [does not inherit from LunchChoice]
 
 
-
-
-GUI CRUD Alternate lunches: pregenerate. 
-Name1, name2, name3 => [id 1, id 2, id 3]
-Name1, name2, name3 => [id 4, id 5, id 6]
 
 TODO: Make lunch alternates only when requested. 
 

@@ -111,9 +111,9 @@ class Child < ActiveRecord::Base
     end 
   end 
 
-  def destroy_lunch_choices_on(date)
+  def destroy_lunch_choices_on(date, type)
     self.lunch_choices.each do |lc|
-      lc.destroy if lc.date == date 
+      lc.destroy if lc.date == date && lc.lunch_type == type 
     end
   end 
 

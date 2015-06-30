@@ -3,9 +3,15 @@ class Lunch < ActiveRecord::Base
   has_and_belongs_to_many :users, through: :lunch_choices
   belongs_to :menu
 
+  validates :name, presence: true
+  validates :lunch_type, presence: true
+  validates :date, presence: true
+
+
   default_scope { order('date ASC') } 
   scope :by_day, ->(date) { where(date: date)}
   scope :by_menu, ->(id) { where(menu_id: id)}
+  scope :by_type, ->(type) { where(lunch_type: type)}
 
   
   def weekday

@@ -12,6 +12,11 @@
       <%= f.label "Vegetarian" %> <br />
       <%= f.check_box :vegetarian %> <br />
     </div>
+    <div class="form-group">
+      <%= f.label "Type" %> <br />
+      <%= f.text_field :lunch_type, placeholder: "eg. \"drink\" or \"lunch\"", class:'form-control' %> <br />
+    </div>
+
    <div class="form-group">
      <%= f.submit "Save", class: 'btn btn-success' %>
    </div>
