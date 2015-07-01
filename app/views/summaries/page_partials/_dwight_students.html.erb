@@ -2,87 +2,36 @@
 <%= render partial: 'summaries/page_partials/header'%>
 
 <table class ="table"> 
-<tr>
-  <th><h3> GRADE </h3></th>
-  <th><%=Menu.lunch_name_on(0, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(1, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(2, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(3, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(4, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(5, @date, 2)%> </th>
-  <th>TOTAL</th>
-</tr>
-<tr>
-  <td>1 </td>
-  <td><%= LunchChoice.count_by_date_and_grade(0, @date, 2, 1, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(1, @date, 2, 1, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(2, @date, 2, 1, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(3, @date, 2, 1, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(4, @date, 2, 1, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(5, @date, 2, 1, "students")%></td>
-</tr>
-<tr>
-  <td>2 </td>
-  <td><%= LunchChoice.count_by_date_and_grade(0, @date, 2, 2, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(1, @date, 2, 2, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(2, @date, 2, 2, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(3, @date, 2, 2, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(4, @date, 2, 2, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(5, @date, 2, 2, "students")%></td>
-</tr>
-<tr>
-  <td>3 </td>
-  <td><%= LunchChoice.count_by_date_and_grade(0, @date, 2, 3, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(1, @date, 2, 3, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(2, @date, 2, 3, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(3, @date, 2, 3, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(4, @date, 2, 3, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(5, @date, 2, 3, "students")%></td>
-</tr>
-<tr>
-  <td>4 </td>
-  <td><%= LunchChoice.count_by_date_and_grade(0, @date, 2, 4, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(1, @date, 2, 4, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(2, @date, 2, 4, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(3, @date, 2, 4, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(4, @date, 2, 4, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(5, @date, 2, 4, "students")%></td>
-</tr>
-<tr>
-  <td>5 </td>
-  <td><%= LunchChoice.count_by_date_and_grade(0, @date, 2, 5, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(1, @date, 2, 5, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(2, @date, 2, 5, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(3, @date, 2, 5, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(4, @date, 2, 5, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(5, @date, 2, 5, "students")%></td>
-</tr>
-<tr>
-  <td>6 </td>
-  <td><%= LunchChoice.count_by_date_and_grade(0, @date, 2, 6, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(1, @date, 2, 6, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(2, @date, 2, 6, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(3, @date, 2, 6, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(4, @date, 2, 6, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(5, @date, 2, 6, "students")%></td>
-</tr>
-<tr>
-  <td>7 </td>
-  <td><%= LunchChoice.count_by_date_and_grade(0, @date, 2, 7, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(1, @date, 2, 7, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(2, @date, 2, 7, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(3, @date, 2, 7, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(4, @date, 2, 7, "students")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(5, @date, 2, 7, "students")%></td>
-</tr>
-<tr>
-  <td>TOTAL </td>
-  <td><%= LunchChoice.column_totals(0, @date, 2, Child::DWT_GRADES, "students")%></td>
-  <td><%= LunchChoice.column_totals(1, @date, 2, Child::DWT_GRADES, "students")%></td>
-  <td><%= LunchChoice.column_totals(2, @date, 2, Child::DWT_GRADES, "students")%></td>
-  <td><%= LunchChoice.column_totals(3, @date, 2, Child::DWT_GRADES, "students")%></td>
-  <td><%= LunchChoice.column_totals(4, @date, 2, Child::DWT_GRADES, "students")%></td>
-  <td><%= LunchChoice.column_totals(5, @date, 2, Child::DWT_GRADES, "students")%></td>
-  <td><%= LunchChoice.RH_sum(@date, 2, Child::DWT_GRADES,"students", 6)%></td> 
-</tr>
+  
+
+  <%= render partial: 'summaries/line_partials/lunch_name_on', 
+  locals: {
+    title: "GRADE",
+    date: @date,
+    menu_id: 2, 
+    lunches: 12 }%>
+  
+  <% grade = 1 %> 
+  <% 7.times do %>
+    <%= render partial: 'summaries/line_partials/count_by_date_and_grade_row', 
+    locals: {
+      title:"Grade #{grade}",
+      date: @date, 
+      menu_id: 2, 
+      role: "students", 
+      grade: grade, 
+      lunches: 12}%>
+    <% grade += 1 %> 
+  <%end %> 
+  
+  <%= render partial: 'summaries/line_partials/column_totals', 
+  locals: {
+    title: "TOTAL",
+    date: @date,
+    menu_id: 2,
+    grade_range: Child::DWT_GRADES,
+    role:"students",  
+    number_of_columns: 12 }%>
+  
+ 
 </table>

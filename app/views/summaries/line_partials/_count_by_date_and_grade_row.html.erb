@@ -1,14 +1,15 @@
 <tr> 
-  <td> <%="#{user.first_name} #{user.last_name}"%></td>
-  <td> <%="#{user.show_grade_or_role}"%> </td> 
-
+  <th><h3> <%= title %> </h3></th>
   <%i = 0 %> 
+
   <% lunches.times do %> <!-- Once for each lunch choice. --> 
     <!-- i stands for lunch number.  -->
-      <td> <%= user.choice_for?(date, i) %></td> 
+      <td><%=LunchChoice.count_by_date_and_grade(i, date, menu_id, grade, role, decision=nil)%></th>
     <%i += 1 %>
   <% end %> 
+  <th>TOTAL</th>
 </tr>
+
 
 
 

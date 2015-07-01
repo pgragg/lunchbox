@@ -2,43 +2,42 @@
 <%= render partial: 'summaries/page_partials/header'%>
 
 <table class ="table"> 
-<tr>
-  <th><h3> Faculty and/or Staff </h3></th>
-  <th><%=Menu.lunch_name_on(0, @date, 1)%></th>
-  <th><%=Menu.lunch_name_on(1, @date, 1)%></th>
-  <th><%=Menu.lunch_name_on(2, @date, 1)%></th>
-  <th><%=Menu.lunch_name_on(3, @date, 1)%></th>
-  <th><%=Menu.lunch_name_on(4, @date, 1)%></th>
-  <th><%=Menu.lunch_name_on(5, @date, 1)%></th>
-  <th>TOTAL</th>
-</tr>
-<tr>
-  <td>ECD staff</td> <!-- Here she wants just staff, not ECD faculty. Hence "exclude_ecd_teachers."  -->
-  <td><%= LunchChoice.count_by_date_and_grade(0, @date, 3, nil, "staff", "exclude_ecd_teachers")%></td> 
-  <td><%= LunchChoice.count_by_date_and_grade(1, @date, 3, nil, "staff", "exclude_ecd_teachers")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(2, @date, 3, nil, "staff", "exclude_ecd_teachers")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(3, @date, 3, nil, "staff", "exclude_ecd_teachers")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(4, @date, 3, nil, "staff", "exclude_ecd_teachers")%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(5, @date, 3, nil, "staff", "exclude_ecd_teachers")%></td>
-</tr>
-<tr>
-  <td>DWT faculty and staff</td> <!-- This means DWT faculty and staff -->
+    
+  <%= render partial: 'summaries/line_partials/lunch_name_on', 
+  locals: {
+    title: "Adult Lunches",
+    date: @date,
+    menu_id: 1,
+    lunches: 9 }%>
 
-  <td><%= LunchChoice.count_by_date_and_grade(0, @date, 1, nil, ["faculty", "staff"])%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(1, @date, 1, nil, ["faculty", "staff"])%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(2, @date, 1, nil, ["faculty", "staff"])%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(3, @date, 1, nil, ["faculty", "staff"])%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(4, @date, 1, nil, ["faculty", "staff"])%></td>
-  <td><%= LunchChoice.count_by_date_and_grade(5, @date, 1, nil, ["faculty", "staff"])%></td>
-</tr>
-<tr>
-  <td>TOTAL </td>
-  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(0, @date, nil, "exclude_ecd_teachers")%></td>
-  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(1, @date, nil, "exclude_ecd_teachers")%></td>
-  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(2, @date, nil, "exclude_ecd_teachers")%></td>
-  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(3, @date, nil, "exclude_ecd_teachers")%></td>
-  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(4, @date, nil, "exclude_ecd_teachers")%></td>
-  <td><%= LunchChoice.all_faculty_count_by_date_and_grade(5, @date, nil, "exclude_ecd_teachers")%></td>
-  <td><%= LunchChoice.sum(6, @date, nil, "exclude_ecd_teachers"){|a,b,c,d| LunchChoice.all_faculty_count_by_date_and_grade(a,b,c,d)}%></td>
-</tr>
+
+  <%= render partial: 'summaries/line_partials/count_by_date_and_grade_row', 
+  locals: {
+    title:"ECD Staff",
+    date: @date, 
+    menu_id: 3, 
+    role: "staff", 
+    decision: "exclude_ecd_teachers", 
+    grade: nil,
+    lunches: 9}%>
+
+  <%= render partial: 'summaries/line_partials/count_by_date_and_grade_row', 
+  locals: {
+    title:"DWT Faculty and Staff", 
+    date: @date, 
+    menu_id: 1, 
+    role: ["faculty", "staff"], 
+    grade: nil, 
+    decision: nil,
+    lunches: 9}%>
+
+  <%= render partial: 'summaries/line_partials/all_faculty_count_by_date_and_grade', 
+  locals: {
+    title:"TOTAL", 
+    date: @date, 
+    decision: "exclude_ecd_teachers", 
+    grade: nil,
+    lunches: 9}%>
+
+
 </table>

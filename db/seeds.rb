@@ -5,15 +5,15 @@ def flip_a_coin
   [true, false].sample
 end  
 
-Lunch.delete_all
-User.delete_all #Deleting all your data before a reset is pretty much necessary. 
-Menu.delete_all 
-Child.delete_all
-LunchChoice.delete_all
-Summary.delete_all
-Year.delete_all
-Trimester.delete_all
-Holiday.delete_all
+  Lunch.delete_all
+  User.delete_all #Deleting all your data before a reset is pretty much necessary. 
+  Menu.delete_all 
+  Child.delete_all
+  LunchChoice.delete_all
+  Summary.delete_all
+# Year.delete_all
+# Trimester.delete_all
+# Holiday.delete_all
 
 def create_parent_sample 
   user = User.new(
@@ -91,7 +91,7 @@ Menu.create!(name: "Dwight Faculty Menu")
 Menu.create!(name: "Dwight Student Menu")
 Menu.create!(name: "ECD Faculty Menu")
 Menu.create!(name: "ECD Student Menu")
-menus = Menu.all
+ menus = Menu.all
 
 
 #####Creating lunches 
@@ -99,7 +99,7 @@ menus = Menu.all
 i = 0 
 30.times do #30 days of lunches created
   i += 1
-  6.times do #6 lunches a day for all menus
+  12.times do #6 lunches a day for all menus
     m = 0 
     date = Date.today + i 
     name = Faker::Commerce.product_name
@@ -108,7 +108,8 @@ i = 0
       Lunch.create!(
        date: date,   #Faker::Date.between(Date.today + 3, Date.today + 10)
        name: name,
-       menu: menu 
+       menu: menu,
+       lunch_type: ['drink', 'lunch'].sample 
      )
      m += 1
    end 
@@ -124,7 +125,7 @@ lunch_users.each do |unit|
    i = 0
    29.times do 
      date = menu.lunch_date_list[i]
-     user.lunch_choices.create(lunch: menu.lunches.by_day(date)[rand(0..5)], date: date)
+     user.lunch_choices.create(lunch: menu.lunches.by_day(date)[rand(0..11)], date: date )
      i += 1
    end
  end 
