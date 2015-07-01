@@ -1,7 +1,14 @@
+
+
 <table class="table text-center">
   <% if current_user.children.count >= 1 %>  
     <%= render partial: 'children' %>
-<%end%>
+  <% else %> 
+    <div class ="text-center child_notice"> 
+      <h1> Welcome! </h1> 
+      <p> Add your children to your account. <p> 
+    </div> 
+  <%end%>
 
 <div class = "text-center"> 
   <div class = "col-md-12 col-sm-12 col-lg-12">

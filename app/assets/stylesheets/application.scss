@@ -21,12 +21,28 @@
 @import "admin_panel.scss";
 
 
+html{
+  min-height: 100%;
+}
 body {
-  background-image: url("blck-horiz-stripes.jpg");
+  height:100vh;
+  background-image: url("food-pattern.jpg");
   background-repeat: true;
   .container {
     background-color:white;
+    min-height:100%
   }
+}
+
+a.btn.btn-success.btn_bottom.btn-lg.btn-midpage{
+  margin: 0px auto 50px auto;
+  width: 41%;
+}
+
+.text-center.child_notice {
+  margin: 88px auto 38px auto;
+  height: 20%;
+  width: 50%;
 }
 
 
