@@ -1,4 +1,4 @@
-$('.date_id_<%= @date.to_s%> .lunch_box').removeClass('chosen').addClass('unchosen')
+$('.date_id_<%= @date.to_s%> .lunch_type_<%= @lunch.lunch_type %>').removeClass('chosen').addClass('unchosen')
 
 $('.lunch_id_<%= @lunch.id%>').removeClass('unchosen').addClass('chosen');
 

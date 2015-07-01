@@ -12,6 +12,17 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+
+  # def lunch_box_class(user, lunch)
+  #   var1 = (lunch.lunch_type == 'lunch' ? 'col-sm-1 col-md-1 col-lg-1 ' : 'row ')
+  #   var2 = 'lunch_box '
+  #   var3 = user.chose(lunch) ? 'chosen ' : 'unchosen '
+  #   var4 = "lunch_id_#{lunch.id.to_s}"
+  #   var5 = "lunch_type_#{lunch.lunch_type}"
+  #   output = "#{var1} #{var2} #{var3} #{var4} #{var5}"
+  #   output.html_safe
+  # end 
+  
   def all_dates_in_range(date1, date2)
     
     start_date = [date1.year, date1.month, date1.day]

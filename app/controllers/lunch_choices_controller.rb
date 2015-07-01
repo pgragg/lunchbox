@@ -1,5 +1,8 @@
 class LunchChoicesController < ApplicationController
+  include ApplicationHelper
 
+  helper :all
+  
   def define_user
     if current_user.children.count >= 1
       child = current_user.children.find(session[:user_id]) #Set in the menu_controller
@@ -14,11 +17,10 @@ class LunchChoicesController < ApplicationController
     @user.destroy_lunch_choices_on(@date, @lunch.lunch_type)
     lunch_choice = LunchChoice.build_choice(@lunch, @user, @date)
     if lunch_choice.save
-      flash[:notice] = "You picked #{@lunch.name} for #{@lunch.weekday}"
-      #redirect_to menu_index_path 
+      #
     else 
-      flash[:error] = "Lunch couldn't be saved."
-    end
+      flash[:error] = "Hmm.. try choosing a lunch that's farther ahead in the list."
+    end 
 
     respond_to do |format|
       format.html

@@ -23,11 +23,24 @@
   margin: 5% 0 2% 1.6%;
 }
 
+.row .lunch_type_drink {
+  height: 40%;
+  width: 90px;
+  float: right;
+  display: block;
+  clear: right;
+  margin-bottom: 5px;
+  padding: 0;
+}
+
 .chosen {
 
   background-color: #dff0d8;
   border-color: #d6e9c6;
   color: #3c763d;
+  .lunch_type_drink {
+    background-color: #dfa0d8;
+  }
 }
 .lunch_row {
   height: 55px;

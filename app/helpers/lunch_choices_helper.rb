@@ -5,4 +5,7 @@ module LunchChoicesHelper
     user.chose(lunch) ? 'chosen' : 'unchosen'
   end
 
+
+  
+
 end

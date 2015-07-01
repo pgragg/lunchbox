@@ -95,8 +95,10 @@ class User < ActiveRecord::Base
   end
 
   def destroy_lunch_choices_on(date, type)
-    self.lunch_choices.each do |lc|
-      lc.destroy if lc.date == date && lc.lunch_type == type 
+    if date 
+      self.lunch_choices.by_date(date).each do |lc|
+        lc.destroy if lc.lunch.lunch_type == type 
+      end
     end
   end 
 

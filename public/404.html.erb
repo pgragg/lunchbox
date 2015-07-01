@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Weird. The page you were looking for doesn't exist (404).</title>
+  <title>Oops! (404).</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
   body {
@@ -58,10 +58,22 @@
   <!-- This file lives in public/404.html -->
   <div class="dialog">
     <div>
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
+      <h1>Whoops.</h1>
+      <p>Go back and make sure all of your account information is up to date.</p>
     </div>
-    <p>Please <%=link_to "sign in again.", root_path%></p>
+    <% if current_user == nil %>
+      <p>Please <%=link_to "sign in.", root_path%></p>
+    <% elsif @user.menu_id == nil %> 
+      <p>Please <%=link_to "make sure your profile is up to date.", edit_user_path(current_user)%></p>
+    <% else %> 
+      <p>Please email pgragg@dwight.edu for assistance.%></p>
+    <% end %>
   </div>
 </body>
 </html>
+
+
+
+
+
+
