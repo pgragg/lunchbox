@@ -82,6 +82,9 @@ class MenuController < ApplicationController
     Lunch.all.each do |lunch| 
       lunch.delete 
     end  
+    LunchChoice.all.each do |lc| #TODO: add a hook in lunch.rb to do this. 
+      lc.delete 
+    end 
   end 
 
   def fill_day_with_lunches(date, name, menu_id)
@@ -93,19 +96,25 @@ class MenuController < ApplicationController
         name: name, 
         lunch_type: "lunch" )
     end
-    DailyLunch.all.each do |altlunch|  
-     menu.lunches.create(
-      date: date, 
-      name: altlunch.name, 
-      lunch_type: altlunch.lunch_type, 
-      vegetarian: altlunch.vegetarian,
-      smart: altlunch.smart)
-    end
+
+    fill_day_with_daily_lunches(date, menu, 'lunch')
+    fill_day_with_daily_lunches(date, menu, 'drink') if (menu_id == 2 || menu_id == 4) #Drinks are only allowed for child lunches. 
   end
 
-  def private_populate(y, m, d) 
+  def fill_day_with_daily_lunches(date, menu, type)
+    DailyLunch.all.by_type(type).each do |altlunch|  # DailyLunches are templates for lunches. 
+       menu.lunches.create( #This is where those templates translate into lunches. 
+        date: date, 
+        name: altlunch.name, 
+        lunch_type: altlunch.lunch_type, 
+        vegetarian: altlunch.vegetarian,
+        smart: altlunch.smart)
+      end
+  end 
+
+  def private_populate(year, month, day) 
     @menus = Menu.all
-    date_array = @menus[0].date_array(y, m, d)
+    date_array = @menus[0].date_array(year, month, day)
     date_array.keep_if {|date| !holiday_or_weekend?(date)}
     @menus.each do |menu|
       date_array.each do |date| 

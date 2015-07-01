@@ -3,6 +3,7 @@ class Lunch < ActiveRecord::Base
   has_and_belongs_to_many :users, through: :lunch_choices
   belongs_to :menu
 
+
   validates :name, presence: true
   validates :lunch_type, presence: true
   validates :date, presence: true
