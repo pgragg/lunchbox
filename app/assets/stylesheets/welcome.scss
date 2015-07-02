@@ -4,29 +4,42 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body {
+  background-image: url("http://i.imgur.com/tW01Tq4.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+html, body {
+  min-height:100vh; 
+}
+
+
 .title-top {
   font-size: 46px;
 }
 
-.background_image {
-  background-image: url("http://i.imgur.com/EzM6MSZ.jpg");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  height:100%;
-  background-position-y: -700px;
-}
+// .background_image {
+//   background-image: url("http://i.imgur.com/tW01Tq4.jpg");
+//   background-size: 100%;
+//   background-repeat: no-repeat;
+//   height:100%;
+//   //background-position-y: -700px;
+// }
 
 
 .square {
-  height:520px;
-  width:600px;
-  margin: 5% auto;
-  padding: 2% 0 0 0;
-  background-color: rgba(250, 250, 250, 0.9); 
+  height: 100vh;
+  width: 600px;
+  margin: 0% auto;
+  padding: 6% 0 0 0;
+  background-color: rgba(250, 250, 250, 0.8); 
 }
 
 .actions {
   margin: 5% 0 0 0; 
+  text-align: center;
 }
 
 .sign-up-box:after {
@@ -41,6 +54,10 @@
 
 .sign-in-btn {
   margin: 8.8% 0 0 0;
+}
+
+.btn {
+  border-radius: 0px;
 }
 
 input {

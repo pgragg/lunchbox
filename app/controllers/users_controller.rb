@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_filter :auth_user
   def index
   end
 

@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def auth_user
-    redirect_to welcome_index_path unless current_user
+    #redirect_to welcome_index_path unless (current_user || params[:confirmation_token])
   end
 
   def configure_permitted_parameters

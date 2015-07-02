@@ -2,8 +2,6 @@ Rails.application.routes.draw do
 
   resources :years 
   resources :holidays   
-
-  
   resources :summaries do 
     post '/next_day' => 'summaries#next_day', as: :next_day
     post '/previous_day' => 'summaries#previous_day', as: :previous_day
@@ -25,8 +23,8 @@ Rails.application.routes.draw do
   resources :admin_panel 
   devise_scope :user do
     #root "devise/registrations#new"
-    get '/users/sign_in' => 'welcome#index'
     root 'welcome#index'
+    
   end
   resources :lunches do 
     resources :lunch_choices 

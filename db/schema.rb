@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150630181729) do
+ActiveRecord::Schema.define(version: 20150702151723) do
 
   create_table "bagels", force: :cascade do |t|
     t.string   "bagel_filling"
@@ -39,9 +39,6 @@ ActiveRecord::Schema.define(version: 20150630181729) do
 
   add_index "children_lunches", ["children_id"], name: "index_children_lunches_on_children_id"
   add_index "children_lunches", ["lunch_id"], name: "index_children_lunches_on_lunch_id"
-
-# Could not dump table "daily_lunches" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
 
   create_table "days", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -136,8 +133,13 @@ ActiveRecord::Schema.define(version: 20150630181729) do
     t.string   "grade"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
