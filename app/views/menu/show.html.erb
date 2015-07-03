@@ -10,7 +10,12 @@
       </div>
     </div>
     <div class="row lunch_row text-center date_id_<%=date.to_s%>">
-      <% @menu.lunches_for_day(date).each do |lunch| %>
+      <% @menu.lunches_for_day(date)[0..5].each do |lunch| %>
+        <%= render partial: 'lunch_choices/lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
+      <% end %>
+    </div> 
+    <div class="row lunch_row text-center date_id_<%=date.to_s%>">
+      <% @menu.lunches_for_day(date)[6..12].each do |lunch| %>
         <%= render partial: 'lunch_choices/lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
       <% end %>
     </div>

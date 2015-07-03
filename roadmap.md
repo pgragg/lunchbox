@@ -62,7 +62,7 @@
 - Menus should be available to users according to their role. (2.0).
 - Faculty should have a "grade" attribute so we can lump them in with their grade if 1-5. 
 - Admins should be able to edit menus. 
-* Student menus should include Bagel choices every day, water milk or juice Mon-Thurs, water ch. milk or juice on Fri.
+- Student menus should include Bagel choices every day, water milk or juice Mon-Thurs, water ch. milk or juice on Fri.
 * Faculty should have a "paid" attribute so we don't send lunches to unpaid accounts.
 - Clean up controllers. 
 - Delete unused partials. 
@@ -122,25 +122,7 @@ Git GUI - Sourcetree - Tower
 Heroku GUI - Postico - lets you edit database graphically. 
 https://devcenter.heroku.com/articles/connecting-to-heroku-postgres-databases-from-outside-of-heroku
 
-
-Lunch : 
-rails g model DailyLunch 
-DailyLunch < Lunch  
-Once per day: 
-  DailyLunch.all.each do |altlunch|  
-   menu.lunches.create(date: date, name: altlunch.name )
-  end
-
-Drink : 
-rails g model Drink name:string menu_id:integer days:array 
-rails g model DrinkChoice [does not inherit from LunchChoice]
-
-
-
-TODO: Make lunch alternates only when requested. 
-
-Drink model 
-DrinkChoice model / join table 
+HireFire gem: http://docs.hirefire.io/v1.0/docs/ruby-on-rails-30
 
 AJAX is next. 
 
