@@ -19,14 +19,14 @@
 @import "summaries.scss";
 @import "children.scss";
 @import "admin_panel.scss";
-@import url(http://fonts.googleapis.com/css?family=Bitter);
+@import url(https://fonts.googleapis.com/css?family=Bitter);
 
 html {
   min-height: 100%;
 }
 body {
   height:100vh;
-  background-image: url("http://i.imgur.com/ePwNrVr.jpg"); 
+  background-image: url("https://i.imgur.com/ePwNrVr.jpg"); 
   background-repeat: true;
   .container {
     background-color:rgba(255,255,255,0);
