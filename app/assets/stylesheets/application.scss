@@ -47,7 +47,7 @@ ul {
 li a {
   color: black;
   font-style: bold;
-  letter-spacing: 1px;
+  letter-spacing: 0.4px;
 }
 
 .nav-tabs {
@@ -57,7 +57,6 @@ li a {
   border-bottom-left-radius: 112px;
   border-bottom-right-radius: 112px;
   box-shadow: 1px 4px 4px grey;
-  text-shadow: 0px 3px 1px rgba(200, 200, 200, 1);
 }
 
 .nav-tabs > li > a {
@@ -66,6 +65,12 @@ li a {
   border: 1px solid transparent;
   height: 50px;
   font-family:'PT sans', 'Lucida Grande', 'Helvetica Neue', sans-serif;
+}
+
+.nav-tabs > li > a:hover {
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0px 3px 1px rgba(200, 200, 200, 1);
+  box-shadow: none;
 }
 
 a p {
@@ -87,6 +92,8 @@ a p {
   width: 100%;
   bottom: 0;
   letter-spacing: 1px;
+  text-shadow: 1px 0px 0px grey; 
+  box-shadow: 3px 3px 2px rgba(6, 6, 6, 0.3);
 }
 
 // a.btn.btn-success.btn_bottom.btn-lg.btn-midpage{
@@ -145,9 +152,9 @@ a p {
 
 }
 .btn {
-  border-radius:0px;
+  border-radius:8px;
   letter-spacing: 0.5px;
-
+  box-shadow: 3px 3px 2px rgba(6, 6, 6, 0.3);
 }
 .btn_bottom {
   margin: 0 0 50px 0;

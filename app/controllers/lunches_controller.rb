@@ -8,10 +8,13 @@ class LunchesController < ApplicationController
     end 
     Menu.all.each do |menu|
       menu.lunches.by_day(date).each_with_index do |lunch,i| 
-        unless safe(params[i][0]) == false
-          lunch.update_attributes(name: params[i][0]) 
-          lunch.update_attributes(vegetarian: params[i][1], smart: params[i][2]) 
-        end 
+        if params[i] 
+          unless safe(params[i][0]) == false
+            lunch.update_attributes(name: params[i][0]) 
+            lunch.update_attributes(vegetarian: params[i][1], smart: params[i][2]) 
+          end 
+        end
+        
       end 
       menu.save!
     end
