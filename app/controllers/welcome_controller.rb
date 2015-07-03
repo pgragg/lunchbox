@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
-  skip_before_filter :auth_user
+  skip_before_filter :authenticate_user!
+
   
   def index
     render :layout => '_landing'

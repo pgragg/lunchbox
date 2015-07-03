@@ -18,6 +18,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'factory_girl_rails'
 gem 'newrelic_rpm'
+gem 'sendgrid'
 
 group :production do
   gem 'pg'
