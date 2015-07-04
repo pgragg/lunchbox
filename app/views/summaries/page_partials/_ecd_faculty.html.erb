@@ -48,3 +48,6 @@
   <td><%= LunchChoice.column_totals(5, @date, 3, Child::ECD_GRADES, "faculty")%></td> 
   <td><%=LunchChoice.sum(6, @date, 3, Child::ECD_GRADES, "faculty"){|x,y,a,b,c|LunchChoice.column_totals(x, y, a, b, c)}%></td>
 </tr>
+</table>
+
+<%= render partial: 'summaries/page_partials/footer'%>

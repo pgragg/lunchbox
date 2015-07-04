@@ -1,6 +1,7 @@
 <%= render partial: 'summaries/page_partials/header'%>
 
 <table class ="table"> 
+
 <tr>
   <th><h3> ECD students </h3></th>
   <th> <%=Menu.lunch_name_on(0, @date, 4)%> </th>
@@ -39,3 +40,6 @@
   <td><%= LunchChoice.RH_sum(@date, 4, Child::ECD_GRADES, "students", 4)%></td>
 </tr>
 </table>
+
+
+<%= render partial: 'summaries/page_partials/footer'%>

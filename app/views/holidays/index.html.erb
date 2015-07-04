@@ -3,8 +3,8 @@
 </table>
 
 
-<div class = "container text-center"> 
-  <div class = "container col-md-12 col-sm-12 col-lg-12">
+<div class = "text-center"> 
+  <div class = "col-md-12 col-sm-12 col-lg-12">
     <% if current_user.admin? %> 
       <%=link_to "Add a holiday", new_holiday_path, class: 'btn btn-success'%>
     <% end %>

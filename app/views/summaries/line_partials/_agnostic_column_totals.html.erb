@@ -1,0 +1,16 @@
+<tr> 
+  <th><h3> <%= title %></h3></th>
+  <%i = 0 %> 
+  <% number_of_columns.times do %> <!-- Once for each lunch choice. --> 
+    <!-- i stands for lunch number.  -->
+      <td><%=LunchChoice.agnostic_column_totals(i, date)%></th>
+    <%i += 1 %>
+  <% end %> 
+  <td><%= LunchChoice.sum(number_of_columns, date){|x,y|LunchChoice.agnostic_column_totals(x, y) }%></td> 
+</tr>
+
+
+
+
+
+

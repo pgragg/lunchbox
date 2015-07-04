@@ -16,9 +16,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "welcome.scss";
-@import "summaries.scss";
 @import "children.scss";
 @import "admin_panel.scss";
+@import "summaries.scss";
 // @import url(http://fonts.googleapis.com/css?family=Bitter);
 @import url(http://fonts.googleapis.com/css?family=PT+Sans);
 
@@ -27,6 +27,7 @@ html {
 }
 
 body {
+  font-family: 'PT sans', 'Lucida Grande', 'Helvetica Neue', sans-serif;
   height:100vh;
   background-image: url("http://i.imgur.com/tW01Tq4.jpg"); 
   background-repeat: true;
@@ -34,10 +35,17 @@ body {
     background-color: rgba(255, 255, 255, 0.5);
     min-height: 100%;
     color: black;
-    border-top-right-radius: 112px;
-    border-top-left-radius: 112px;
+    border-top-right-radius: 59px;
+    border-top-left-radius: 59px;
+    border-bottom-right-radius: 59px;
+    border-bottom-left-radius: 59px;
     box-shadow: 14px 4px 1px rgb(22, 22, 22);
   }
+}
+
+h1 {
+  font-style: bold;
+  font-weight: 800;
 }
 
 ul {
@@ -152,9 +160,20 @@ a p {
 
 }
 .btn {
-  border-radius:8px;
+  border-radius: 0px;
+  border: 2.8px solid white;
+  background-color: rgba(0, 0, 0, 0);
   letter-spacing: 0.5px;
+  color: white;
+  font-weight: 500;
   box-shadow: 3px 3px 2px rgba(6, 6, 6, 0.3);
+}
+.btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 3px 4px 6px rgba(6, 6, 6, 0.55);
+  border: 2.8px solid white;
+  letter-spacing: 0.7px;
+  text-shadow: 0px 2px 1px grey; 
 }
 .btn_bottom {
   margin: 0 0 50px 0;
@@ -181,8 +200,7 @@ a p {
   margin: 0 44px 0 0px;
 }
 
-
-
-
-
+.panel_container {
+  padding: 42px 0 0 0;
+}
 
