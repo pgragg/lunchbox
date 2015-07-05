@@ -62,6 +62,7 @@ class MenuController < ApplicationController
     session[:menu_id] = params[:id]
     @menu = Menu.find(params[:id])
     @dates = @menu.lunch_date_list
+    authorize @menu 
   end
 
   def update

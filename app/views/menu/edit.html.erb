@@ -4,23 +4,32 @@
   <%= link_to "Delete All Lunches", menu_delete_all_lunches_path(@menu.id), class: "btn btn-success", method: :post  %>
   <%= link_to "Populate Menus With Blank Lunches", menu_populate_with_blanks_path(@menu.id), class: "btn btn-success", method: :post  %>
 
+  <div class="col-md-12">
+  <%= "Menu ID: #{@menu.id} "%>
+  <div class="center_column">
   <% unless @dates.include? nil %> 
     <% @dates.each do |date| %> 
-    <div class="row text-center"> 
+    <div class="row title_row text-center"> 
       <div class="col-sm-12 date_box text-center">
         <h4><%="#{weekday_on(date)}"%></h4> 
         <h6><%= date %> </h6>
       </div>
     </div>
     <div class="row lunch_row text-center date_id_<%=date.to_s%>">
-      <% @menu.lunches_for_day(date).each do |lunch| %>
+      <% @menu.lunches_for_day(date)[0..5].each do |lunch| %>
+        <%= render partial: 'lunch_choices/edit_lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
+      <% end %>
+    </div> 
+    <div class="row lunch_row text-center date_id_<%=date.to_s%>">
+      <% @menu.lunches_for_day(date)[6..12].each do |lunch| %>
         <%= render partial: 'lunch_choices/edit_lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
       <% end %>
     </div>
   <br>
   <hr>
-  <% end %>
-<% end %> 
+    <% end %>
+  <% end %> 
+</div>
 </div>
 
 <!-- Adding or editing things in menu.lunches collection.  -->

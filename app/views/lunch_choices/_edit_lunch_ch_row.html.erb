@@ -1,7 +1,18 @@
 <div class="col-sm-1 col-md-1 col-lg-1 lunch_box %>">
-    <%= link_to "#{lunch.name}", edit_lunch_path(lunch), class: '' %>
+    <%= link_to edit_lunch_path(lunch), class: 'white_link' do%>
+      <%= lunch.name %>
+      <% if lunch.vegetarian %> 
+        <div class ="green_box" %> V </div>
+      <% end %>
+      <% if lunch.smart %> 
+        <div class ="blue_box" %> S </div>
+      <% end %>
+  <%end%>
 </div> 
 
 <!-- Make another partial for this and use it in menu#edit.  -->
 
 <!-- link_to "", lunch, method: :delete, class: 'btn btn-xs btn-danger' -->
+
+
+<!-- Make another partial for this and use it in menu#edit.  -->

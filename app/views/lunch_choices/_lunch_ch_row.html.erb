@@ -1,9 +1,14 @@
-<div class="col-sm-1 col-md-1 col-lg-1 lunch_box <%= lunch_choice = @user.chose(lunch) ? 'chosen' : 'unchosen'%> lunch_id_<%=lunch.id%> lunch_type_<%=lunch.lunch_type%> ">
-  <%= link_to [lunch, LunchChoice.new], class: 'lunch_text', method: :post, remote: true do %>
+<%= link_to [lunch, LunchChoice.new], class: 'lunch_text', method: :post, remote: true do %>
+  <div class="col-sm-1 col-md-1 col-lg-1 lunch_box <%= lunch_choice = @user.chose(lunch) ? 'chosen' : 'unchosen'%> lunch_id_<%=lunch.id%> lunch_type_<%=lunch.lunch_type%> ">
     <p><%= lunch.name %></p>
-  <% end %> 
+    <% if lunch.vegetarian %> 
+      <div class ="green_box" %> V </div>
+    <% end %>
+    <% if lunch.smart %> 
+      <div class ="blue_box" %> S </div>
+    <% end %>
 </div> 
-  
+<% end %> 
 
 
 <!-- Make another partial for this and use it in menu#edit.  -->
