@@ -43,6 +43,7 @@ class SummariesController < ApplicationController
       @summary.update_attribute(:date, (new_date))
     else 
       flash[:error] = "You may have tried to display a date which doesn't have any lunches."
+      @summary.update_attribute(:date, (first_day))
     end  
   end
 
