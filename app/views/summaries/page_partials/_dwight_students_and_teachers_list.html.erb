@@ -1,25 +1,24 @@
 <%= render partial: 'summaries/page_partials/header'%>
 
-<table class ="table"> 
-<tr>
-  <th><h3> DWT Students and Teachers list</h3></th>
-  <th> Grade </th> 
-  <th><%=Menu.lunch_name_on(0, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(1, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(2, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(3, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(4, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(5, @date, 2)%> </th>
-</tr>
+<table class ="table">
+
+
+  <%= render partial: 'summaries/line_partials/lunch_name_on', 
+  locals: {
+    title: "DWT Students and Teachers list",
+    date: @date,
+    menu_id: 1, 
+    lunches: 12, 
+    grades_listed: true }%>
 
 <%Child::DWT_GRADES.each do |grade|%>
   <%Child.by_grade(grade).each do |child| %> 
     <!-- Render the partial for each child in the grade.  -->
-    <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: child, date: @date}%>  
+    <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: child, date: @date, lunches: 12}%>  
   <% end %> 
   <%User.by_grade(grade).each do |user| %>
-    <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: user, date: @date}%> 
-  <% end %>
+    <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: user, date: @date, lunches: 12}%> 
+  <% end %> 
   <!-- Render the student totals partial for the grade. -->
   <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: grade, role: "students", date: @date}%>  
   <!-- Render the teacher totals partial for the grade. -->

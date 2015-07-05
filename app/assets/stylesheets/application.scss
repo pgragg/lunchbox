@@ -34,11 +34,12 @@ body {
   .container {
     background-color: rgba(255, 255, 255, 0.11);
     min-height: 50%;
+    width:96%; 
     color: white;
     border-bottom-right-radius: 59px;
     border-bottom-left-radius: 59px;
     box-shadow: 14px 4px 1px #161616;
-    padding: 9% 4% 4% 4%;
+    padding: 12% 4% 4% 4%;
   }
 }
 
@@ -109,7 +110,9 @@ table {
   width: 100%;
   max-width: 100%;
   margin-bottom: 20px;
+  font-size:14px; 
 }
+
 .alert {
   border: 1px solid transparent;
   border-radius: 0px;
