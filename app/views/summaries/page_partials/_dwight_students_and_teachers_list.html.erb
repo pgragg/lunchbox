@@ -14,10 +14,10 @@
 <%Child::DWT_GRADES.each do |grade|%>
   <%Child.by_grade(grade).each do |child| %> 
     <!-- Render the partial for each child in the grade.  -->
-    <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: child, date: @date, lunches: 12}%>  
+    <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: child, date: @date}%>  
   <% end %> 
   <%User.by_grade(grade).each do |user| %>
-    <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: user, date: @date, lunches: 12}%> 
+    <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: user, date: @date}%> 
   <% end %> 
   <!-- Render the student totals partial for the grade. -->
   <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: grade, role: "students", date: @date}%>  
