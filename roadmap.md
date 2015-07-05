@@ -114,6 +114,7 @@ N/A Upload student information
 * Batch data access if necessary. 
 * Reduce over-fetching if necessary. 
 * Refactor to have a single choice class which is inherited by DrinkChoice and LunchChoice. 
+* Letter_opener gem to make emails prettier. 
 
 
 http://stackoverflow.com/questions/24545127/setting-devise-after-sign-in-path-for-with-multiple-models

@@ -3,7 +3,7 @@
 en:
   devise:
     confirmations:
-      confirmed: "Your email address has been successfully confirmed."
+      confirmed: "Your email address has been confirmed. Feel free to log in!"
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
     failure:
@@ -18,7 +18,7 @@ en:
       unconfirmed: "You have to confirm your email address before continuing."
     mailer:
       confirmation_instructions:
-        subject: "Confirmation instructions"
+        subject: "Confirm your Dwight Lunchbox account"
       reset_password_instructions:
         subject: "Reset password instructions"
       unlock_instructions:
@@ -41,16 +41,16 @@ en:
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address."
       updated: "Your account has been updated successfully."
     sessions:
-      signed_in: "Signed in successfully."
-      signed_out: "Signed out successfully."
-      already_signed_out: "Signed out successfully."
+      signed_in: "Welcome!"
+      signed_out: "You have signed out."
+      already_signed_out: "You are signed out."
     unlocks:
-      send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
+      send_instructions: "An email with unlock instructions is on its way: it should arrive in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
-      unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+      unlocked: "Your account has been unlocked: try signing in now!"
   errors:
     messages:
-      already_confirmed: "was already confirmed, please try signing in"
+      already_confirmed: "Don't worry: your account has already been confirmed. You should be able to sign in now."
       confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
       expired: "has expired, please request a new one"
       not_found: "not found"

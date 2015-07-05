@@ -26,25 +26,27 @@
    </div>
 
   <% end %>
-  <div class="container <%="summary" if @summary %>">
-  <ul class="nav nav-tabs"> 
+  <% if current_user %> 
+  <ul class="nav nav-tabs text-center"> 
     <% if policy(Menu.new).children? %>
-      <li> <%= link_to "My Children (#{current_user.children.count})", user_children_path(current_user.id) %> </li> 
+      <li class= "col-md-4"> <%= link_to "My Children (#{current_user.children.count})", user_children_path(current_user.id) %> </li> 
     <% end %>
     <% if current_user && (current_user.faculty? || current_user.staff?) %>
-      <li> <%= link_to "My Menu", menu_path(current_user.id) %> </li> 
+      <li class= "col-md-4"> <%= link_to "My Menu", menu_path(current_user.id) %> </li> 
     <% end %>
     <% if policy(Menu.new).create? && current_user.menu_id != nil %>
-      <li> <%= link_to "Menus", menu_index_path %> </li> 
+      <li class= "col-md-4"> <%= link_to "Menus", menu_index_path %> </li> 
     <% end %>
     <% if policy(Menu.new).create? %>
-      <li> <%= link_to "Control Panel", admin_panel_index_path %> </li> 
+      <li class= "col-md-4"> <%= link_to "Control Panel", admin_panel_index_path %> </li> 
     <% end %>
     <% if current_user %>
-      <li><%= link_to (current_user.first_name || current_user.email), edit_user_registration_path %></li> 
-      <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+      <li class= "col-md-4"><%= link_to (current_user.first_name || current_user.email), edit_user_registration_path %></li> 
+      <li class= "col-md-4"><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
       <%end%>
   </ul>
+  <% end %>
+  <div class="container <%="summary" if @summary %>">
     <%= yield %>
   </div>
 

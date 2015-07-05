@@ -1,5 +1,5 @@
 
-<%= link_to "Add a Daily Menu Item", new_daily_lunch_path, class: "btn btn-success" %> 
+<%= link_to "Add a Daily Menu Item", new_daily_lunch_path, id: "daily_menu_item_btn", class: "btn btn-success" %> 
 
 <% if @daily_lunches != nil %> 
   <%= render partial: 'daily_lunches', locals: {lunches: @daily_lunches } %> 

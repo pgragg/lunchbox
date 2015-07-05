@@ -1,4 +1,4 @@
-<div class="col-md-8">
+<div class="col-md-8 col-sm-8 center">
  <%= form_for [@user, @child] do |f| %><!--   , remote: true -->
    <div class="form-group">
      <%= f.label :first_name %>
@@ -16,7 +16,7 @@
      <%= f.label :email %>
      <%= f.email_field :email, class: 'form-control', placeholder: "eg. \"2019sappleseed@dwight.edu\"" %>
    </div>
-   <div class="form-group">
+   <div class="form-group text-center">
      <%= f.submit "Save", class: 'btn btn-success' %>
    </div>
  <% end %>

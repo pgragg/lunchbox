@@ -1,6 +1,7 @@
 class Child < ActiveRecord::Base
   after_save :define_menu_id
   after_update :define_menu_id
+
   belongs_to :user
   has_and_belongs_to_many :lunches, through: :lunch_choices
   has_many :lunch_choices, dependent: :destroy 
@@ -10,6 +11,11 @@ class Child < ActiveRecord::Base
   scope :by_campus, ->(campus) { where(campus: campus)}
   default_scope { order('last_name ASC') }
   scope :by_grade, ->(grade) { where(grade: grade)}
+
+  validates :email, :uniqueness => true, if: 'email.present?'
+  validates :first_name, :presence => true 
+  validates :last_name, :presence => true
+  validates :grade, :presence => true
 
   GRADES = %w[threes fours k 1 2 3 4 5 6 7]
   ECD_GRADES = %w[threes fours k]

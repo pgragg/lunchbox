@@ -1,12 +1,12 @@
 
 <div class="text-center panel_container"> 
-  <h1> Control Panel </h1>
+  <!-- <h1> Control Panel </h1> -->
   <div class = "admin-box-panel" >
-    <%= link_to "Manage School Holidays", holidays_path, class: 'btn btn-success btn-admin' %>
-    <%= link_to "Manage User Accounts", users_path, class: 'btn btn-success btn-admin' %>
-    <%= link_to "Manage Daily Lunches", daily_lunches_path, class: 'btn btn-success btn-admin' %>
-    <%= link_to "View Summaries", summaries_path, class: 'btn btn-success btn-admin' %>
-    <%= link_to "Manage Menu Items", edit_menu_path(@menus[0]), class: 'btn btn-success btn-admin' %>
+    <%= link_to "School Holidays", holidays_path, class: 'btn btn-success btn-admin' %>
+    <%= link_to "User Accounts", users_path, class: 'btn btn-success btn-admin' %>
+    <%= link_to "Daily Lunches", daily_lunches_path, class: 'btn btn-success btn-admin' %>
+    <%= link_to "Menu Items", edit_menu_path(@menus[0]), class: 'btn btn-success btn-admin' %>
+    <%= link_to "Summaries", summaries_path, class: 'btn btn-success btn-admin' %>
   </div>
 </div>
 

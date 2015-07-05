@@ -32,14 +32,13 @@ body {
   background-image: url("http://i.imgur.com/tW01Tq4.jpg"); 
   background-repeat: true;
   .container {
-    background-color: rgba(255, 255, 255, 0.5);
-    min-height: 100%;
-    color: black;
-    border-top-right-radius: 59px;
-    border-top-left-radius: 59px;
+    background-color: rgba(255, 255, 255, 0.11);
+    min-height: 50%;
+    color: white;
     border-bottom-right-radius: 59px;
     border-bottom-left-radius: 59px;
-    box-shadow: 14px 4px 1px rgb(22, 22, 22);
+    box-shadow: 14px 4px 1px #161616;
+    padding: 9% 4% 4% 4%;
   }
 }
 
@@ -58,21 +57,31 @@ li a {
   letter-spacing: 0.4px;
 }
 
+form {
+  margin-bottom: 5.4%;
+}
+
 .nav-tabs {
-  // border-bottom: 1px solid #ddd;
-  padding-left: 3%;
-  background-color: rgba(255, 255, 255, 0.72);
-  border-bottom-left-radius: 112px;
-  border-bottom-right-radius: 112px;
+  background-color: rgba(255, 255, 255, 0.99);
   box-shadow: 1px 4px 4px grey;
+  width: 100vw;
+  height: 8vw;
+  position: absolute;
+  z-index: 999;
+  margin: 0 auto;
+  li {
+    float: left;
+  }
 }
 
 .nav-tabs > li > a {
-  margin: 0 0 12% 0;
+  margin: 0 0 25% 0;
   line-height: 4;
   border: 1px solid transparent;
   height: 50px;
-  font-family:'PT sans', 'Lucida Grande', 'Helvetica Neue', sans-serif;
+  font-family: 'PT sans', 'Lucida Grande', 'Helvetica Neue', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
 }
 
 .nav-tabs > li > a:hover {
@@ -81,14 +90,25 @@ li a {
   box-shadow: none;
 }
 
+a:hover {
+  box-shadow: none; 
+  border:none; 
+}
+
 a p {
-  color: black;
+  color: white;
   text-decoration: none;
   /* text-overflow: ellipsis; */
   font-style: normal;
   font-family:'PT sans', 'Lucida Grande', 'Helvetica Neue', sans-serif;
   font-size:14px; 
   letter-spacing: 1px;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
 }
 .alert {
   border: 1px solid transparent;
@@ -124,11 +144,6 @@ a p {
   width: 50%;
 }
 
-
-// .alert {
-//   margin: 5% 0 2% 1.6%;
-// }
-
 .row .lunch_type_drink {
   height: 23.3333333333px;
   display: block;
@@ -137,6 +152,10 @@ a p {
   padding-top: 4px;
   width: 77.7px;
   color:white;
+}
+
+.title_row {
+  margin: 0 0 5% 0;
 }
 
 .chosen {
@@ -152,13 +171,18 @@ a p {
 .lunch_row {
   height: 155px;
   width: 100%;
-  margin: 0 auto;
+  margin: 0 0 0 16%;
 }
 
 .center_column {
   margin: 0 auto 0 auto; 
-
 }
+
+.center {
+  margin: 5% 0 0 16%;
+}
+
+
 .btn {
   border-radius: 0px;
   border: 2.8px solid white;
@@ -172,7 +196,6 @@ a p {
   background-color: rgba(255, 255, 255, 0.2);
   box-shadow: 3px 4px 6px rgba(6, 6, 6, 0.55);
   border: 2.8px solid white;
-  letter-spacing: 0.7px;
   text-shadow: 0px 2px 1px grey; 
 }
 .btn_bottom {
@@ -201,6 +224,16 @@ a p {
 }
 
 .panel_container {
-  padding: 42px 0 0 0;
+  padding: 0px 0 42px 0;
 }
+
+.registration_title {
+  margin: 0 0 8% 0;
+}
+
+
+#daily_menu_item_btn {
+  margin: 5% auto;
+}
+
 

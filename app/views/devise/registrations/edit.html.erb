@@ -1,7 +1,13 @@
 
-<div class = "text-center">
-  <h2>Where should we send your lunches?</h2>
-</div>
+<div class = "col-md-8 col-sm-8 center text-center">
+  <div class = "registration_title">
+    <% if current_user.role == "faculty" || current_user.role == "staff" %>
+      <h1>Where should we send your lunches?</h1>
+    <% else %>
+      <h1>Edit your personal information</h1>
+  </div>
+
+
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
@@ -20,12 +26,11 @@
     <%= f.email_field :email, autofocus: true, class: "form-control"  %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :campus %> <i> (choose DWT for 18/22 W. 89th street) </i><br>
-    <%= f.select(:campus, %w[ECD DWT], {include_blank: false}, { :class => 'form-control' }) %>
-  </div>
-  
   <% if current_user.role == "faculty" || current_user.role == "staff" %>
+    <div class="form-group">
+      <%= f.label :campus %> <i> (choose DWT for 18/22 W. 89th street) </i><br>
+      <%= f.select(:campus, %w[ECD DWT], {include_blank: false}, { :class => 'form-control' }) %>
+    </div>
     <div class="form-group">
        <%= f.label :role %> <br>
        <%= f.select(:role, %w[faculty staff], {include_blank: false}, { :class => 'form-control' }) %>
@@ -46,13 +51,14 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div class="actions">
+  <div class="actions text-center">
     <%= f.submit "Update", class: "btn btn-success" %>
   </div>
-<% end %>
+  <% end %>
+  <% end %>
 
 <h3>Cancel my account</h3>
 
-<p>Would you like to cancel this account? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure? All lunch choices will be lost." }, method: :delete %></p>
+<p>Would you like to cancel this account? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure? All lunch choices will be lost." }, method: :delete, class: "btn btn-danger" %></p>
 
-<%= link_to "Back", :back %>
+</div>

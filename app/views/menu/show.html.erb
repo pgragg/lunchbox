@@ -3,7 +3,7 @@
   <div class="center_column">
   <% unless @dates.include? nil %> 
     <% @dates.each do |date| %> 
-    <div class="row text-center"> 
+    <div class="row title_row text-center"> 
       <div class="col-sm-12 date_box text-center">
         <h4><%="#{weekday_on(date)}"%></h4> 
         <h6><%= date %> </h6>
