@@ -32,7 +32,7 @@ body {
   background-image: url("http://i.imgur.com/tW01Tq4.jpg"); 
   background-repeat: true;
   .container {
-    background-color: rgba(255, 255, 255, 0.11);
+    background-color: rgba(0, 0, 0, 0.36);
     min-height: 50%;
     width:96%; 
     color: white;
@@ -81,9 +81,10 @@ form {
   border: 1px solid transparent;
   height: 50px;
   font-family: 'PT sans', 'Lucida Grande', 'Helvetica Neue', sans-serif;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
-  letter-spacing:1px; 
+  letter-spacing: 1px;
+  color: rgba(0, 0, 0, 0.68); 
 }
 
 .nav-tabs > li > a:hover {

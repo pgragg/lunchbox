@@ -15,12 +15,37 @@ html, body {
   min-height:100vh; 
 }
 
-
-.title-top {
-  font-size: 46px;
+span {
+  font-weight:100;
+  font-style: normal;
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
 }
 
-div#sign_up_btn {
+
+h1 {
+  font-size: 150%;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.26);
+  color: #fff;
+}
+
+.title-top {
+  font-size: 36px;
+  width: 84%;
+  .white_box {
+    padding: 0 9% 0 0; 
+  }
+}
+
+#lower_logo {
+  margin: -14% 0 0 30.8%;
+}
+
+#upper_logo {
+
+}
+
+#sign_up_btn {
   margin: 18.5% 0 0 0;
 }
 // .background_image {
@@ -38,7 +63,8 @@ div#sign_up_btn {
   max-width: 600px;
   margin: 0% auto;
   padding: 6% 0 0 0;
-  background-color: rgba(250, 250, 250, 0.8); 
+  background-color: rgba(0, 0, 0, 0.44);
+  color: white;
 }
 
 .actions {
@@ -65,8 +91,16 @@ div#sign_up_btn {
 
 .btn {
   border-radius: 0px;
-  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.36);
+  background-color: rgba(0, 62, 131, 0);
+  border: 1px solid #FFFFFF;
+  color: #FFFFFF;
+  font-size: 16px;
+  box-shadow: 2px 3px 0 rgba(255, 255, 255, 1);}
 
+.btn:hover {
+  border: 1px solid #003e83;
+  background-color: #003e83;
+  color:white;
 }
 
 input {

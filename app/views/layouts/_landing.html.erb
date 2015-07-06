@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag params[:controller] %>
 <%= javascript_include_tag params[:controller] %>
-
+<link rel="shortcut icon" href="https://www.dwight.edu/favicon.ico" /> 
 <% if flash[:notice] %>
   
    <div class="alert alert-success">
@@ -24,7 +24,12 @@
   <div class="container text-center">
     <div class ="square">
       <div class="title-top white_box">
-        <h1> Dwight Lunchbox </h1> 
+        <div id="upper_logo">
+        <h1> <span>The </span>Dwight</h1>
+        </div></br>
+        <div id="lower_logo">
+          <h1> Lunch<span>box</span> </h1> 
+        </div>
       </div>
 
       <div class= "form col-sm-6 text-center sign-up-box"> 
