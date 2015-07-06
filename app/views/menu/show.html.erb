@@ -10,13 +10,18 @@
       </div>
     </div>
     <div class="row lunch_row text-center date_id_<%=date.to_s%>">
-      <% @menu.lunches_for_day(date)[0..5].each do |lunch| %>
-        <%= render partial: 'lunch_choices/lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
+      <% @menu.lunches.by_day(date).by_type("lunch")[0..4].each do |lunch|  %>
+        <%= render partial: 'lunch_choices/edit_lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
       <% end %>
     </div> 
     <div class="row lunch_row text-center date_id_<%=date.to_s%>">
-      <% @menu.lunches_for_day(date)[6..12].each do |lunch| %>
-        <%= render partial: 'lunch_choices/lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
+      <% @menu.lunches.by_day(date).by_type("lunch")[5..9].each do |lunch|  %>
+        <%= render partial: 'lunch_choices/edit_lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
+      <% end %>
+    </div> 
+    <div class="row lunch_row text-center date_id_<%=date.to_s%>">
+      <% @menu.lunches.by_day(date).by_type("drink").all.each do |lunch|  %>
+        <%= render partial: 'lunch_choices/edit_lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
       <% end %>
     </div>
   <br>
