@@ -88,8 +88,10 @@ form {
 .nav-tabs > li > a:hover {
   background-color: rgba(0, 0, 0, 0);
   text-shadow: 0px 3px 1px rgba(200, 200, 200, 1);
-  box-shadow: none;
+  box-shadow: 0px 0px 0px white;
+  border: transparent;
 }
+
 
 a:hover {
   box-shadow: none; 

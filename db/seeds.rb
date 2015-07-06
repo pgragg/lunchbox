@@ -22,6 +22,7 @@ def create_parent_sample
      email:    Faker::Internet.email,
      password: "password",#Faker::Lorem.characters(10),
    )
+   user.skip_confirmation!
    user.save! 
 end 
 parents = User.all 
@@ -35,6 +36,7 @@ def create_faculty_sample
     grade: [nil, "threes", "k", "4", "6", "7", nil].sample,
     role: "faculty" #([true, false].sample ? "faculty" : "student")
    )
+  user.skip_confirmation!
   user.define_campus
   user.define_menu_id
   user.save! 
@@ -50,6 +52,7 @@ def create_staff_sample
     role: "staff",
     campus: ["ECD", "DWT"].sample 
    )
+  user.skip_confirmation!
   user.define_menu_id
   user.save! 
 end 
@@ -99,7 +102,7 @@ Menu.create!(name: "ECD Student Menu")
 i = 0 
 30.times do #30 days of lunches created
   i += 1
-  12.times do #6 lunches a day for all menus
+  12.times do #12 lunches a day for all menus
     m = 0 
     date = Date.today + i 
     name = Faker::Commerce.product_name
@@ -158,7 +161,7 @@ Summary.create!(date: date, name: "Grand Totals")
    password:   'password',
    role:       'admin'
  )
- #admin.skip_confirmation!
+ admin.skip_confirmation!
  admin.save!
 
 population = User.all 
