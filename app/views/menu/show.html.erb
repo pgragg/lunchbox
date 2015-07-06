@@ -9,18 +9,19 @@
         <h6><%= date %> </h6>
       </div>
     </div>
+    <% lunch_count = @menu.lunches.by_day(date).by_type("lunch").count %> 
     <div class="row lunch_row text-center date_id_<%=date.to_s%>">
-      <% @menu.lunches.by_day(date).by_type("lunch")[0..4].each do |lunch|  %>
+      <% @menu.lunches.by_day(date).by_type("lunch")[0..(lunch_count/2).to_i].each do |lunch|  %>
         <%= render partial: 'lunch_choices/edit_lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
       <% end %>
     </div> 
     <div class="row lunch_row text-center date_id_<%=date.to_s%>">
-      <% @menu.lunches.by_day(date).by_type("lunch")[5..9].each do |lunch|  %>
+      <% @menu.lunches.by_day(date).by_type("lunch")[((lunch_count/2).to_i + 1)..lunch_count].each do |lunch|  %>
         <%= render partial: 'lunch_choices/edit_lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
       <% end %>
     </div> 
     <div class="row lunch_row text-center date_id_<%=date.to_s%>">
-      <% @menu.lunches.by_day(date).by_type("drink").all.each do |lunch|  %>
+      <% @menu.lunches.by_day(date).by_type("drink").each do |lunch|  %>
         <%= render partial: 'lunch_choices/edit_lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
       <% end %>
     </div>
