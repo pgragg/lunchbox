@@ -8,7 +8,7 @@
     title: "DWT Students and Teachers list",
     date: @date,
     menu_id: 1, 
-    lunches: 12, 
+    lunches: Menu.find(2).lunches.by_day(@date).count, 
     grades_listed: true }%>
 
 <%Child::DWT_GRADES.each do |grade|%>
@@ -33,3 +33,7 @@
 </table>
 
 <%= render partial: 'summaries/page_partials/footer'%>
+
+
+
+

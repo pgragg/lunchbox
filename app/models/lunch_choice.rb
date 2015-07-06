@@ -65,8 +65,7 @@ class LunchChoice < ActiveRecord::Base
   #   self.all.where("lunch_id = ?", lunch_id).to_a.count
   # end  
   #Can also be used in the grand_totals method 
-  #since it counts ALL DWT or ECD faculty regardless of grade-level delivery. 
-
+  #since it counts ALL DWT or ECD faculty regardless of grade-level delivery.
   def self.column_totals(num, date, menu_id, grade_range, role) 
     if role == "grand"
       grand_total = 0 

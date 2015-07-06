@@ -1,17 +1,13 @@
 <%= render partial: 'summaries/page_partials/header'%>
 
 <table class ="table"> 
-<tr>
-  <th><h3> ECD Student list</h3>           </th>
-  <th> Grade                               </th>
-  <th><%=Menu.lunch_name_on(0, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(1, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(2, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(3, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(4, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(5, @date, 2)%> </th>
-  <th> TOTALS</th>
-</tr>
+
+  <%= render partial: 'summaries/line_partials/lunch_name_on', 
+  locals: {
+    title: "ECD Student list",
+    date: @date,
+    menu_id: 4, 
+    lunches: Menu.find(4).lunches.by_day(@date).count }%>
 
 <%Child::ECD_GRADES.each do |grade|%>
   <%Child.by_grade(grade).each do |child| %>

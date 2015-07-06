@@ -9,7 +9,7 @@
     title: "GRADE",
     date: @date,
     menu_id: 2, 
-    lunches: 12 }%>
+    lunches: Menu.find(2).lunches.by_day(@date).count}%>
   
   <% grade = 1 %> 
   <% 7.times do %>
@@ -20,7 +20,7 @@
       menu_id: 2, 
       role: "students", 
       grade: grade, 
-      lunches: 12}%>
+      lunches: Menu.find(2).lunches.by_day(@date).count}%>
     <% grade += 1 %> 
   <%end %> 
   
@@ -31,7 +31,7 @@
     menu_id: 2,
     grade_range: Child::DWT_GRADES,
     role:"students",  
-    number_of_columns: 12 }%>
+    number_of_columns: Menu.find(2).lunches.by_day(@date).count }%>
  
 </table>
 

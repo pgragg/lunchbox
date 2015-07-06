@@ -1,13 +1,13 @@
 <tr> 
-  <th><h3> <%= title %> </h3></th>
+  <th><h4> <%= title %> </h4></th>
   <%i = 0 %> 
-
+<% lunches = Menu.find(menu_id).lunches.by_day(date).count %> 
   <% lunches.times do %> <!-- Once for each lunch choice. --> 
     <!-- i stands for lunch number.  -->
       <td><%=LunchChoice.count_by_date_and_grade(i, date, menu_id, grade, role, decision=nil)%></th>
     <%i += 1 %>
   <% end %> 
-  <th>TOTAL</th>
+  <th><%= LunchChoice.RH_sum(date, menu_id, grade, role, lunches)%></th>
 </tr>
 
 

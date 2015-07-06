@@ -12,11 +12,11 @@ class SummariesController < ApplicationController
 
   def show 
     @summary = Summary.find(params[:id]) 
-    @menus = Menu.all 
     @partial = @summary.summary_partial_for(@summary.id)
     @date = @summary.date
     @weekday = weekday_on(@date)
     @month = month_on(@date)
+    @lunches ||= 12
     authorize @summary
     #Array of arrays 
   end 

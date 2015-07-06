@@ -8,7 +8,6 @@
     <%i += 1 %>
   <% end %> 
   <td><%= LunchChoice.sum(9, date, grade, decision){|a,b,c,d| LunchChoice.all_faculty_count_by_date_and_grade(a,b,c,d)}%></td>
-  <th>TOTAL</th>
 </tr>
 
 

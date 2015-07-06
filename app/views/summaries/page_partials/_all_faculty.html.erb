@@ -7,8 +7,8 @@
   locals: {
     title: "Adult Lunches",
     date: @date,
-    menu_id: 1,
-    lunches: 9 }%>
+    menu_id: 3,
+    lunches: Menu.find(3).lunches.by_day(@date).count }%>
 
 
   <%= render partial: 'summaries/line_partials/count_by_date_and_grade_row', 
@@ -19,7 +19,7 @@
     role: "staff", 
     decision: "exclude_ecd_teachers", 
     grade: nil,
-    lunches: 9}%>
+    lunches: Menu.find(3).lunches.by_day(@date).count}%>
 
   <%= render partial: 'summaries/line_partials/count_by_date_and_grade_row', 
   locals: {
@@ -29,7 +29,7 @@
     role: ["faculty", "staff"], 
     grade: nil, 
     decision: nil,
-    lunches: 9}%>
+    lunches: Menu.find(3).lunches.by_day(@date).count}%>
 
   <%= render partial: 'summaries/line_partials/all_faculty_count_by_date_and_grade', 
   locals: {
@@ -37,7 +37,7 @@
     date: @date, 
     decision: "exclude_ecd_teachers", 
     grade: nil,
-    lunches: 9}%>
+    lunches: Menu.find(3).lunches.by_day(@date).count}%>
 
 
 </table>

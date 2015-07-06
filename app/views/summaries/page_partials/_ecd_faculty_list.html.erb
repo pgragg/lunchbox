@@ -1,23 +1,20 @@
 <%= render partial: 'summaries/page_partials/header'%>
 
 <table class ="table"> 
-<tr>
-  <th><h3> ECD Teachers list</h3></th>
-  <th> Grades </th>
-  <th><%=Menu.lunch_name_on(0, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(1, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(2, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(3, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(4, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(5, @date, 2)%> </th>
-</tr>
+   
+   <%= render partial: 'summaries/line_partials/lunch_name_on', 
+  locals: {
+    title: "ECD Teachers list",
+    date: @date,
+    menu_id: 3, 
+    lunches: @lunches }%>
 
 <%Child::ECD_GRADES.each do |grade|%>
   <%User.by_grade(grade).each do |user| %>
     <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: user, date: @date}%> 
   <% end %>
   <!-- Render the teacher totals partial for the grade. -->
-  <%= render partial: 'summaries/line_partials/totals_row', locals: {campus: "ECD", grade: grade, role: "faculty", date: @date}%>  
+  <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: [grade], role: "faculty", date: @date}%>  
 <% end  %>
 <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: Child::ECD_GRADES, role: "faculty", date: @date}%>
 </table>

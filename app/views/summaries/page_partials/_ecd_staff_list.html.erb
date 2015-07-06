@@ -1,22 +1,26 @@
 <%= render partial: 'summaries/page_partials/header'%>
 
 <table class ="table"> 
-<tr>
-  <th><h3> ECD Staff list</h3></th>
-  <th> Role </th> 
-  <th><%=Menu.lunch_name_on(0, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(1, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(2, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(3, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(4, @date, 2)%> </th>
-  <th><%=Menu.lunch_name_on(5, @date, 2)%> </th>
-</tr>
 
-<%User.by_role("staff").by_campus("ECD").each do |user| %>
-  <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: user, date: @date}%> 
-<% end %>
-<!-- Render the staff totals partial for the nil grade. -->
-<%= render partial: 'summaries/line_partials/totals_row', locals: {campus: "ECD", grade: nil, role: "staff", date: @date}%>  
+   <%= render partial: 'summaries/line_partials/lunch_name_on', 
+  locals: {
+    title: "ECD Staff list",
+    date: @date,
+    menu_id: 3, 
+    lunches: Menu.find(3).lunches.by_day(@date).count }%>
+
+  <%User.by_role("staff").by_campus("ECD").each do |user| %>
+    <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: user, date: @date}%> 
+  <% end %>
+  <!-- Render the staff totals partial for the nil grade. -->
+
+  <%= render partial: 'summaries/line_partials/count_by_date_and_grade_row', locals: {
+    title: "ECD Staff", 
+    grade: nil, 
+    role: "staff", 
+    menu_id: 3, 
+    date: @date}%>  
+  
 </table>
 
 

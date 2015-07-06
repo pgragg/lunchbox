@@ -82,7 +82,8 @@ form {
   height: 50px;
   font-family: 'PT sans', 'Lucida Grande', 'Helvetica Neue', sans-serif;
   font-size: 17px;
-  font-weight: 800;
+  font-weight: 600;
+  letter-spacing:1px; 
 }
 
 .nav-tabs > li > a:hover {
@@ -91,7 +92,6 @@ form {
   box-shadow: 0px 0px 0px white;
   border: transparent;
 }
-
 
 a:hover {
   box-shadow: none; 
