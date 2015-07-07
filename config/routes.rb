@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   
   devise_for :users, controllers: {
                     sessions: 'users/sessions', 
-                    registrations: 'users/registrations'}
+                    registrations: 'users/registrations',
+                    confirmations: 'users/confirmations' }
   resources :users do #, :controllers => {:registrations => "registrations"} 
     resources :children do 
       resources :menu, only: [:show]

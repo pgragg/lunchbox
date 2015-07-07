@@ -14,15 +14,30 @@ gem 'uglifier', '>= 1.3.0'
 gem 'devise'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'factory_girl_rails'
-gem 'newrelic_rpm'
-gem 'sendgrid'
+gem 'factory_girl_rails' 
+gem 'sendgrid' #Email 
+gem 'nprogress-rails' #JS loading bar. 
+
+
+gem 'faker'
+gem 'pundit'
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 2.0'
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'figaro', '1.0'
+gem 'will_paginate'
 
 group :production do
   gem 'pg'
   gem 'rails_12factor'  
+  gem 'newrelic_rpm' #Stats 
 end
 
 group :development do
@@ -45,18 +60,7 @@ group :development, :test do
   gem 'spring'
 end
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-gem 'faker'
-gem 'pundit'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'figaro', '1.0'
-gem 'will_paginate'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

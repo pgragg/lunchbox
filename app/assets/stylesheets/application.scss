@@ -13,14 +13,13 @@
 
  */
 
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "welcome.scss";
-@import "children.scss";
-@import "admin_panel.scss";
-@import "summaries.scss";
-// @import url(http://fonts.googleapis.com/css?family=Bitter);
-@import url(http://fonts.googleapis.com/css?family=PT+Sans);
+@import 'nprogress' ;
+@import 'nprogress-bootstrap ';
+
+
 
 html {
   min-height: 100%;
@@ -177,7 +176,7 @@ table {
 .lunch_row {
   height: 155px;
   width: 100%;
-  margin: 0 0 0 16%;
+  margin: 0 0 0 33%;
 }
 
 .center_column {
@@ -269,5 +268,49 @@ table {
 #daily_menu_item_btn {
   margin: 5% auto;
 }
+
+// CHILDREN
+
+.btn-midpage {
+  margin: 90px 0 0 0;
+  border-radius: 2px; 
+}
+
+
+
+.child_background {
+  background-color: rgba(0, 0, 0, 0.5)
+}
+
+// Admin panel
+
+
+.btn-admin {
+  // color: #F0D97C;
+  // background-color: #231388;
+  // border-color: #1A1B1A;
+  display: block;
+  margin: 10px auto;
+  width: 30%;
+}
+
+.admin-box-panel {
+  margin: 7% 0 0 0;
+  font-size: 17px;
+}
+
+// Summaries 
+
+
+th {
+  text-align: left; 
+}
+
+.summary {
+  background-color:rgba(255, 255, 255, 0.8); 
+  border-radius: 0px; 
+}
+
+@import url(http://fonts.googleapis.com/css?family=PT+Sans);
 
 

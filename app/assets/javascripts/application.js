@@ -14,16 +14,22 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require nprogress
+//= require nprogress-turbolinks 
 //= require_tree .
 
-// $(document).ready(function(){
-//     $(".col-md-12").hover(function(){
-//         $(".lunch_description").hide();
-//     });
-//     $(".lunch_box").hover(function(){
-//         $(".lunch_description").show();
-//     });
-// });
+NProgress.configure({
+  showSpinner: false,
+  ease: 'ease',
+  speed: 1000,
+  parent: '.loading_bar'
+});
+
+
+$(document).on('page:fetch',   function() { NProgress.start(); });
+$(document).on('page:change',  function() { NProgress.done(); });
+$(document).on('page:restore', function() { NProgress.remove(); });
+
 
 $(document).ready(function(){
   setTimeout(function(){
