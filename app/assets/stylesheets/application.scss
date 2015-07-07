@@ -175,7 +175,7 @@ table {
 .lunch_row {
   height: 155px;
   width: 100%;
-  margin: 0 0 0 33%;
+  margin: 0 0 0 27%;
 }
 
 .center_column {
@@ -185,7 +185,6 @@ table {
 .center {
   margin: 5% 0 0 16%;
 }
-
 
 .btn {
   border-radius: 0px;
@@ -254,6 +253,12 @@ table {
   padding: 0px 0 42px 0;
 }
 
+.drink_row_center {
+  margin: 0 0 0 11.7%;
+}
+.lunch_row_center {
+  margin: 0 0 0 4.7%;
+}
 .registration_title {
   margin: 0 0 8% 0;
 }
@@ -351,6 +356,15 @@ th {
 .nprogress-custom-parent #nprogress .spinner,
 .nprogress-custom-parent #nprogress .bar {
   position: absolute;
+}
+
+.page_modal {
+  width:100%;
+  height:100%; 
+  background-color: rgba(255,255,255,1);
+  position:absolute; 
+  left:0;
+  top:0;
 }
 
 

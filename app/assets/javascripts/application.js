@@ -21,7 +21,9 @@
 NProgress.configure({
   showSpinner: false,
   ease: 'ease',
-  speed: 500
+  speed: 500,
+  parent: 'body',
+  template: '<div class = "page_modal"> <div class="bar" role="bar"><div class="peg"></div></div><div class="spinner" role="spinner"><div class="spinner-icon"></div></div></div>'
 });
 
 

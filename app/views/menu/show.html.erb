@@ -16,14 +16,18 @@
       <% end %>
     </div> 
     <div class="row lunch_row text-center date_id_<%=date.to_s%>">
+      <div class="lunch_row_center"> 
       <% @menu.lunches.by_day(date).by_type("lunch")[((lunch_count/2).to_i + 1)..lunch_count].each do |lunch|  %>
         <%= render partial: 'lunch_choices/lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
       <% end %>
     </div> 
+    </div> 
     <div class="row lunch_row text-center date_id_<%=date.to_s%>">
+      <div class="drink_row_center"> 
       <% @menu.lunches.by_day(date).by_type("drink").each do |lunch|  %>
         <%= render partial: 'lunch_choices/lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
       <% end %>
+    </div>
     </div>
   <br>
   <hr>
