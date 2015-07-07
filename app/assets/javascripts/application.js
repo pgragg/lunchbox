@@ -21,8 +21,7 @@
 NProgress.configure({
   showSpinner: false,
   ease: 'ease',
-  speed: 1000,
-  parent: '.loading_bar'
+  speed: 500
 });
 
 
