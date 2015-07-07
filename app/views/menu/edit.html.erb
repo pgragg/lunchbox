@@ -1,8 +1,9 @@
-<h1> Edit All Menus At Once </h1>
-
 <div class="col-sm-12 col-md-12 container">
-  <%= link_to "Delete All Lunches", menu_delete_all_lunches_path(@menu.id), class: "btn btn-success", method: :post  %>
-  <%= link_to "Populate Menus With Blank Lunches", menu_populate_with_blanks_path(@menu.id), class: "btn btn-success", method: :post  %>
+  <div class="menu_edit_btns text-center">
+    <h1> Edit All Menus </h1>
+  <%= link_to "Delete All Lunches", menu_delete_all_lunches_path(@menu.id), class: "btn btn-success admin_btn", method: :post  %>
+  <%= link_to "Populate Menus With Blank Lunches", menu_populate_with_blanks_path(@menu.id), class: "btn btn-success admin_btn", method: :post  %>
+  </div>
 
   <div class="col-md-12">
   <%= "Menu ID: #{@menu.id} "%>
