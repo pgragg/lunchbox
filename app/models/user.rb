@@ -13,6 +13,14 @@ class User < ActiveRecord::Base
   scope :by_grade, ->(grade) { where(grade: grade)}
 
 
+  def self.search(search_term, search)
+    if search_term && search 
+      where("#{search_term} LIKE ?", "#{search}")
+    else
+      all
+    end
+  end
+
   def define_role
     if self.role == nil 
       self.role ||= (self.email.include?("dwight.edu") ? "faculty" : "parent")

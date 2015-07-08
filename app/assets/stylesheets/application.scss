@@ -60,6 +60,25 @@ form {
   margin-bottom: 5.4%;
 }
 
+td, th {
+  border: thin dotted #fff;
+}
+
+p.fixed_name {
+  position: fixed;
+  bottom: 0;
+  left: 2%;
+  background-color: rgba(0, 155, 168, 0.44);
+  height: 15%;
+  width: 22%;
+  padding: 3% 0 0 1%;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 14px;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.49);
+  text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.28);
+}
+
 .nav-tabs {
   background-color: rgba(255, 255, 255, 0.99);
   box-shadow: 1px 4px 4px grey;
@@ -71,6 +90,10 @@ form {
   li {
     float: left;
   }
+}
+
+input {
+  color:black;
 }
 
 .nav-tabs > li > a {
@@ -117,7 +140,7 @@ table {
 .alert {
   border: 1px solid transparent;
   border-radius: 0px;
-  position: absolute;
+  position: fixed;
   text-align: center;
   background-color: rgba(100, 175, 175, 0.8);
   color: white;

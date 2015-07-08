@@ -1,0 +1,22 @@
+<tr class=""> <h1 class="text-center"> Users </h1> </tr>
+  <tr> 
+    <td><h3>Name</h3></td> 
+    <td><h3>Grade </h3></td> 
+    <td><h3>Email</h3></td> 
+    <td><h3>Campus</h3></td> 
+    <td><h3>Menu ID</h3></td> 
+    <td><h3> </h3></td> 
+  </tr> 
+  <%@users.each do |user| %> 
+    <tr> 
+    <td> <%="#{child.first_name} #{child.last_name}"%></td> 
+    <td> <%=user.grade %> </td> 
+    <td> <%=user.email %> </td> 
+    <td> <%=user.campus %> </td> 
+    <td> <%=user.menu_id %> </td>
+    <td> <%if user.menu_id != nil%><%= link_to "Menu", user_menu_path(@user, user.menu_id), class:"btn btn-success"%> <%end%></td>
+    <td> <%= link_to "Edit", edit_user_child_path(@user, child), class:"btn btn-warning"%></td>
+    <td> <%= link_to "Remove", user_child_path(@user, child), method: :delete, class:"btn btn-danger"%></td>
+    </tr> 
+  <% end %>
+</table>

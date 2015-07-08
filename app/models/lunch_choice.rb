@@ -17,7 +17,7 @@ class LunchChoice < ActiveRecord::Base
   end 
 
   ## ## ## ## ## ## ## Students ## ## ## ## ## ## ## ## 
-  def self.totals(num, date, menu_id_array, grade_range, role, decision=nil)
+  def self.totals(num, date, menu_id_array, grade_range, role, decision=nil, lunch_type="lunch")
     output = 0  
     menu_id_array = [menu_id_array] unless menu_id_array.class == Array 
     menu_id_array.flatten.each do |single_menu_id|
@@ -27,7 +27,7 @@ class LunchChoice < ActiveRecord::Base
   end 
 # Totals 5th through adult. All fac including sp. deliveries. 
 # Should count lunch totals on a date for students or fac for any given grade range, or nil grade. 
-  def self.count_by_date_and_grade(num, date, menu_id, grade, role, decision=nil)
+  def self.count_by_date_and_grade(num, date, menu_id, grade, role, decision=nil, lunch_type="lunch")
     
     if role.class == Array 
       output = 0 
@@ -133,6 +133,8 @@ class LunchChoice < ActiveRecord::Base
     output += self.all.by_user_group(user_ids).by_user_group(ids).where("lunch_id = ?", ecd_lunch_id).to_a.count
     output 
   end
+
+  private 
 
 ## ## ## ## ## ## ## Faculty ## ## ## ## ## ## ## ## 
 

@@ -37,11 +37,13 @@ class MenuController < ApplicationController
   end
 
   def assign_correct_menu
-    session[:menu_id] = params[:id]
+    session[:menu_id] = params[:id] unless current_user.admin? 
     if @user.class == Child
       @menu = Menu.find(@user.menu_id)
-    elsif @user.role == "admin"
-      @menu = Menu.find(params[:id])
+    elsif current_user.admin? 
+      @menu = Menu.find(params[:format])
+      @user = User.find(params[:id]) # So admin can order for other users. 
+      session[:user_id] = params[:id]
     else 
       @user.redirect_if_menu_id_invalid 
       @menu = Menu.find(@user.menu_id)
@@ -50,9 +52,9 @@ class MenuController < ApplicationController
   end
 
   def show
-
     define_user
     assign_correct_menu
+    @user = User.find(session[:user_id])
     @dates = @menu.lunch_date_list
     @lunch_choice = @user.lunch_choices.last 
   end

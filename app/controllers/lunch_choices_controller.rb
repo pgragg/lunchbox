@@ -8,6 +8,7 @@ class LunchChoicesController < ApplicationController
       child = current_user.children.find(session[:user_id]) #Set in the menu_controller
     end
     @user = (current_user.faculty_or_staff? ? current_user : child)
+    @user = User.find(session[:user_id]) if current_user.admin? 
   end 
  
   def create

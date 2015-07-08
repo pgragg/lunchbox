@@ -1,0 +1,33 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+
+
+<table class = "table"> 
+  <tr class=""> <h1 class="text-center"> Users </h1> </tr>
+    <tr>
+    <th><%= sortable "first_name", "First" %></th>
+    <th><%= sortable "last_name", "Last" %></th>
+    <th>Lunches selected</th>
+    <th><%= sortable "grade", "Grade if applicable" %></th>
+    <th><%= sortable "email"%></th>
+    <th><%= sortable "campus" %></th>
+    <th><%= sortable "role" %></th>
+    <th><%= sortable "menu_id", "Menu ID" %></th>
+    
+  </tr>
+    <%@users.each do |user| %> 
+      <tr> 
+      <td> <%= user.first_name%></td> 
+      <td> <%= user.last_name%> </td> 
+      <td> <%= "#{user.lunch_choices.count} / #{Menu.find(user.menu_id).lunch_date_list.count}" unless(user.parent? || user.admin?)%></td> 
+      <td> <%=user.grade %> </td> 
+      <td> <%=user.email %> </td> 
+      <td> <%=user.campus %> </td> 
+      <td> <%=user.role %> </td>
+      <td> <%=user.menu_id %> </td>
+      <td> <%if user.menu_id != nil%><%= link_to "Menu", menu_path(user, user.menu_id), class:"btn btn-success"%> <%end%></td>
+      <td> <%= link_to "Edit", edit_user_path(user), class:"btn btn-warning"%></td>
+      <td> <%= link_to "Remove", user_path(user), method: :delete, class:"btn btn-danger"%></td>
+      </tr> 
+    <% end %>
+</table>

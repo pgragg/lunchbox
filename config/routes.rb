@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :children do 
       resources :menu, only: [:show]
     end 
+    post '/visit_menu' => 'users#visit_menu', as: :visit_menu
   end 
   resources :welcome 
   resources :admin_panel 
