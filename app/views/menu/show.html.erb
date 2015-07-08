@@ -1,7 +1,9 @@
 <div class="col-md-12">
   <%= "Menu ID: #{@menu.id} "%>
   <% if @user != current_user %> 
-    <p class = "fixed_name text-center"> <%= "Menu for #{@user.first_name} #{@user.last_name}"%></p>
+    <p class = "fixed_name text-center float_left big_note"> <%= "Menu for #{@user.first_name} #{@user.last_name}"%></p>
+    <p class = "fixed_name text-center float_right small_note"> 
+      <%= "#{@user.lunch_choices.count} / #{Menu.find(@user.menu_id).lunch_date_list.count}" unless(@user.parent? || @user.admin?)%></p>
   <% end %>
   <div class="center_column">
   <% unless @dates.include? nil %> 

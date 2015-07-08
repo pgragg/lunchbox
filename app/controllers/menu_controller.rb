@@ -53,7 +53,7 @@ class MenuController < ApplicationController
 
   def show
     define_user
-    assign_correct_menu
+    @menu = assign_correct_menu
     @user = User.find(session[:user_id])
     @dates = @menu.lunch_date_list
     @lunch_choice = @user.lunch_choices.last 

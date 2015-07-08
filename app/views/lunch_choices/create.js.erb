@@ -2,3 +2,4 @@ $('.date_id_<%= @date.to_s%> .lunch_type_<%= @lunch.lunch_type %>').removeClass(
 
 $('.lunch_id_<%= @lunch.id%>').removeClass('unchosen').addClass('chosen');
 
+$('.small_note').html("<%=@user.lunch_choices.count%> / <%=Menu.find(@user.menu_id).lunch_date_list.count%>");

@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
 
 
   def self.search(search_term, search)
-    if search_term && search 
+    if search_term != '' && search != ''
+      search_term ||= 'last_name'
       where("#{search_term} LIKE ?", "#{search}")
     else
       all

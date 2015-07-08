@@ -5,14 +5,14 @@
 <table class = "table"> 
   <tr class=""> <h1 class="text-center"> Users </h1> </tr>
     <tr>
-    <th><%= sortable "first_name", "First" %></th>
-    <th><%= sortable "last_name", "Last" %></th>
+    <th><%= sortable "first_name", "first_name" %></th>
+    <th><%= sortable "last_name", "last_name" %></th>
     <th>Lunches selected</th>
-    <th><%= sortable "grade", "Grade if applicable" %></th>
-    <th><%= sortable "email"%></th>
-    <th><%= sortable "campus" %></th>
-    <th><%= sortable "role" %></th>
-    <th><%= sortable "menu_id", "Menu ID" %></th>
+    <th><%= sortable "grade", "grade" %></th>
+    <th><%= sortable "email", "email"%></th>
+    <th><%= sortable "campus", "campus" %></th>
+    <th><%= sortable "role", "role" %></th>
+    <th><%= sortable "menu_id", "menu_id" %></th>
     
   </tr>
     <%@users.each do |user| %> 
