@@ -16,15 +16,6 @@ class MenuController < ApplicationController
     redirect_to :back
   end  
 
-  def define_user
-    if current_user.children.count >= 1
-      session[:user_id] = params[:child_id] #For use in the lunch_choices controller.
-      @child = current_user.children.find(params[:child_id])
-    end
-    return @user = current_user if current_user.admin? 
-    @user = (current_user.faculty_or_staff? ? current_user : @child)
-  end 
-
   def index
     @menus = Menu.all
     define_user
@@ -36,14 +27,42 @@ class MenuController < ApplicationController
     authorize @menu
   end
 
+
+  def define_user
+    # return @user = current_user if current_user.admin? 
+    case current_user.role 
+      when "admin"
+        if session[:user_id]
+          return @user = User.find(session[:user_id])
+        end 
+        if session[:child_id]
+          return @user = Child.find(session[:child_id]) 
+        end
+      when "parent"
+        session[:user_id] = params[:child_id]
+        @child = current_user.children.find(params[:child_id])
+        return @user = @child 
+      when "faculty"
+        return @user = current_user
+      when "staff"
+        return @user = current_user 
+    end
+  end 
+
+
   def assign_correct_menu
-    session[:menu_id] = params[:id] unless current_user.admin? 
+    session[:menu_id] = params[:id]
     if @user.class == Child
       @menu = Menu.find(@user.menu_id)
     elsif current_user.admin? 
-      @menu = Menu.find(params[:format])
-      @user = User.find(params[:id]) # So admin can order for other users. 
-      session[:user_id] = params[:id]
+      if params[:format]
+        @menu = Menu.find(params[:format])
+        @user = User.find(params[:id]) # So admin can order for other users. 
+        session[:user_id] = params[:id]
+      else 
+        @menu = Menu.find(session[:menu_id])
+        @user = current_user
+      end
     else 
       @user.redirect_if_menu_id_invalid 
       @menu = Menu.find(@user.menu_id)
@@ -54,7 +73,6 @@ class MenuController < ApplicationController
   def show
     define_user
     @menu = assign_correct_menu
-    @user = User.find(session[:user_id])
     @dates = @menu.lunch_date_list
     @lunch_choice = @user.lunch_choices.last 
   end

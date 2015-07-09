@@ -180,6 +180,25 @@ table {
 //   min-width:190px;
 // }
 
+.popup_text {
+    display: none;
+    position: fixed;
+    bottom:0;
+    left:2%;
+    width:100%;
+    height:300px; 
+    background-color:black; 
+    border: 5px solid white; 
+    z-index:999;
+}
+#help {
+  width: 5%;
+}
+
+#help:hover + .popup_text {
+    display: inline-block;
+}
+
 .text-center.child_notice {
   margin: 88px auto 38px auto;
   height: 20%;
@@ -407,8 +426,8 @@ th {
 }
 
 .page_modal {
-  width:100%;
-  height:100%; 
+  width:10000px;
+  height:10000px; 
   background-color: rgba(0,0,0,1);
   position:absolute; 
   left:0;

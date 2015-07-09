@@ -3,7 +3,6 @@
 
 
 <table class = "table"> 
-  <tr class=""> <h1 class="text-center"> Users </h1> </tr>
     <tr>
     <th><%= sortable "first_name", "first_name" %></th>
     <th><%= sortable "last_name", "last_name" %></th>
@@ -19,7 +18,13 @@
       <tr> 
       <td> <%= user.first_name%></td> 
       <td> <%= user.last_name%> </td> 
-      <td> <%= "#{user.lunch_choices.count} / #{Menu.find(user.menu_id).lunch_date_list.count}" unless(user.parent? || user.admin?)%></td> 
+      <% if user.menu_id %> 
+        <td> <%= "#{user.lunch_choices.count} / #{Menu.find(user.menu_id).lunch_date_list.count}" unless(user.parent? || user.admin?)%></td> 
+      <% elsif (user.parent? || user.admin?) %> 
+        <td> </td> 
+      <% else  %> 
+        <td> PENDING </td> 
+      <% end %> 
       <td> <%=user.grade %> </td> 
       <td> <%=user.email %> </td> 
       <td> <%=user.campus %> </td> 

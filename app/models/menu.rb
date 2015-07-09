@@ -1,5 +1,5 @@
 class Menu < ActiveRecord::Base
-  has_many :lunches
+  has_many :lunches, dependent: :destroy 
   has_many :children 
   has_many :users
 

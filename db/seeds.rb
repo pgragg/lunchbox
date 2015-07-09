@@ -1,4 +1,4 @@
-require 'faker'
+brequire 'faker'
 require 'date' 
 
 def flip_a_coin
@@ -155,12 +155,13 @@ Summary.create!(date: date, name: "Grand Totals")
 
 
  admin = User.new(
-   first_name: 'Admin',
-   last_name:  'User',
-   email:      'admin@example.com',
-   password:   'password',
+   first_name: 'Scholastic',
+   last_name:  'Eat',
+   email:      'scholastic@gmail.com',
+   password:   'eatwell',
    role:       'admin'
  )
+ 
  admin.skip_confirmation!
  admin.save!
 

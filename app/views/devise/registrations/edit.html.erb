@@ -29,7 +29,7 @@
 
   <% if current_user.role == "faculty" || current_user.role == "staff" %>
     <div class="form-group">
-      <%= f.label :campus %> <i> (choose DWT for 18/22 W. 89th street) </i><br>
+      <%= f.label :campus %> <i> (Choose DWT if you don't eat lunch in the ECD.) </i><br>
       <%= f.select(:campus, %w[ECD DWT], {include_blank: false}, { :class => 'form-control' }) %>
     </div>
     <div class="form-group">

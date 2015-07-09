@@ -1,12 +1,29 @@
+<h1 class="text-center title_row"> User Accounts </h1> 
+<p id = "help"> Help? </p> 
+<div class = "popup_text text-center">
+  <p> Hints: </p> 
+  <p> User Properties can be any of the table headings below. </p>
+  <p> Blank value searches will return all users </p>  
+  <p> Use the Child Search index to search children. </p> 
+</div>
 
 <%= form_tag users_path, :method => 'get', :id => "users_search" do %>
-  <p>
-    <%= text_field_tag :search_term, params[:search_term], placeholder: "eg. \"last_name\"" %>
-    <%= text_field_tag :search, params[:search], placeholder: "eg. \"Smith\"" %>
-
-    <%= submit_tag "Search", :search => nil%>
-  </p>
+  <div class = "row title_row">
+    <div class = "col-md-6"> 
+      <p> User Property </p> 
+      <%= text_field_tag :search_term, params[:search_term], placeholder: "eg. \"last_name\"", class: 'form-control' %>
+    </div>
+      <div class = "col-md-6"> 
+        <p> Value </p> 
+      <%= text_field_tag :search, params[:search], placeholder: "eg. \"Smith\"", class: 'form-control' %>
+    </div>
+  </div>
+  <div class = "row text-center title_row"> 
+    <div class = "col-md-12"> 
+      <%= submit_tag "Search", :search => nil, class: "btn btn-success"%>
+    </div>
+  </div>
   <% if @users %> 
-    <div id="users"><%= render partial: 'users', locals: {users: @users } %></div>
+    <div id="users" class = "title_row"><%= render partial: 'users', locals: {users: @users } %></div>
   <% end %> 
 <% end %>
