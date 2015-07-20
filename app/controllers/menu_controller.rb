@@ -85,7 +85,7 @@ class MenuController < ApplicationController
   end
 
   def edit
-    define_user
+    @user = current_user if current_user.admin? 
     session[:menu_id] = params[:id]
     @menu = Menu.find(params[:id])
     @dates = @menu.lunch_date_list
