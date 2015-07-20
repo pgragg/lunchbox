@@ -1,4 +1,4 @@
-brequire 'faker'
+require 'faker'
 require 'date' 
 
 def flip_a_coin
@@ -149,8 +149,6 @@ Summary.create!(date: date, name: "ECD Teachers (list)")
 Summary.create!(date: date, name: "ECD Staff (list)")
 Summary.create!(date: date, name: "ECD Students (list)")
 Summary.create!(date: date, name: "Grand Totals")
-
-
 
 
 
