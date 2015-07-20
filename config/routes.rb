@@ -21,6 +21,9 @@ Rails.application.routes.draw do
     end 
     post '/visit_menu' => 'users#visit_menu', as: :visit_menu
   end 
+  resources :children do #Added here experimentally to allow searching.
+    get '/search' => 'children#search', as: :search #URL, controller method, path. 
+  end  
   resources :welcome 
   resources :admin_panel 
   devise_scope :user do

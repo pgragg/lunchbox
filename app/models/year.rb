@@ -13,3 +13,9 @@ class Year < ActiveRecord::Base
     end
   end
 end
+
+
+# Note for Heroku rails console: Heroku sees the date "Nov. 20th, 2015"
+# As, "20-11-2015." Day-month-year. 
+# Input should therefore be in the style: 
+# $Trimester.find(1).start_date = "20-11-2015"

@@ -21,6 +21,27 @@ class Child < ActiveRecord::Base
   ECD_GRADES = %w[threes fours k]
   DWT_GRADES = %w[1 2 3 4 5 6 7]
 
+  def parent? 
+    false
+  end
+
+  def admin?
+    false
+  end
+
+  def staff?
+    false
+  end
+
+  def self.search(search_term, search)
+    if search_term != '' && search != ''
+      search_term ||= 'last_name'
+      where("#{search_term} LIKE ?", "#{search}")
+    else
+      all
+    end
+  end
+
   def self.ids_in_grade(grade)
     ids = []
     self.by_grade(grade).each do |child|

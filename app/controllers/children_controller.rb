@@ -1,10 +1,16 @@
 class ChildrenController < ApplicationController
+  helper_method :sort_column, :sort_direction
+
   def index
     if current_user.faculty? 
       current_user.redirect_if_menu_id_invalid
     end 
     @user = current_user
     @children = @user.children
+  end
+
+  def search 
+    @children = Child.search(params[:search_term],params[:search]).order(sort_column + " " + sort_direction)
   end
 
   # def show
@@ -70,6 +76,13 @@ class ChildrenController < ApplicationController
   # end 
 
   private 
+  def sort_column
+    User.column_names.include?(params[:sort]) ? params[:sort] : "last_name"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 
   def child_params
     params.require(:child).permit(:first_name, :last_name, :grade, :campus, :menu_id, :email)
