@@ -30,9 +30,9 @@
       <td> <%=user.campus %> </td> 
       <td> <%=user.role %> </td>
       <td> <%=user.menu_id %> </td>
-      <td> <%if user.menu_id != nil%><%= link_to "Menu", menu_path(user, user.menu_id), class:"btn btn-success"%> <%end%></td>
-      <td> <%= link_to "Edit", edit_user_path(user), class:"btn btn-warning"%></td>
-      <td> <%= link_to "Remove", user_path(user), method: :delete, class:"btn btn-danger"%></td>
+      <td> <%if user.menu_id != nil%><%= link_to "Menu", menu_path(user, user.menu_id), class:"btn btn-success btn-sm"%> <%end%></td>
+      <td> <%= link_to "Edit", edit_user_path(user), class:"btn btn-warning btn-sm"%></td>
+      <td> <%= link_to "Remove", user_path(user), method: :delete, class:"btn btn-danger btn-sm"%></td>
       </tr> 
     <% end %>
 </table>

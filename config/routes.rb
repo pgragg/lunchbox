@@ -19,10 +19,11 @@ Rails.application.routes.draw do
     resources :children do 
       resources :menu, only: [:show]
     end 
-    post '/visit_menu' => 'users#visit_menu', as: :visit_menu
+    # post '/visit_menu' => 'users#visit_menu', as: :visit_menu
   end 
   resources :children do #Added here experimentally to allow searching.
     get '/search' => 'children#search', as: :search #URL, controller method, path. 
+    # post '/visit_menu' => 'children#visit_menu', as: :visit_menu
   end  
   resources :welcome 
   resources :admin_panel 

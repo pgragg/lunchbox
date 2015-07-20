@@ -1,6 +1,7 @@
 class ChildrenController < ApplicationController
   helper_method :sort_column, :sort_direction
 
+
   def index
     if current_user.faculty? 
       current_user.redirect_if_menu_id_invalid
@@ -13,21 +14,22 @@ class ChildrenController < ApplicationController
     @children = Child.search(params[:search_term],params[:search]).order(sort_column + " " + sort_direction)
   end
 
-  # def show
-  # end
-
   def edit
-    @user = current_user
-    @child = @user.children.find(params[:id])
+    @user = current_user 
+    @child = Child.find(params[:id]) #@user.children.find(params[:id])
+    @user = @child.parent if current_user.admin? 
+    #Allows editing other people's children. 
   end
 
   def update
     @user = current_user
-    @child = @user.children.find(params[:id])
+    @child = Child.find(params[:id]) #@user.children.find(params[:id])
+    @user = @child.parent if current_user.admin? 
     @children = @user.children 
     if @child.update_attributes(child_params)
     flash[:notice] = "Child information was updated."
-    redirect_to user_children_path
+    redirect_to user_children_path unless current_user.admin? 
+    redirect_to child_search_path(Child.all) if current_user.admin? 
     else
       flash[:error] = "There was an error editing the child. Please try again."
       render :edit

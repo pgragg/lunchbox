@@ -6,9 +6,8 @@
     <tr>
     <th><%= sortable "first_name", "first_name" %></th>
     <th><%= sortable "last_name", "last_name" %></th>
-    <th>Lunches selected</th>
+    <th><%= sortable "lunch_choices.count", "selections / available" %></th>
     <th><%= sortable "grade", "grade" %></th>
-    <th><%= sortable "email", "email"%></th>
     <th><%= sortable "campus", "campus" %></th>
     <th><%= sortable "menu_id", "menu_id" %></th>
     
@@ -23,12 +22,11 @@
         <td> PENDING </td> 
       <% end %> 
       <td> <%=child.grade %> </td> 
-      <td> <%=child.email %> </td> 
       <td> <%=child.campus %> </td> 
       <td> <%=child.menu_id %> </td>
-      <td> <%if child.menu_id != nil%><%= link_to "Menu", menu_path(child, child.menu_id), class:"btn btn-success"%> <%end%></td>
-      <td> <%= link_to "Edit", edit_child_path(child), class:"btn btn-warning"%></td>
-      <td> <%= link_to "Remove", child_path(child), method: :delete, class:"btn btn-danger"%></td>
+      <td> <%if child.menu_id != nil%><%= link_to "Menu", user_child_menu_path(child.parent, child, child.menu_id), class:"btn btn-success btn-sm"%> <%end%></td>
+      <td> <%= link_to "Edit", edit_user_child_path(child.parent, child), class:"btn btn-warning btn-sm"%></td>
+      <td> <%= link_to "Remove", child_path(child), method: :delete, class:"btn btn-danger btn-sm"%></td>
       </tr> 
     <% end %>
 </table>

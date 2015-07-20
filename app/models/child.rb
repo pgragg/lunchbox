@@ -21,6 +21,10 @@ class Child < ActiveRecord::Base
   ECD_GRADES = %w[threes fours k]
   DWT_GRADES = %w[1 2 3 4 5 6 7]
 
+  def parent 
+    User.find(self.user_id)
+  end 
+
   def parent? 
     false
   end

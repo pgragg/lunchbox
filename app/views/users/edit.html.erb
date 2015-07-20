@@ -1,2 +1,59 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+
+<div class = "col-md-8 col-sm-8 center text-center">
+  <div class = "registration_title">
+    <% if current_user.role == "faculty" || current_user.role == "staff" %>
+      <h1>Where should we send your lunches?</h1>
+    <% else %>
+      <h1>Edit <%=@user.first_name || "this person"%>'s personal information</h1>
+    <%end%>
+  </div>
+
+
+<%= form_for @user do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="form-group">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, class: "form-control"  %>
+  </div>
+
+  <% if @user.role == "faculty" || @user.role == "staff" %>
+    <div class="form-group">
+      <%= f.label :campus %> <i> (Choose DWT if you don't eat lunch in the ECD.) </i><br>
+      <%= f.select(:campus, %w[ECD DWT], {include_blank: false}, { :class => 'form-control' }) %>
+    </div>
+    <div class="form-group">
+       <%= f.label :role %> <br>
+       <%= f.select(:role, %w[faculty staff], {include_blank: false}, { :class => 'form-control' }) %>
+    </div>
+
+    <div class="form-group">
+       <%= f.label :grade_level_delivery %> <i> Select a grade only if you would like your lunches specially delivered to that homeroom. </i><br>
+       <%= f.select(:grade, %w[threes fours k 1 2 3 4 5], {include_blank: true}, { :class => 'form-control' }) %>
+    </div>
+  <%end %>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="actions text-center">
+    <%= f.submit "Update", class: "btn btn-success" %>
+  </div>
+  <% end %>
+
+<h3>Cancel my account</h3>
+
+<p>Would you like to cancel this account? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure? All lunch choices will be lost." }, method: :delete, class: "btn btn-danger" %></p>
+
+</div>
