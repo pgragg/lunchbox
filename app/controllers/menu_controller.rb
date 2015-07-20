@@ -5,7 +5,8 @@ class MenuController < ApplicationController
     private_delete 
     redirect_to :back 
   end
-
+  # populate=true in URL param: if true, then call method. 
+  
   def populate_with_blanks
     check_for_year
     schoolyear = Year.first 

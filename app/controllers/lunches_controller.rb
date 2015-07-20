@@ -25,11 +25,11 @@ class LunchesController < ApplicationController
   end 
 
   def new
-    @lunch = Lunch.new 
+    @lunch = Lunch.new.includes(:menu) 
   end
 
   def show
-    @lunch = Lunch.find(params[:id])
+    @lunch = Lunch.find(params[:id]).includes(:menu)
   end
 
   def edit
@@ -38,7 +38,7 @@ class LunchesController < ApplicationController
 
   def update
     @menu = Menu.find(session[:menu_id])
-    @lunch = Lunch.find(params[:id])
+    @lunch = Lunch.find(params[:id]).includes(:menu)
     if @lunch.update_attributes(lunch_params)
       standardize_menus(@menu.lunches, @lunch.date)
       redirect_to edit_menu_path(@menu)
@@ -61,14 +61,14 @@ class LunchesController < ApplicationController
 
   def destroy
     @menu = Menu.find(session[:menu_id])
-    @lunch = Lunch.find(params[:id])
-    if @lunch.delete
-     redirect_to edit_menu_path(@menu), notice: "Deleted #{@lunch.name}"
-   else
-     flash[:error] = "Error deleting lunch. Please try again."
-     redirect_to edit_menu_path(@menu)
-   end
-
+    @lunch = Lunch.find(params[:id]).includes(:menu)
+    @lunch.delete
+   #  if @lunch.delete
+   #   redirect_to edit_menu_path(@menu), notice: "Deleted #{@lunch.name}"
+   #  else
+   #   flash[:error] = "Error deleting lunch. Please try again."
+   #   redirect_to edit_menu_path(@menu)
+   # end
   end
 
    private 

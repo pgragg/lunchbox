@@ -45,6 +45,7 @@ group :development do
   gem 'rails-erd'
   gem 'pry-rails'
   gem 'better_errors'
+  gem 'bullet'
 end
 
 group :development, :test do

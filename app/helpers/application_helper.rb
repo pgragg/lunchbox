@@ -18,6 +18,10 @@ module ApplicationHelper
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to title, params.merge(:sort => column, :direction => direction, :page => nil), {:class => css_class}
   end
+
+  def fixed(n)
+    "col-xl-#{n} col-lg-#{n} col-md-#{n} col-sm-#{n} col-xs-#{n}" 
+  end
   
   # def direct_and_assign(sdirection,variable,assignment)
   #   variable = assignment 

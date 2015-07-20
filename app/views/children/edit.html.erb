@@ -11,6 +11,7 @@
    <div class="form-group">
      <%= f.label :grade %>
      <%= f.select(:grade, Child::GRADES, {include_blank: false}, { :class => 'form-control' }) %>
+    <!-- TODO: grouped_options_for_select(grouped_options, selected_key = nil, options = {}) -->
    </div>
    <div class="form-group">
      <%= f.label :email %>

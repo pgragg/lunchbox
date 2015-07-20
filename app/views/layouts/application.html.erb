@@ -32,19 +32,17 @@
     <% if policy(Menu.new).children? %>
       <li class= "col-md-4"> <%= link_to "My Children (#{current_user.children.count})", user_children_path(current_user.id) %> </li> 
     <% end %>
-    <% if current_user && (current_user.faculty? || current_user.staff?) %>
-      <li class= "col-md-4"> <%= link_to "My Menu", menu_path(current_user.id) %> </li> 
+    <% if (current_user.faculty? || current_user.staff?) %>
+      <li class= "<%=fixed(4)%>" > <%= link_to "My Menu", menu_path(current_user.id) %> </li> 
     <% end %>
     <% if policy(Menu.new).create? && current_user.menu_id != nil %>
-      <li class= "col-md-4"> <%= link_to "Menus", menu_index_path %> </li> 
+      <li class= "<%=fixed(4)%> "> <%= link_to "Menus", menu_index_path %> </li> 
     <% end %>
     <% if policy(Menu.new).create? %>
-      <li class= "col-md-4"> <%= link_to "Control Panel", admin_panel_index_path %> </li> 
+      <li class= "<%=fixed(4)%>" > <%= link_to "Control Panel", admin_panel_index_path %> </li> 
     <% end %>
-    <% if current_user %>
-      <li class= "col-md-4"><%= link_to (current_user.first_name || current_user.email), edit_user_registration_path %></li> 
-      <li class= "col-md-4"><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
-      <%end%>
+      <li class= "<%=fixed(4)%>" ><%= link_to (current_user.first_name || current_user.email), edit_user_registration_path %></li> 
+      <li class= "<%=fixed(4)%>" ><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
   </ul>
   <% end %>
   <div class="container <%="summary" if @summary %>">
