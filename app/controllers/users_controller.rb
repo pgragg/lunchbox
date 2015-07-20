@@ -44,6 +44,9 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     unless @user.admin? 
+      if @user.children.count >= 1 
+        @user.children.each {|child| child.delete}
+      end
       @user.delete 
     end
     redirect_to :back

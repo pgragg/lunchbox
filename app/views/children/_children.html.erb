@@ -14,9 +14,15 @@
     <td> <%=child.email %> </td> 
     <td> <%=child.campus %> </td> 
     <td> <%=child.menu_id %> </td>
-    <td> <%if child.menu_id != nil%><%= link_to "Menu", user_child_menu_path(@user, child, child.menu_id), class:"btn btn-success"%> <%end%></td>
+    <td> 
+        <%if child.menu_id != nil%>
+        <%= link_to "Menu", user_child_menu_path(@user, child, child.menu_id), class:"btn btn-success"%> 
+        <%end%>
+    </td>
     <td> <%= link_to "Edit", edit_user_child_path(@user, child), class:"btn btn-warning"%></td>
     <td> <%= link_to "Remove", user_child_path(@user, child), method: :delete, class:"btn btn-danger"%></td>
     </tr> 
   <% end %>
 </table>
+<!-- 
+This is the view the parent sees when editing their child's lunches.  -->

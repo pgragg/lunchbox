@@ -21,19 +21,23 @@ class Child < ActiveRecord::Base
   ECD_GRADES = %w[threes fours k]
   DWT_GRADES = %w[1 2 3 4 5 6 7]
 
-  def parent 
+  def parent # Finds the child's parent. 
     User.find(self.user_id)
   end 
 
-  def parent? 
+  def parent? #Children cannot be parents. 
     false
   end
 
-  def admin?
+  def admin? #Children cannot be admin. 
     false
   end
 
-  def staff?
+  def faculty? 
+    false
+  end
+
+  def staff? #Children cannot be staff. 
     false
   end
 

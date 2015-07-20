@@ -42,9 +42,10 @@ class ChildrenController < ApplicationController
   end
 
   def create
-    @user = current_user
+    @user = current_user unless current_user.admin? 
     @children = @user.children
     @child = @user.children.create(child_params)
+    # @user = @child.parent if current_user.admin? 
     @child.save!
     if @child.save
      flash[:notice] = "You have added your child to the system."
@@ -55,8 +56,9 @@ class ChildrenController < ApplicationController
   end
 
   def destroy
-   @user = current_user
+   @user = current_user 
    @child = @user.children.find(params[:id])
+   @user = @child.parent if current_user.admin? 
    @children = @user.children
    if @child.destroy
      flash[:notice] = "\"#{@child.first_name}\" was removed successfully."

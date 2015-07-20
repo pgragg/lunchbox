@@ -33,14 +33,16 @@ class MenuController < ApplicationController
     # return @user = current_user if current_user.admin? 
     case current_user.role 
       when "admin"
-        if session[:user_id]
-          return @user = User.find(session[:user_id])
-        end 
-        if session[:child_id]
-          return @user = Child.find(session[:child_id]) 
+        if params[:id] && !params[:user_id]
+          session[:user_id] = params[:id]
+          return @user = User.find(params[:id])
+        else 
+          session[:child_id] = params[:child_id]
+          @child = Child.find(params[:child_id]) 
+          return @user = @child 
         end
       when "parent"
-        session[:user_id] = params[:child_id]
+        session[:child_id] = params[:child_id]
         @child = current_user.children.find(params[:child_id])
         return @user = @child 
       when "faculty"
@@ -48,31 +50,35 @@ class MenuController < ApplicationController
       when "staff"
         return @user = current_user 
     end
+
   end 
 
 
   def assign_correct_menu
-    session[:menu_id] = params[:id]
-    if @user.class == Child
+      session[:menu_id] = params[:id] #not necessary, I don't think. 
+    # if @user.class == Child
+    #   @menu = Menu.find(@user.menu_id)
+    # elsif current_user.admin? 
+    #   if params[:format]
+    #     @menu = Menu.find(params[:format])
+    #     # @user = User.find(params[:id]) # So admin can order for other users. 
+    #     # session[:user_id] = params[:id]
+    #     session[:user_id] = nil
+    #   else 
+    #     @menu = Menu.find(session[:menu_id])
+    #     session[:user_id] = nil
+    #     # @user = current_user
+    #   end
+    # else 
+      # @user.redirect_if_menu_id_invalid 
       @menu = Menu.find(@user.menu_id)
-    elsif current_user.admin? 
-      if params[:format]
-        @menu = Menu.find(params[:format])
-        @user = User.find(params[:id]) # So admin can order for other users. 
-        session[:user_id] = params[:id]
-      else 
-        @menu = Menu.find(session[:menu_id])
-        @user = current_user
-      end
-    else 
-      @user.redirect_if_menu_id_invalid 
-      @menu = Menu.find(@user.menu_id)
-    end
+    # end
     @menu 
   end
 
   def show
     define_user
+    
     @menu = assign_correct_menu
     @dates = @menu.lunch_date_list
     @lunch_choice = @user.lunch_choices.last 
