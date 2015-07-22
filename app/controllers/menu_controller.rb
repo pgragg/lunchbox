@@ -86,7 +86,6 @@
     @dates = @menu.lunch_date_list
     @lunch_choice = @user.lunch_choices.last 
   end
-
   def edit
     @user = current_user if current_user.admin? 
     session[:menu_id] = params[:id]

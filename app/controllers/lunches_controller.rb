@@ -25,11 +25,11 @@ class LunchesController < ApplicationController
   end 
 
   def new
-    @lunch = Lunch.new.includes(:menu) 
+    @lunch = Lunch.new
   end
 
   def show
-    @lunch = Lunch.find(params[:id]).includes(:menu)
+    @lunch = Lunch.find(params[:id])
   end
 
   def edit
@@ -38,7 +38,7 @@ class LunchesController < ApplicationController
 
   def update
     @menu = Menu.find(session[:menu_id])
-    @lunch = Lunch.find(params[:id]).includes(:menu)
+    @lunch = Lunch.find(params[:id])
     if @lunch.update_attributes(lunch_params)
       standardize_menus(@menu.lunches, @lunch.date)
       redirect_to edit_menu_path(@menu)
@@ -61,7 +61,7 @@ class LunchesController < ApplicationController
 
   def destroy
     @menu = Menu.find(session[:menu_id])
-    @lunch = Lunch.find(params[:id]).includes(:menu)
+    @lunch = Lunch.find(params[:id])
     @lunch.delete
    #  if @lunch.delete
    #   redirect_to edit_menu_path(@menu), notice: "Deleted #{@lunch.name}"
