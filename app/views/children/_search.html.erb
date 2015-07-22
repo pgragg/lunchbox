@@ -6,7 +6,7 @@
     <tr>
     <th><%= sortable "first_name", "first_name" %></th>
     <th><%= sortable "last_name", "last_name" %></th>
-    <th><%= sortable "lunch_choices.count", "selections / available" %></th>
+    <th><%= sortable "lunch_choices_count('lunch')", "selections / available" %></th>
     <th><%= sortable "grade", "grade" %></th>
     <th><%= sortable "campus", "campus" %></th>
     <th><%= sortable "menu_id", "menu_id" %></th>
@@ -17,7 +17,7 @@
       <td> <%= child.first_name%></td> 
       <td> <%= child.last_name%> </td> 
       <% if child.menu_id %> 
-        <td> <%= "#{child.lunch_choices.count} / #{Menu.find(child.menu_id).lunch_date_list.count}"%></td> 
+        <td> <%= "#{child.lunch_choices_count('lunch')} / #{Menu.find(child.menu_id).lunch_date_list.count}"%></td> 
       <% else  %> 
         <td> PENDING </td> 
       <% end %> 
