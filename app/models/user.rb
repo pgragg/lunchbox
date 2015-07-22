@@ -111,7 +111,13 @@ class User < ActiveRecord::Base
     end
   end 
 
- 
+  def lunch_choices_count(type)
+    i = 0
+    self.lunch_choices.eager.each do |lc| 
+      i += 1 if lc.lunch.lunch_type == "#{type}" 
+    end
+    i
+  end 
 
   def all_faculty
     User.by_role('faculty').by_grade(nil)

@@ -1,4 +1,4 @@
-class MenuController < ApplicationController
+ class MenuController < ApplicationController
   include ApplicationHelper
 
   def delete_all_lunches 
@@ -28,12 +28,16 @@ class MenuController < ApplicationController
     authorize @menu
   end
 
-
-  def define_user
-    # return @user = current_user if current_user.admin? 
+  def clear_session 
+    session[:user_id] = nil
+    session[:child_id] = nil
+  end
+  
+  def define_user #Has two roles: define user and create session cookies. 
     case current_user.role 
       when "admin"
-        if params[:id] && !params[:user_id]
+        clear_session
+        if params[:id] && !params[:user_id] #When does this happen? 
           session[:user_id] = params[:id]
           return @user = User.find(params[:id])
         else 
@@ -43,14 +47,12 @@ class MenuController < ApplicationController
         end
       when "parent"
         session[:child_id] = params[:child_id]
-        @child = current_user.children.find(params[:child_id])
-        return @user = @child 
+        return @user = current_user.children.find(params[:child_id])
       when "faculty"
         return @user = current_user
       when "staff"
         return @user = current_user 
     end
-
   end 
 
 
@@ -78,7 +80,8 @@ class MenuController < ApplicationController
 
   def show
     define_user
-    
+    @num_user_lc = @user.lunch_choices_count("lunch")
+    @num_possible_choices = Menu.find(@user.menu_id).lunch_date_list.count
     @menu = assign_correct_menu
     @dates = @menu.lunch_date_list
     @lunch_choice = @user.lunch_choices.last 

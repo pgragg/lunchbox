@@ -7,6 +7,7 @@ class LunchChoice < ActiveRecord::Base
   scope :by_lunch_id, ->(lunch_id) { where(lunch_id: lunch_id)}
   scope :by_child_group, ->(id_array) {where(child_id: id_array)}
   scope :by_user_group, ->(id_array) {where(user_id: id_array)}
+  scope :eager,  -> { includes(:lunch) }  
 
 
   #num stands for "lunch number." It's a way to reference which lunch we're referring to. 

@@ -142,14 +142,27 @@ class Child < ActiveRecord::Base
     define_campus
     if (menu_id == nil || self.campus != previous_campus)
       self.menu_id = Menu.id_for(self.grade, "students", self.campus) #Updates menu if it detects that you've changed the child's campus. 
+      self.destroy_my_lunch_choices
       self.save!
     end 
   end 
+
+  def destroy_my_lunch_choices
+    self.lunch_choices.each {|lc| lc.delete}
+  end
 
   def destroy_lunch_choices_on(date, type)
     self.lunch_choices.by_date(date).each do |lc|
       lc.destroy if lc.lunch.lunch_type == type 
     end
+  end 
+
+  def lunch_choices_count(type)
+    i = 0
+    self.lunch_choices.eager.each do |lc| 
+      i += 1 if lc.lunch.lunch_type == "#{type}" 
+    end
+    i
   end 
 
   def ecd_children 

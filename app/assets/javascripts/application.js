@@ -18,6 +18,15 @@
 //= require nprogress-turbolinks 
 //= require_tree .
 
+
+$(document).ready(function(){
+  setTimeout(function(){
+    $('.alert').fadeOut("slow", function() {
+      $(this).remove();
+    })
+  }, 4500);
+});
+
 $(function() {
   $("#users th a, #users .pagination a").live("click", function() {
     $.getScript(this.href);
@@ -43,11 +52,3 @@ $(document).on('page:fetch',   function() { NProgress.start(); });
 $(document).on('page:change',  function() { NProgress.done(); });
 $(document).on('page:restore', function() { NProgress.remove(); });
 
-
-$(document).ready(function(){
-  setTimeout(function(){
-    $('.alert').fadeOut("slow", function() {
-      $(this).remove();
-    })
-  }, 4500);
-});

@@ -1,13 +1,18 @@
 class LunchChoicesController < ApplicationController
   include ApplicationHelper
 
-  helper :all
+  # helper :all
   
   def define_user
     if current_user.children.count >= 1
       child = current_user.children.find(session[:child_id]) #Set in the menu_controller
     end
     if current_user.admin? 
+      # if params[:user_id] && params[:child_id]
+      #   @user = Child.find(params[:child_id])
+      # else 
+      #   @user = User.find(params[:user_id])
+      # end
       if session[:child_id]
         @user = Child.find(session[:child_id]) 
       end
