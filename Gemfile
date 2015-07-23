@@ -19,7 +19,7 @@ gem 'jquery-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'factory_girl_rails' 
-gem 'sendgrid' #Email 
+gem 'sendgrid' #Email. Now working! 
 gem 'nprogress-rails' #JS loading bar. 
 
 
