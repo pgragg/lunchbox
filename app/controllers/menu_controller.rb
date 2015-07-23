@@ -12,12 +12,13 @@
     year = schoolyear.current_trimester.end_date.year.to_i  
     month = schoolyear.current_trimester.end_date.month.to_i 
     day = schoolyear.current_trimester.end_date.day.to_i 
+    [year, month, day]
   end
 
   def populate_with_blanks
     check_for_year
-    assign_year
-    private_populate(year, month, day)
+    ymd = assign_year
+    private_populate(ymd[0], ymd[1], ymd[2])
     redirect_to :back
   end  
 
