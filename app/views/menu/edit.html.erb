@@ -18,22 +18,22 @@
       </div>
     </div>
     <div class="row lunch_row text-center date_id_<%=date.to_s%>">
-      <% if Menu.lunch_by_date(5, date, @menu.id, type = "lunch") %> 
+      <% if Menu.lunch_by_date(5, date, @menu.id) %> 
         <% @menu.lunches.by_day(date).by_type("lunch")[0..4].each do |lunch|  %>
           <%= render partial: 'lunch_choices/edit_lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
         <% end %>
       <% end %> 
     </div> 
     <div class="row lunch_row text-center date_id_<%=date.to_s%>">
-      <% if Menu.lunch_by_date(6, date, @menu.id, type = "lunch") %> 
-        <% @menu.lunches.by_day(date).by_type("lunch")[5..9].each do |lunch|  %>
+      <% if Menu.lunch_by_date(6, date, @menu.id) %> 
+        <% @menu.lunches.by_day(date).by_type("lunch")[5..8].each do |lunch|  %>
           <%= render partial: 'lunch_choices/edit_lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
         <% end %>
       <% end %> 
     </div> 
     <div class="row lunch_row text-center date_id_<%=date.to_s%>">
-      <% if Menu.lunch_by_date(1, date, @menu.id, type = "drink") %> 
-        <% @menu.lunches.by_day(date).by_type("drink").all.each do |lunch|  %>
+      <% if Menu.lunch_by_date(11, date, @menu.id) %> 
+        <% @menu.lunches.by_day(date).by_type("drink").each do |lunch|  %>
           <%= render partial: 'lunch_choices/edit_lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
         <% end %>
       <% end %> 

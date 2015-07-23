@@ -3,8 +3,8 @@ class Menu < ActiveRecord::Base
   has_many :children 
   has_many :users
 
-  def self.lunch_by_date(num, date, menu_id, type = "lunch")
-    self.find(menu_id).lunches.by_day(date).by_type(type)[num]
+  def self.lunch_by_date(num, date, menu_id)
+    self.find(menu_id).lunches.by_day(date)[num]
   end 
   
   def self.id_by_date(num, date, menu_id)

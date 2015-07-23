@@ -11,6 +11,7 @@
     <th><%= sortable "email", "email"%></th>
     <th><%= sortable "campus", "campus" %></th>
     <th><%= sortable "role", "role" %></th>
+    <th><%= sortable "sign_in_count", "sign_in_count" %></th>
     <th><%= sortable "menu_id", "menu_id" %></th>
     
   </tr>
@@ -29,6 +30,7 @@
       <td> <%=user.email %> </td> 
       <td> <%=user.campus %> </td> 
       <td> <%=user.role %> </td>
+      <td> <%=user.sign_in_count %> </td> 
       <td> <%=user.menu_id %> </td>
       <td> <%if user.menu_id != nil%><%= link_to "Menu", menu_path(user, user.menu_id), class:"btn btn-success btn-sm"%> <%end%></td>
       <td> <%= link_to "Edit", edit_user_path(user), class:"btn btn-warning btn-sm"%></td>

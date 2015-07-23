@@ -4,7 +4,7 @@
 
   <% lunches.times do %> <!-- Once for each lunch choice. --> 
     <!-- i stands for lunch number.  -->
-      <td><%=Menu.lunch_name_on(i, date, menu_id)%></th>
+      <th><%=Menu.lunch_name_on(i, date, menu_id)%></th>
     <%i += 1 %>
   <% end %> 
   <th>TOTAL</th>

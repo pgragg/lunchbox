@@ -5,14 +5,18 @@
     private_delete 
     redirect_to :back 
   end
-  # populate=true in URL param: if true, then call method. 
-  
-  def populate_with_blanks
-    check_for_year
+  # another way to do this: populate=true in URL param: if true, then call method. 
+
+  def assign_year
     schoolyear = Year.first 
     year = schoolyear.current_trimester.end_date.year.to_i  
     month = schoolyear.current_trimester.end_date.month.to_i 
     day = schoolyear.current_trimester.end_date.day.to_i 
+  end
+
+  def populate_with_blanks
+    check_for_year
+    assign_year
     private_populate(year, month, day)
     redirect_to :back
   end  
@@ -32,22 +36,32 @@
     session[:user_id] = nil
     session[:child_id] = nil
   end
-  
+
+  def editing_child_menu
+    session[:child_id] = params[:child_id] #When admin edits child lunches. 
+    return @user = Child.find(params[:child_id]) 
+  end
+
+  def editing_user_menu 
+    session[:user_id] = params[:id]
+    return @user = User.find(params[:id])
+  end
+
+  def edit_user_or_child_menu
+    clear_session
+    if params[:id] && !params[:user_id] #When admin edits user lunches. 
+      return editing_user_menu
+    else 
+      return editing_child_menu
+    end
+  end
+
   def define_user #Has two roles: define user and create session cookies. 
     case current_user.role 
-      when "admin"
-        clear_session
-        if params[:id] && !params[:user_id] #When does this happen? 
-          session[:user_id] = params[:id]
-          return @user = User.find(params[:id])
-        else 
-          session[:child_id] = params[:child_id]
-          @child = Child.find(params[:child_id]) 
-          return @user = @child 
-        end
+      when "admin" #Admin can't currently access their OWN show page. 
+        return edit_user_or_child_menu 
       when "parent"
-        session[:child_id] = params[:child_id]
-        return @user = current_user.children.find(params[:child_id])
+        return editing_child_menu
       when "faculty"
         return @user = current_user
       when "staff"
@@ -58,21 +72,6 @@
 
   def assign_correct_menu
       session[:menu_id] = params[:id] #not necessary, I don't think. 
-    # if @user.class == Child
-    #   @menu = Menu.find(@user.menu_id)
-    # elsif current_user.admin? 
-    #   if params[:format]
-    #     @menu = Menu.find(params[:format])
-    #     # @user = User.find(params[:id]) # So admin can order for other users. 
-    #     # session[:user_id] = params[:id]
-    #     session[:user_id] = nil
-    #   else 
-    #     @menu = Menu.find(session[:menu_id])
-    #     session[:user_id] = nil
-    #     # @user = current_user
-    #   end
-    # else 
-      # @user.redirect_if_menu_id_invalid 
       @menu = Menu.find(@user.menu_id)
     # end
     @menu 
@@ -80,12 +79,11 @@
 
   def show
     define_user
-    @num_user_lc = @user.lunch_choices_count("lunch")
-    @num_possible_choices = Menu.find(@user.menu_id).lunch_date_list.count
     @menu = assign_correct_menu
     @dates = @menu.lunch_date_list
     @lunch_choice = @user.lunch_choices.last 
   end
+
   def edit
     @user = current_user if current_user.admin? 
     session[:menu_id] = params[:id]
@@ -152,6 +150,23 @@
       end
     end 
   end
+
+
+      # if @user.class == Child
+    #   @menu = Menu.find(@user.menu_id)
+    # elsif current_user.admin? 
+    #   if params[:format]
+    #     @menu = Menu.find(params[:format])
+    #     # @user = User.find(params[:id]) # So admin can order for other users. 
+    #     # session[:user_id] = params[:id]
+    #     session[:user_id] = nil
+    #   else 
+    #     @menu = Menu.find(session[:menu_id])
+    #     session[:user_id] = nil
+    #     # @user = current_user
+    #   end
+    # else 
+      # @user.redirect_if_menu_id_invalid 
 
 
 

@@ -81,11 +81,11 @@ class ChildrenController < ApplicationController
 
   private 
   def sort_column
-    User.column_names.include?(params[:sort]) ? params[:sort] : "last_name"
+    Child.column_names.include?(params[:sort]) ? params[:sort] : "last_name"
   end
   
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
   def child_params

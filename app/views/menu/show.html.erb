@@ -2,7 +2,7 @@
   <%= "Menu ID: #{@menu.id} "%>
     <p class = "fixed_name text-center float_left big_note"> <%= "Menu for #{@user.first_name} #{@user.last_name}"%></p>
     <p class = "fixed_name text-center float_right small_note"> 
-      <%= "#{@num_user_lc} / #{@num_possible_choices}"%></p>
+      <%= "Selected / Total"%></p>
   <div class="center_column">
   <% unless @dates.include? nil %> 
     <% @dates.each do |date| %> 
