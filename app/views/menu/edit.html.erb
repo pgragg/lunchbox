@@ -32,7 +32,7 @@
       <% end %> 
     </div> 
     <div class="row lunch_row text-center date_id_<%=date.to_s%>">
-      <% if Menu.lunch_by_date(11, date, @menu.id) %> 
+      <% if @menu.lunches.by_day(date).by_type("drink").count >= 1 %> 
         <% @menu.lunches.by_day(date).by_type("drink").each do |lunch|  %>
           <%= render partial: 'lunch_choices/edit_lunch_ch_row', locals: { lunch: lunch, user: @user } %> 
         <% end %>
