@@ -62,13 +62,9 @@ class Menu < ActiveRecord::Base
     self.lunches.count
   end 
 
-  def date_array(y,m,d)
-    (Date.today..Time.new(y,m,d).to_date).map{|date| date.strftime("%Y-%m-%d")}
-  end 
-
-  def date_generator(y,m,d)
-    date_array(y,m,d).sample 
-  end 
+  # def date_generator(y,m,d)
+  #   date_array(y,m,d).sample 
+  # end 
 
   def lunch_count
     self.lunches.count 

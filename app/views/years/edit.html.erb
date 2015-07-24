@@ -1,0 +1,20 @@
+<div class="col-md-8 center">
+ <%= form_for [@year] do |f| %><!--   , remote: true -->
+   <div class="form-group">
+     <%= f.label :name %>
+     <%= f.text_field :name, class: 'form-control', placeholder: " \"You can name the year if you want.\"" %>
+   </div>
+   <div class="form-group">
+     <%= f.label :start_date %>
+     <%= f.text_field :start_date, class: 'form-control', placeholder: "eg. \"2015-09-10\"" %>
+   </div>
+   <div class="form-group">
+     <%= f.label :end_date %>
+     <%= f.text_field :end_date, class: 'form-control', placeholder: "eg. \"2016-06-20\"" %>
+   </div>
+   <div class="form-group">
+     <%= f.submit "Save", class: 'btn btn-success' %>
+   </div>
+ <% end %>
+</div>
+

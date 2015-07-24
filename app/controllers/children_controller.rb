@@ -68,17 +68,6 @@ class ChildrenController < ApplicationController
    end
  end
 
-  # def destroy 
-
-  #   @user = current_user
-  #    if @child.destroy
-  #      flash[:notice] = "\"#{@child.name}\" was removed successfully."
-  #      redirect_to user_children_path(@user)
-  #    else
-  #      flash[:error] = "There was an error."
-  #    end
-  # end 
-
   private 
   def sort_column
     Child.column_names.include?(params[:sort]) ? params[:sort] : "last_name"

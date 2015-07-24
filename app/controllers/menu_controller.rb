@@ -1,6 +1,10 @@
  class MenuController < ApplicationController
   include ApplicationHelper
 
+  def date_array(year, y,m,d)
+    (year.current_trimester.start_date..Time.new(y,m,d).to_date).map{|date| date.strftime("%Y-%m-%d")}
+  end 
+
   def delete_all_lunches 
     private_delete 
     redirect_to :back 
@@ -140,10 +144,11 @@
         smart: altlunch.smart)
       end
   end 
-
-  def private_populate(year, month, day) 
+#def date_array(year, y,m,d)
+  def private_populate(y, m, d) 
     @menus = Menu.all
-    date_array = @menus[0].date_array(year, month, day)
+    @year = Year.last 
+    date_array = date_array(@year, y, m, d)
     date_array.keep_if {|date| !holiday_or_weekend?(date)}
     @menus.each do |menu|
       date_array.each do |date| 

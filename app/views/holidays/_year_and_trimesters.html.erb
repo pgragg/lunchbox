@@ -1,0 +1,25 @@
+<table class = "table text-center">
+<tr> <h1> Current Year </h1> </tr> 
+  <tr> 
+    <td> Starts </td> 
+    <td> Ends </td> 
+    <td> </td>  
+  </tr> 
+  <tr> 
+    <td> <h3><%= year.start_date%> </h3> </td> 
+    <td> <h3><%= year.end_date%> </h3> </td> 
+    <td> <%= link_to "Edit year dates", edit_year_path(year), class:"btn btn-warning btn-sm"%></td>
+  </tr> 
+</table> 
+
+<table class = "table text-center"> 
+  <tr> <h1> Trimesters for Current Year </h1> </tr> 
+  <% year.trimesters.each do |trimester| %> 
+    <tr> 
+    <th> Trimester <%=trimester.number %> </th> 
+    <td> <%=trimester.start_date %> </td> 
+    <td> <%=trimester.end_date %> </td> 
+    <td> <%= link_to "Edit trimester #{trimester.number}", edit_year_trimester_path(year, trimester), class:"btn btn-warning btn-sm"%></td>
+    </tr> 
+  <% end %>
+</table>

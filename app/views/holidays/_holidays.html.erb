@@ -1,4 +1,5 @@
-<tr class=""> <h1> Holidays </h1> </tr>
+<table class = "table text-center"> 
+  <tr class=""> <h1> Holidays </h1> </tr>
   <tr> 
     <td><h3>Name</h3></td> 
     <td><h3>Start Date </h3></td> 
@@ -11,8 +12,8 @@
     <td> <%="#{holiday.name}"%></td> 
     <td> <%=holiday.start_date %> </td> 
     <td> <%=holiday.end_date %> </td> 
-    <td> <%= link_to "Edit", edit_holiday_path(holiday), class:"btn btn-warning"%></td>
-    <td> <%= link_to "Remove", holiday_path(holiday), method: :delete, class:"btn btn-danger"%></td>
+    <td> <%= link_to "Edit #{holiday.name}", edit_holiday_path(holiday), class:"btn btn-warning btn-sm"%></td>
+    <td> <%= link_to "Remove", holiday_path(holiday), method: :delete, class:"btn btn-danger btn-sm"%></td>
     </tr> 
   <% end %>
 </table>

@@ -1,12 +1,12 @@
-<table class="table text-center">
-  <%= render partial: 'holidays' %>
-</table>
 
+<%= render partial: 'year_and_trimesters', locals: {year: @year} %>
+
+<%= render partial: 'holidays' %>
 
 <div class = "text-center"> 
   <div class = "col-md-12 col-sm-12 col-lg-12">
     <% if current_user.admin? %> 
-      <%=link_to "Add a holiday", new_holiday_path, class: 'btn btn-success'%>
+      <%=link_to "Add a Holiday", new_holiday_path, class: 'btn btn-success'%>
     <% end %>
   </div>
 </div>

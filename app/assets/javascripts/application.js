@@ -24,7 +24,7 @@ $(document).ready(function(){
     $('.alert').fadeOut("slow", function() {
       $(this).remove();
     })
-  }, 4500);
+  }, 10000);
 });
 
 $(function() {

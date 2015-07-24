@@ -2,13 +2,14 @@
 <div class="text-center panel_container"> 
   <!-- <h1> Control Panel </h1> -->
   <div class = "admin-box-panel" >
-    <%= link_to "School Holidays", holidays_path, class: 'btn btn-success btn-admin' %>
-    <%= link_to "User Accounts", users_path, class: 'btn btn-success btn-admin' %>
-    <%= link_to "Student Accounts", child_search_path(Child.all), class: 'btn btn-success btn-admin' %>
-    <%= link_to "Daily Lunches", daily_lunches_path, class: 'btn btn-success btn-admin' %>
-    <%= link_to "Menu Items", edit_menu_path(@menus[1]), class: 'btn btn-success btn-admin' %>
+    <%= link_to "Menu", edit_menu_path(@menus[1]), class: 'btn btn-success btn-admin' %>
     <%= link_to "Summaries", summaries_path, class: 'btn btn-success btn-admin' %>
+    <%= link_to "Users", users_path, class: 'btn btn-success btn-admin' %>
+    <%= link_to "Students", child_search_path(Child.all), class: 'btn btn-success btn-admin' %>
+    <%= link_to "School Year", holidays_path, class: 'btn btn-success btn-admin' %>
+    <%= link_to "Daily Lunches", daily_lunches_path, class: 'btn btn-success btn-admin' %>
   </div>
+ 
 </div>
 
 <!-- AJAX call can have a target div  -->

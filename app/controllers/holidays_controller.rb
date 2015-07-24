@@ -1,6 +1,7 @@
 class HolidaysController < ApplicationController
   def index
     @holidays = Holiday.all 
+    @year = Year.last 
   end
 
   def new
@@ -23,7 +24,6 @@ class HolidaysController < ApplicationController
      flash[:error] = "Error creating holiday. Please try again."
      render :new
    end
-
   end
 
   def update

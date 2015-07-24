@@ -1,6 +1,24 @@
 Rails.application.routes.draw do
 
-  resources :years 
+  get 'trimesters/edit'
+
+  get 'trimesters/update'
+
+  get 'years/edit'
+
+  get 'years/update'
+
+  get 'year/edit'
+
+  get 'year/update'
+
+  get 'trimester/edit'
+
+  get 'trimester/update'
+
+  resources :years do
+    resources :trimesters 
+  end
   resources :holidays   
   resources :summaries do 
     post '/next_day' => 'summaries#next_day', as: :next_day
