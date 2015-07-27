@@ -1,20 +1,19 @@
 class LunchesController < ApplicationController
   include LunchesHelper
 
-  def standardize_menus(lunches, date)
+  def standardize_menus(lunches, date, type)
     params= []
-    lunches.by_day(date).each do |lunch| 
-      params << [lunch.name, lunch.vegetarian, lunch.smart, lunch.lunch_type] 
+    lunches.by_day(date).by_type(type).each do |lunch| 
+      params << [lunch.name, lunch.vegetarian, lunch.smart] 
     end 
     Menu.all.each do |menu|
-      menu.lunches.by_day(date).each_with_index do |lunch,i| 
+      menu.lunches.by_day(date).by_type(type).each_with_index do |lunch,i| 
         if params[i] 
           if safe(params[i][0]) == true
             lunch.update_attributes(name: params[i][0]) 
-            lunch.update_attributes(vegetarian: params[i][1], smart: params[i][2], lunch_type: params[i][3]) 
+            lunch.update_attributes(vegetarian: params[i][1], smart: params[i][2]) 
           end 
         end
-        
       end 
       menu.save!
     end
@@ -40,7 +39,7 @@ class LunchesController < ApplicationController
     @menu = Menu.find(session[:menu_id])
     @lunch = Lunch.find(params[:id])
     if @lunch.update_attributes(lunch_params)
-      standardize_menus(@menu.lunches.by_type("lunch"), @lunch.date)
+      standardize_menus(@menu.lunches, @lunch.date, @lunch.lunch_type)
       redirect_to edit_menu_path(@menu)
     else 
       flash[:error] = "Error saving lunch. Please try again."
