@@ -74,6 +74,6 @@ class LunchesController < ApplicationController
    private 
 
     def lunch_params
-      params.require(:lunch).permit(:name, :description, :date, :vegetarian, :smart)
+      params.require(:lunch).permit(:name, :description, :date, :vegetarian, :smart, :lunch_type)
     end
 end
