@@ -47,16 +47,13 @@ class LunchChoice < ActiveRecord::Base
       ids = Child.ids_in_grade(grade)
       user_group << ids 
       return self.by_child_group(user_group).where("lunch_id = ?", lunch_id).to_a.count
-    elsif role == "faculty"
+    else
       grade_ids = User.ids_in_grade(grade) 
-      faculty_ids = User.ids_in_role(role)
+      adult_ids = User.ids_in_role(role)
       #Faculty ids will be used only if they belong to a certain grade. 
       #nil for non-sp. deliv. [grade] for sp. deliv. [[grade],nil].flatten for both
-      faculty_ids.keep_if {|id| grade_ids.include? id }
-      user_group << faculty_ids
-    elsif role == "staff"
-      staff_ids = User.ids_in_role(role)
-      user_group << staff_ids
+      adult_ids.keep_if {|id| grade_ids.include? id }
+      user_group << adult_ids
     end 
 
     self.by_user_group(user_group.flatten).where("lunch_id = ?", lunch_id).to_a.count
@@ -82,7 +79,7 @@ class LunchChoice < ActiveRecord::Base
 
   def self.big_lunch_totals(num, date) #Totals 5th through adult. All fac including sp. deliveries. 
     big_lunches = 0
-    big_lunches += self.totals(num, date, 1, [nil, Child::DWT_GRADES, ""], "faculty") # faculty including sp. deliveries
+    big_lunches += self.totals(num, date, 1, [nil, Child::DWT_GRADES, ""], ["faculty","staff"]) # faculty including sp. deliveries
     big_lunches += self.totals(num, date, 2, [5,6,7], "students") #stud 5-7
     big_lunches
   end
