@@ -9,9 +9,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+  end
 
   # GET /resource/edit
   # def edit
@@ -22,8 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     campus_before = current_user.campus
     if current_user.update_attributes(user_params)
-    params(:campus) = nil if current_user.campus == ""
-    current_user.lunch_choices.each {|lc| lc.delete} if current_user.campus != campus_before
+      current_user.lunch_choices.each {|lc| lc.delete} if current_user.campus != campus_before
     end
     super
   end
