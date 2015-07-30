@@ -15,6 +15,7 @@ class Menu < ActiveRecord::Base
         num -= 2 
       end
     end 
+    num
   end
 
   def self.lunch_by_date(num, date, menu_id)
