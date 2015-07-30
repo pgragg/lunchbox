@@ -1,4 +1,6 @@
 class Summary < ActiveRecord::Base
+  
+  default_scope { order('id ASC') } 
 
   def summary_partial_for(id)
     suffix = case id 
