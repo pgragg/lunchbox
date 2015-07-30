@@ -3,11 +3,27 @@ class Menu < ActiveRecord::Base
   has_many :children 
   has_many :users
 
+  def menu_translated(num, menu_id) #NEW
+    #If the menu in question is ECD, it's limited. 
+    #5, 6, 7, 8 correspond to bagel choices on every menu but ECD. 
+    #This function fixes that. 
+    if menu_id == 4 
+      case num 
+      when [3..4] #ECD menu doesn't have 3rd or 4th lunch options, so 
+        num += 7
+      when [5..11]
+        num -= 2 
+      end
+    end 
+  end
+
   def self.lunch_by_date(num, date, menu_id)
+    num = menu_translated(num, menu_id) #NEW
     self.find(menu_id).lunches.by_day(date)[num]
   end 
   
   def self.id_by_date(num, date, menu_id)
+    num = menu_translated(num, menu_id) #NEW
     lunch = self.lunch_by_date(num, date, menu_id)
     if lunch
       return lunch.id 
@@ -33,6 +49,7 @@ class Menu < ActiveRecord::Base
   end 
 
   def self.lunch_name_on(num, date, menu_id) #This method exists because it protects the output against nil. 
+    num = menu_translated(num, menu_id) #NEW
     lunch = self.lunch_by_date(num, date, menu_id)
     if lunch 
       return lunch.name
