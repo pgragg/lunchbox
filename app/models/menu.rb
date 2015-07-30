@@ -3,7 +3,7 @@ class Menu < ActiveRecord::Base
   has_many :children 
   has_many :users
 
-  def menu_translated(num, menu_id) #NEW
+  def self.menu_translated(num, menu_id) #NEW
     #If the menu in question is ECD, it's limited. 
     #5, 6, 7, 8 correspond to bagel choices on every menu but ECD. 
     #This function fixes that. 
@@ -18,7 +18,7 @@ class Menu < ActiveRecord::Base
   end
 
   def self.lunch_by_date(num, date, menu_id)
-    num = menu_translated(num, menu_id) #NEW
+    num = self.menu_translated(num, menu_id) #NEW
     self.find(menu_id).lunches.by_day(date)[num]
   end 
   
