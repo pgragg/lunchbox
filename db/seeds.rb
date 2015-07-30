@@ -151,18 +151,6 @@ Summary.create!(date: date, name: "ECD Students (list)")
 Summary.create!(date: date, name: "Grand Totals")
 
 
-
- admin = User.new(
-   first_name: 'Scholastic',
-   last_name:  'Eat',
-   email:      'scholastic@gmail.com',
-   password:   'comerbueno',
-   role:       'admin'
- )
- 
- admin.skip_confirmation!
- admin.save!
-
 population = User.all 
 
 puts "Seed finished"
