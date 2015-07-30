@@ -24,6 +24,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if current_user.update_attributes(user_params)
     current_user.lunch_choices.each {|lc| lc.delete} if current_user.campus != campus_before
     current_user.campus = nil if current_user.campus == ""
+    current_user.save! 
     end
     super
   end
