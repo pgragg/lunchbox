@@ -9,7 +9,7 @@ class Lunch < ActiveRecord::Base
   validates :date, presence: true
 
 
-  default_scope { order('date ASC') } 
+  default_scope { order('id ASC') } 
   scope :by_day, ->(date) { where(date: date)}
   scope :by_menu, ->(id) { where(menu_id: id)}
   scope :by_type, ->(type) { where(lunch_type: type)}
