@@ -10,6 +10,7 @@ class LunchesController < ApplicationController
       menu.lunches.by_day(date).by_type(type).each_with_index do |lunch,i| 
         if params[i] 
           if safe(params[i][0]) == true
+            i = Menu.menu_translated(i, menu.id) #NEW
             lunch.update_attributes(name: params[i][0]) 
             lunch.update_attributes(vegetarian: params[i][1], smart: params[i][2]) 
           end 
