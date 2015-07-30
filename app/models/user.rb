@@ -56,13 +56,26 @@ class User < ActiveRecord::Base
     (self.grade != Child::GRADES ? self.role : self.grade)
   end 
 
+
+#Conditional statements ugly, but fix bug whereby users aren't counted if they don't have a homeroom. 
   def self.ids_in_grade(grade)
     ids = []
+    if (grade == nil)
+      self.by_grade("").each do |user|
+        ids << user.id
+      end   
+    end
+    if (grade == "")
+      self.by_grade(nil).each do |user|
+        ids << user.id
+      end   
+    end
     self.by_grade(grade).each do |user|
       ids << user.id
     end 
     ids
   end 
+
 
   def self.ids_in_role(role)
     ids = []

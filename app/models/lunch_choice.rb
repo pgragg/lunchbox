@@ -48,7 +48,6 @@ class LunchChoice < ActiveRecord::Base
       user_group << ids 
       return self.by_child_group(user_group).where("lunch_id = ?", lunch_id).to_a.count
     elsif role == "faculty"
-      grade = nil if grade == "" #Fixes bug whereby users aren't counted if they don't have a homeroom. 
       grade_ids = User.ids_in_grade(grade) 
       faculty_ids = User.ids_in_role(role)
       #Faculty ids will be used only if they belong to a certain grade. 
