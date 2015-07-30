@@ -57,7 +57,6 @@ class User < ActiveRecord::Base
   end 
 
 
-#Conditional statements ugly, but fix bug whereby users aren't counted if they don't have a homeroom. 
   def self.ids_in_grade(grade)
     grade = [nil, ""] if (grade == "" || grade == nil) 
     ids = []

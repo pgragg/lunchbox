@@ -79,7 +79,7 @@ class LunchChoice < ActiveRecord::Base
 
   def self.big_lunch_totals(num, date) #Totals 5th through adult. All fac including sp. deliveries. 
     big_lunches = 0
-    big_lunches += self.totals(num, date, 1, [nil, Child::DWT_GRADES, ""], ["faculty","staff"]) # faculty including sp. deliveries
+    big_lunches += self.totals(num, date, [1,3], [nil, Child::GRADES], ["faculty","staff"]) # faculty including sp. deliveries
     big_lunches += self.totals(num, date, 2, [5,6,7], "students") #stud 5-7
     big_lunches
   end
