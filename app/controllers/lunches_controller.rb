@@ -6,9 +6,9 @@ class LunchesController < ApplicationController
     lunches.by_day(date).by_type(type).each do |lunch| 
       params << [lunch.name, lunch.vegetarian, lunch.smart] 
     end 
-    Menu.all.each do |menu|
+     Menu.all.where("id <= ?" , 3).each do |menu| #Does NOT alter the fourth menu. 
       menu.lunches.by_day(date).by_type(type).each_with_index do |lunch,i| 
-        if params[i] 
+        if params[i]
           if safe(params[i][0]) == true
             i = Menu.menu_translated(i, menu.id) #NEW
             lunch.update_attributes(name: params[i][0]) 

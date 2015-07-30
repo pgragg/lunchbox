@@ -9,9 +9,9 @@ class Menu < ActiveRecord::Base
     #This function fixes that. 
     if menu_id == 4 
       case num 
-      when [3,4] include? num #ECD menu doesn't have 3rd or 4th lunch options, so 
+      when [3,4].include?(num) #ECD menu doesn't have 3rd or 4th lunch options, so 
         num += 7
-      when [5,6,7,8,9,10,11] include? num 
+      when [5,6,7,8,9,10,11].include?(num)
         num -= 2 
       end
     end 
