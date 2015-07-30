@@ -23,7 +23,7 @@ class Menu < ActiveRecord::Base
   end 
   
   def self.id_by_date(num, date, menu_id)
-    num = menu_translated(num, menu_id) #NEW
+    num = self.menu_translated(num, menu_id) #NEW
     lunch = self.lunch_by_date(num, date, menu_id)
     if lunch
       return lunch.id 
@@ -49,7 +49,7 @@ class Menu < ActiveRecord::Base
   end 
 
   def self.lunch_name_on(num, date, menu_id) #This method exists because it protects the output against nil. 
-    num = menu_translated(num, menu_id) #NEW
+    num = self.menu_translated(num, menu_id) #NEW
     lunch = self.lunch_by_date(num, date, menu_id)
     if lunch 
       return lunch.name
