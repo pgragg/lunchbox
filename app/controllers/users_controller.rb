@@ -9,12 +9,9 @@ class UsersController < ApplicationController
   #   redirect_to @menu 
   # end 
 
-  def index
-    # if params[:parameter] && params[:value] #eg. last_name or grade 
-    #   parameter = params[:parameter]
-    #   value = params[:value] # eg. "Anastos" or "threes"
-    # end 
-    # @users = User.all.where("#{parameter} = ?", "#{value}")
+  def index #Really a user search page. 
+    #The equivalent for children is the search function in the child controller. 
+    authorize current_user  
     @users = User.search(params[:search_term],params[:search]).order(sort_column + " " + sort_direction)#.paginate(:per_page => 5, :page => params[:page])
   end
 
@@ -31,10 +28,12 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    campus_before = @user.campus
     authorize @user 
     if @user.update_attributes(user_params)
-    flash[:notice] = "User's information was updated."
-    redirect_to users_path if current_user.admin? 
+      @user.lunch_choices.each {|lc| lc.delete} if @user.campus != campus_before
+      flash[:notice] = "User's information was updated."
+      redirect_to users_path if current_user.admin? 
     else
       flash[:error] = "There was an error editing the user. Please try again."
       render :edit

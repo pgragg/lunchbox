@@ -19,9 +19,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    campus_before = current_user.campus
+    if current_user.update_attributes(user_params)
+    current_user.lunch_choices.each {|lc| lc.delete} if current_user.campus != campus_before
+    end
+    super
+  end
+
+  
+
+  private 
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :grade, :campus, :menu_id, :email)
+  end
 
   # DELETE /resource
   # def destroy

@@ -2,18 +2,14 @@
   <tr> 
     <td><h3>Name</h3></td> 
     <td><h3>Grade </h3></td> 
-    <td><h3>Email</h3></td> 
     <td><h3>Campus</h3></td> 
-    <td><h3>Menu ID</h3></td> 
     <td><h3> </h3></td> 
   </tr> 
   <%@children.each do |child| %> 
     <tr> 
     <td> <%="#{child.first_name} #{child.last_name}"%></td> 
     <td> <%=child.grade %> </td> 
-    <td> <%=child.email %> </td> 
-    <td> <%=child.campus %> </td> 
-    <td> <%=child.menu_id %> </td>
+    <td> <%=child.campus =="DWT" ? "89th street - Main Campus" : "Early Childhood Division (ECD)"%> </td> 
     <td> 
         <%if child.menu_id != nil%>
         <%= link_to "Menu", user_child_menu_path(@user, child, child.menu_id), class:"btn btn-success"%> 

@@ -156,7 +156,7 @@ Summary.create!(date: date, name: "Grand Totals")
    first_name: 'Scholastic',
    last_name:  'Eat',
    email:      'scholastic@gmail.com',
-   password:   'eatwell',
+   password:   'comerbueno',
    role:       'admin'
  )
  
