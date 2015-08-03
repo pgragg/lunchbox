@@ -118,9 +118,19 @@ class LunchChoice < ActiveRecord::Base
     all_lunches = 0 
     all_lunches += self.big_lunch_totals(num, date) #Totals 5th through adult 
     all_lunches += self.totals(num, date, 2, [1,2,3,4], "students") #Totals 1-4th grade 
-    all_lunches += self.totals(num, date, 4, Child::ECD_GRADES, "students") #Totals ECD grades 
+    all_lunches += self.totals(self.translate_i(num, 4), date, 4, Child::ECD_GRADES, "students") #Totals ECD grades 
     all_lunches
   end 
+
+  # def self.sum_all_lunches(num, date)
+  #   all_lunches = 0 
+  #   lunch1 = Menu.lunch_by_date(num, date, 1)
+  #   lunch2 = Menu.lunch_by_date(num, date, 2)
+  #   lunch3 = Menu.lunch_by_date(num, date, 3)
+  #   lunch4 = Menu.lunch_by_date(num, date, 4)
+  #   all_lunches += self.
+  #   all_lunches
+  # end 
 
   def self.RH_sum(date, menu_id, grade_range, role, number_of_columns, type="lunch")
     grand_total = 0 
