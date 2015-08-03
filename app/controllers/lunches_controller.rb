@@ -40,7 +40,7 @@ class LunchesController < ApplicationController
     @menu = Menu.find(session[:menu_id])
     @lunch = Lunch.find(params[:id])
     if @lunch.update_attributes(lunch_params)
-      standardize_menus(@menu.lunches, @lunch.date, @lunch.lunch_type)
+      standardize_menus(@menu.lunches, @lunch.date, @lunch.lunch_type) unless @menu.id == 4 
       redirect_to edit_menu_path(@menu)
     else 
       flash[:error] = "Error saving lunch. Please try again."

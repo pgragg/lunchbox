@@ -5,7 +5,7 @@ class Menu < ActiveRecord::Base
 
   def self.menu_translated(num, menu_id) #NEW
     #If the menu in question is ECD, it's limited. 
-    #5, 6, 7, 8 correspond to bagel choices on every menu but ECD. 
+    #lunch numbers 5, 6, 7, 8 correspond to bagel choices on every menu but ECD. 
     #This function fixes that. 
     if menu_id == 4 
       case num 
@@ -18,8 +18,24 @@ class Menu < ActiveRecord::Base
     num
   end
 
+  def self.menu_translated_for_sum(num, menu_id) #NEW
+    #If the menu in question is ECD, it's limited. 
+    #lunch numbers 5, 6, 7, 8 correspond to bagel choices on every menu but ECD. 
+    #This function fixes that. 
+    if menu_id == 4 
+      case num 
+      when [3,4].include?(num) #ECD menu doesn't have 3rd or 4th lunch options, so 
+        num += 15
+      when [5,6,7,8,9,10,11].include?(num)
+        num -= 2 
+      end
+    end 
+    num
+  end
+
   def self.lunch_by_date(num, date, menu_id)
     num = self.menu_translated(num, menu_id) #NEW
+    return nil if num == nil 
     self.find(menu_id).lunches.by_day(date)[num]
   end 
   

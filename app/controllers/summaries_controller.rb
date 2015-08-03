@@ -16,7 +16,7 @@ class SummariesController < ApplicationController
     @date = @summary.date
     @weekday = weekday_on(@date)
     @month = month_on(@date)
-    @lunches ||= 12
+    @lunches ||=  @summary.lunches
     authorize @summary
     #Array of arrays 
   end 

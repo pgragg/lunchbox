@@ -5,7 +5,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  has_many :children, dependent: :destroy 
+  has_many :children, dependent: :delete_all 
+  #Used delete_all to destroy Child records when Parent deleted by admin.
+  #The child_controller destroy method only destroys the children of the current user.  
   belongs_to :menu 
   has_many :lunch_choices, dependent: :destroy 
   scope :by_role, ->(role) { where(role: role)}

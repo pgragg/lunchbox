@@ -27,7 +27,33 @@ class LunchChoice < ActiveRecord::Base
     output 
   end 
 # Totals 5th through adult. All fac including sp. deliveries. 
-# Should count lunch totals on a date for students or fac for any given grade range, or nil grade. 
+# Should count lunch totals on a date for students or fac for any given grade range, or nil grade.
+
+
+  # def self.get_type_by_num(num, menu_id)
+  #   if menu_id == 4 
+  #     return [0,1,2,3,4,5,6].include?(num) ? "lunch" : "drink"
+  #   else 
+  #     return [0,1,2,3,4,5,6,7,8].include?(num) ? "lunch" : "drink"
+  #   end
+  # end
+
+  def self.translate_i(i, menu_id)
+    if menu_id == 4 
+      case true 
+      when [0,1,2].include?(i)
+        return i 
+      when [3,4].include?(i)
+        return nil
+      when [5,6,7,8,9,10,11].include?(i)
+        return (i-2)
+      else 
+        return i 
+      end 
+    else 
+      return i 
+    end 
+  end 
   def self.count_by_date_and_grade(num, date, menu_id, grade, role, decision=nil)
     
     if role.class == Array 
@@ -37,8 +63,10 @@ class LunchChoice < ActiveRecord::Base
       end
       return output 
     end   
+
     lunch = Menu.lunch_by_date(num, date, menu_id)
-    if lunch 
+    # lunch = Menu.find(menu_id).lunches.by_day(date)[num]
+    if lunch
       lunch_id = lunch.id 
     end
     user_group = []
@@ -59,11 +87,11 @@ class LunchChoice < ActiveRecord::Base
     self.by_user_group(user_group.flatten).where("lunch_id = ?", lunch_id).to_a.count
   end 
 
-  def self.column_totals(num, date, menu_id, grade_range, role) 
+  def self.column_totals(num, date, menu_id, grade_range, role, type="lunch") 
     if role == "grand"
       grand_total = 0 
-      grand_total += self.column_totals(num,date,Menu.id_for(grade_range,"faculty"),grade_range, "faculty")
-      grand_total += self.column_totals(num,date,Menu.id_for(grade_range,"students"),grade_range, "students")
+      grand_total += self.column_totals(num,date,Menu.id_for(grade_range,"faculty"),grade_range, "faculty", type)
+      grand_total += self.column_totals(num,date,Menu.id_for(grade_range,"students"),grade_range, "students", type)
       return grand_total
     end 
     grand_total = 0 
@@ -71,7 +99,7 @@ class LunchChoice < ActiveRecord::Base
     number_of_rows = (grade_range.class == Array ? grade_range.count : 1)
     number_of_rows.times do #Going down the num column, up the (number of rows) grade levels. 
       grade = (grade_range.class == Array ? grade_range[i] : grade_range) 
-      grand_total += LunchChoice.count_by_date_and_grade(num, date, menu_id, grade, role) #num, date, menu, grade. 
+      grand_total += LunchChoice.count_by_date_and_grade(num, date, menu_id, grade, role, type) #num, date, menu, grade. 
       i += 1
     end
     grand_total
@@ -92,11 +120,12 @@ class LunchChoice < ActiveRecord::Base
     all_lunches
   end 
 
-  def self.RH_sum(date, menu_id, grade_range, role, number_of_columns)
+  def self.RH_sum(date, menu_id, grade_range, role, number_of_columns, type="lunch")
     grand_total = 0 
     i = 0 
+    number_of_columns -= 3 if (menu_id == 2 || menu_id == 4) 
     number_of_columns.times do #Going across the 6 column totals. 
-      grand_total += LunchChoice.column_totals(i, date, menu_id, grade_range, role)
+      grand_total += LunchChoice.column_totals(i, date, menu_id, grade_range, role, type)
       i += 1
     end
     grand_total

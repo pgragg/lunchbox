@@ -31,7 +31,9 @@ class UsersController < ApplicationController
     campus_before = @user.campus
     authorize @user 
     if @user.update_attributes(user_params)
-      @user.lunch_choices.each {|lc| lc.delete} if @user.campus != campus_before
+      if @user.campus != campus_before
+        @user.lunch_choices.each {|lc| lc.delete} 
+      end
       flash[:notice] = "User's information was updated."
       redirect_to users_path if current_user.admin? 
     else

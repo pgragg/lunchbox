@@ -26,6 +26,12 @@ class Summary < ActiveRecord::Base
     "summaries/page_partials/#{suffix}"
   end 
 
+  def lunches
+    lunches = 12 
+    lunches = 10 if self.id == 8 
+    lunches 
+  end
+
   def self.all_menu_date_list
     output = []
     Menu.all.each do |menu| 

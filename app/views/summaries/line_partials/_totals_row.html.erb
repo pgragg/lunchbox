@@ -1,3 +1,5 @@
+ 
+<% number_of_columns = Menu.id_for(grade, role) == 4 ? 10 : 12 %> 
  <tr> 
     <%= render partial: 'summaries/line_partials/column_totals', 
       locals: {
@@ -6,7 +8,7 @@
         grade_range: grade,
         role: role, 
         menu_id: Menu.id_for(grade, role),
-        number_of_columns: 12,
+        number_of_columns: number_of_columns,
         }%>
 </tr> 
 
