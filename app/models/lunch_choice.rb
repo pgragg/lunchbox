@@ -29,15 +29,6 @@ class LunchChoice < ActiveRecord::Base
 # Totals 5th through adult. All fac including sp. deliveries. 
 # Should count lunch totals on a date for students or fac for any given grade range, or nil grade.
 
-
-  # def self.get_type_by_num(num, menu_id)
-  #   if menu_id == 4 
-  #     return [0,1,2,3,4,5,6].include?(num) ? "lunch" : "drink"
-  #   else 
-  #     return [0,1,2,3,4,5,6,7,8].include?(num) ? "lunch" : "drink"
-  #   end
-  # end
-
   #Translate_i takes menu numbers from menu 2 and finds corresponding menu numbers in menu 4. 
   def self.translate_i(i, menu_id)
     if menu_id == 4 
@@ -121,16 +112,6 @@ class LunchChoice < ActiveRecord::Base
     all_lunches += self.totals(self.translate_i(num, 4), date, 4, Child::ECD_GRADES, "students") #Totals ECD grades 
     all_lunches
   end 
-
-  # def self.sum_all_lunches(num, date)
-  #   all_lunches = 0 
-  #   lunch1 = Menu.lunch_by_date(num, date, 1)
-  #   lunch2 = Menu.lunch_by_date(num, date, 2)
-  #   lunch3 = Menu.lunch_by_date(num, date, 3)
-  #   lunch4 = Menu.lunch_by_date(num, date, 4)
-  #   all_lunches += self.
-  #   all_lunches
-  # end 
 
   def self.RH_sum(date, menu_id, grade_range, role, number_of_columns, type="lunch")
     grand_total = 0 

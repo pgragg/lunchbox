@@ -12,7 +12,6 @@ class Child < ActiveRecord::Base
   default_scope { order('last_name ASC') }
   scope :by_grade, ->(grade) { where(grade: grade)}
 
-  validates :email, :uniqueness => true, if: 'email.present?'
   validates :first_name, :presence => true 
   validates :last_name, :presence => true
   validates :grade, :presence => true
@@ -137,7 +136,7 @@ class Child < ActiveRecord::Base
   end
   
   def define_menu_id
-    define_grade
+    #define_grade
     previous_campus = self.campus 
     define_campus
     if (menu_id == nil || self.campus != previous_campus)

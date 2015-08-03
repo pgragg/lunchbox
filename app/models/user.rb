@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   before_save :define_role
+  after_update :define_menu_id
+  after_save :define_menu_id
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
@@ -24,29 +27,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def define_role
-    if self.role == nil 
-      self.role ||= (self.email.include?("dwight.edu") ? "faculty" : "parent")
-      self.save!
-    end 
-  end 
-
-  def define_campus
-    if self.grade 
-      if Child::ECD_GRADES.include?(self.grade)
-        self.campus = "ECD"
-      elsif Child::DWT_GRADES.include?(self.grade)
-        self.campus = "DWT"
-      else 
-        self.campus ||= nil 
-      end 
-    end
-  end
-
-  def define_menu_id
-    self.menu_id = Menu.id_for(self.grade, self.role, self.campus) #Updates menu if it detects that you've changed the child's campus. 
-    self.save! 
-  end 
+  
 
   def redirect_if_menu_id_invalid
     self.define_campus 
@@ -152,14 +133,56 @@ class User < ActiveRecord::Base
   #   end 
   # end 
 
-  private 
-  
   def define_role
     if self.role == nil 
       self.role ||= (self.email.include?("dwight.edu") ? "faculty" : "parent")
       self.save!
     end 
   end 
+
+  def define_campus
+    if self.grade 
+      if Child::ECD_GRADES.include?(self.grade)
+        self.campus = "ECD"
+      elsif Child::DWT_GRADES.include?(self.grade)
+        self.campus = "DWT"
+      else 
+        self.campus ||= nil 
+      end 
+    end
+  end
+
+  def define_menu_id
+    self.menu_id = Menu.id_for(self.grade, self.role, self.campus) #Updates menu if it detects that you've changed the child's campus. 
+    self.save! 
+  end 
+
+  def destroy_my_lunch_choices
+    self.lunch_choices.each {|lc| lc.delete}
+  end
+
+  def define_role
+    if self.role == nil 
+      self.role ||= (self.email.include?("dwight.edu") ? "staff" : "parent")
+      self.save!
+    end 
+  end 
+
+  def define_menu_id
+    previous_id = self.menu_id 
+    self.menu_id = Menu.id_for(self.grade, self.role, self.campus)
+    if menu_id != previous_id#Protects against recursion upon save.. 
+       #Saves user if it detects that you've changed the user's menu_id. 
+      self.destroy_my_lunch_choices
+      self.save!
+    end 
+  end 
+
+  private 
+
+  
+  
+  
   
 
 #Menu_ids are set in the order that they are created: 
