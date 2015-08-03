@@ -38,6 +38,7 @@ class LunchChoice < ActiveRecord::Base
   #   end
   # end
 
+  #Translate_i takes menu numbers from menu 2 and finds corresponding menu numbers in menu 4. 
   def self.translate_i(i, menu_id)
     if menu_id == 4 
       case true 
@@ -46,7 +47,7 @@ class LunchChoice < ActiveRecord::Base
       when [3,4].include?(i)
         return nil
       when [5,6,7,8,9,10,11].include?(i)
-        return (i-2)
+        return (i-2) #Corrects for missing lunches (3 and 4) in ECD menu. 
       else 
         return i 
       end 
@@ -54,6 +55,7 @@ class LunchChoice < ActiveRecord::Base
       return i 
     end 
   end 
+
   def self.count_by_date_and_grade(num, date, menu_id, grade, role, decision=nil)
     
     if role.class == Array 
@@ -134,6 +136,8 @@ class LunchChoice < ActiveRecord::Base
   def self.sum(amount, date, menu_id = nil, grade_range = nil, role = nil)
     sum = 0 
     i = 0  
+    amount -= 5 if menu_id == 4 
+    amount -= 3 if menu_id == 2
     amount.times do 
       sum += yield(i,date, menu_id, grade_range, role) if block_given?
       i += 1 

@@ -6,7 +6,7 @@
     <td><%=LunchChoice.totals(LunchChoice.translate_i(i, menu_id), date, menu_id, grade_range, role)%></th>
   <%i += 1 %>
 <% end %> 
-<td><%= LunchChoice.sum(number_of_columns, date, menu_id, grade_range, role){|x,y,a,b,c|LunchChoice.totals(x, y, a, b, c) }%></td> 
+<td><%= LunchChoice.sum((number_of_columns), date, menu_id, grade_range, role){|x,y,a,b,c|LunchChoice.totals(x, y, a, b, c) }%></td> 
 </tr>
 
 
