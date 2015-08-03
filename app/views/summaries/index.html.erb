@@ -3,18 +3,18 @@
   <div class = "row">
     <h2> Group totals</h2> 
     <% @summaries[0..3].each do |summary|%>
-      <%= link_to "#{summary.name}", summary_path(summary.id), class:"btn btn-success"%>
+      <%= link_to "#{summary.name_by_id}", summary_path(summary.id), class:"btn btn-success"%>
     <% end %>
   </div>
   <div class = "row">
     <h2> Lunches in list format </h2> 
-    <% @summaries[4..7].each do |summary|%>
-      <%= link_to "#{summary.name}", summary_path(summary.id), class:"btn btn-success"%>
+    <% @summaries[4..8].each do |summary|%>
+      <%= link_to "#{summary.name_by_id}", summary_path(summary.id), class:"btn btn-success"%>
     <% end %>
   </div>
     <div class = "row"> <!-- The summary with the id of 9 is @summaries[8].  -->
       <h2> Final Summary</h2> 
-        <%= link_to "Grand Totals", summary_path(9), class:"btn btn-warning"%> 
+        <%= link_to "Grand Totals", summary_path(10), class:"btn btn-warning"%> 
     </div>
 </div>
 <!-- Add lunch summaries pages (2.0) ECD students, ECD faculty, DWT students, DWT faculty, 

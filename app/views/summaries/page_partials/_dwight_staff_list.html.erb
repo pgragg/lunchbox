@@ -1,0 +1,27 @@
+<%= render partial: 'summaries/page_partials/header'%>
+
+<table class ="table"> 
+
+   <%= render partial: 'summaries/line_partials/lunch_name_on', 
+  locals: {
+    title: "DWT Staff list",
+    date: @date,
+    menu_id: 1, 
+    lunches: Menu.find(1).lunches.by_day(@date).count }%>
+
+  <%User.by_role("staff").by_campus("DWT").each do |user| %>
+    <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: user, date: @date}%> 
+  <% end %>
+  <!-- Render the staff totals partial for the nil grade. -->
+
+  <%= render partial: 'summaries/line_partials/count_by_date_and_grade_row', locals: {
+    title: "DWT Staff", 
+    grade: nil, 
+    role: "staff", 
+    menu_id: 1, 
+    date: @date}%>  
+  
+</table>
+
+
+<%= render partial: 'summaries/page_partials/footer'%>
