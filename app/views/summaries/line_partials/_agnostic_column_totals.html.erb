@@ -6,8 +6,9 @@
       <td><%=LunchChoice.agnostic_column_totals(i, date)%></th>
     <%i += 1 %>
   <% end %> 
-  <td><%= LunchChoice.sum(number_of_columns, date){|x,y|LunchChoice.agnostic_column_totals(x, y) }%></td> 
+  <td><%= LunchChoice.sum(number_of_columns-3, date){|x,y|LunchChoice.agnostic_column_totals(x, y) }%></td> 
 </tr>
+<!-- 3 subtracted from number_of_columns so that drinks (the last 3 columns) are not tallied.  -->
 
 
 
