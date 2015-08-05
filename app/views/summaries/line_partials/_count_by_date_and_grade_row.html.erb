@@ -1,15 +1,24 @@
 <tr> 
   <th><h4> <%= title %> </h4></th>
   <%i = 0 %> 
-<% lunches = Menu.find(menu_id).lunches.by_day(date).count %> 
+<% lunches = Menu.find(menu_id).lunches.by_day(date).count%> 
   <% lunches.times do %> <!-- Once for each lunch choice. --> 
     <!-- i stands for lunch number.  -->
       <td><%=LunchChoice.count_by_date_and_grade(i, date, menu_id, grade, role, decision=nil)%></th>
     <%i += 1 %>
   <% end %> 
-  <th><%= LunchChoice.RH_sum(date, menu_id, grade, role, lunches)%></th>
+  <% if @summary.id == 8 || @summary.id == 1 || @summary.id == 3 %> 
+  <!-- AKA the ECD staff list summary or the all_fac summary  -->
+  <th><%= LunchChoice.sum(lunches, date, menu_id, grade, role){|a,b,c,d, e| LunchChoice.count_by_date_and_grade(a,b,c,d,e)}%></th>
+  <% else %> 
+    <th><%= LunchChoice.RH_sum(date, menu_id, grade, role, lunches)%></th> 
+    <!-- I'm not sure this function is ever used.  -->
+  <% end %> 
+
 </tr>
 
+
+<!-- (amount, date, menu_id = nil, grade_range = nil, role = nil) -->
 
 
 

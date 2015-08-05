@@ -21,9 +21,10 @@
     grade: nil,
     lunches: Menu.find(3).lunches.by_day(@date).count}%>
 
+
   <%= render partial: 'summaries/line_partials/count_by_date_and_grade_row', 
   locals: {
-    title:"DWT Faculty", #includes staff as well! On purpose.
+    title:"DWT Faculty", #Here, this includes staff as well! On purpose.
     date: @date, 
     menu_id: 1, 
     role: ["faculty", "staff"], 

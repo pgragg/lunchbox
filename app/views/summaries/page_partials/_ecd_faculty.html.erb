@@ -30,27 +30,3 @@
       grade_range: Child::ECD_GRADES,
       number_of_columns: Menu.find(3).lunches.by_day(@date).count }%>
 </table>
-
-<%= render partial: 'summaries/page_partials/header'%>
-
-<table class ="table"> 
-   
-   <%= render partial: 'summaries/line_partials/lunch_name_on', 
-  locals: {
-    title: "ECD Teachers list",
-    date: @date,
-    menu_id: 3, 
-    lunches: @lunches }%>
-
-<%Child::ECD_GRADES.each do |grade|%>
-  <%User.by_grade(grade).each do |user| %>
-    <%= render partial: 'summaries/line_partials/lunch_choices_row', locals: {user: user, date: @date}%> 
-  <% end %>
-  <!-- Render the teacher totals partial for the grade. -->
-  <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: [grade], role: "faculty", date: @date}%>  
-<% end  %>
-<%= render partial: 'summaries/line_partials/totals_row', locals: {grade: Child::ECD_GRADES, role: "faculty", date: @date}%>
-</table>
-
-
-<%= render partial: 'summaries/page_partials/footer'%>

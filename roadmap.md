@@ -105,6 +105,8 @@ N/A Upload student information
 
 ## v1.2 Bug fixing and fun additions (Friday, July 31)
 
+*BUGS LIST 
+*ECD teachers list (Summary 7) has mysterious totals for "threes" faculty. 
 * Add allergy information to admin panel (2.0) 
 * Should be able to reset account paid statuses at any time.
 - Add New Relic. 

@@ -127,6 +127,7 @@ class LunchChoice < ActiveRecord::Base
 #I created two seperate partials and one method just so that the faculty results would add correctly. 
 #The following methods are only used to find the sum of the lunch choices on a given day for 
 #All faculty members who belong to a given grade level from 1-7, DWT campus. 
+#The partials in question are fac_column_
 
   def self.fac_RH_sum(date, menu_id, grade_range, role, number_of_columns, type="lunch")
     grand_total = 0 
@@ -142,13 +143,28 @@ class LunchChoice < ActiveRecord::Base
     end
     grand_total
   end 
-#
+#End of Faculty Custom Methods created for 5h partial. 
+
+ def self.ecd_staff_RH_sum(date, menu_id, grade_range, role, number_of_columns, type="lunch")
+    grand_total = 0 
+    i = 0 
+    ids = []
+    grade_range.each {|grade| ids << User.ids_in_grade(grade) }
+    number_of_columns.times do #Going across the number_of_columns column totals. 
+      lunch = Menu.lunch_by_date(i, date, menu_id)
+      if lunch 
+        grand_total += self.by_user_group(ids).where("lunch_id = ?", lunch.id).to_a.count #LunchChoice.fac_column_totals(i, date, menu_id, grade_range, role, type)
+      end
+      i += 1
+    end
+    grand_total
+  end 
 
   def self.sum(amount, date, menu_id = nil, grade_range = nil, role = nil)
     sum = 0 
     i = 0  
     amount -= 5 if menu_id == 4 
-    amount -= 3 if menu_id == 2
+    amount -= 3 if menu_id == 2 #so that drinks aren't summed. 
     amount.times do 
       sum += yield(i,date, menu_id, grade_range, role) if block_given?
       i += 1 
