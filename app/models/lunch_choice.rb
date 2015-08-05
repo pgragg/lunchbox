@@ -116,13 +116,33 @@ class LunchChoice < ActiveRecord::Base
   def self.RH_sum(date, menu_id, grade_range, role, number_of_columns, type="lunch")
     grand_total = 0 
     i = 0 
-    number_of_columns -= 3 if (menu_id == 2 || menu_id == 4 || role = "grand") 
-    number_of_columns.times do #Going across the 6 column totals. 
+    number_of_columns -= 3 if (menu_id == 2 || menu_id == 4 || role = "grand") #so that drinks aren't counted. 
+    number_of_columns.times do #Going across the number_of_columns column totals. 
       grand_total += LunchChoice.column_totals(i, date, menu_id, grade_range, role, type)
       i += 1
     end
     grand_total
   end 
+########## This is where the custom code for the 5th partial comes in. 
+#I created two seperate partials and one method just so that the faculty results would add correctly. 
+#The following methods are only used to find the sum of the lunch choices on a given day for 
+#All faculty members who belong to a given grade level from 1-7, DWT campus. 
+
+  def self.fac_RH_sum(date, menu_id, grade_range, role, number_of_columns, type="lunch")
+    grand_total = 0 
+    i = 0 
+    ids = []
+    grade_range.each {|grade| ids << User.ids_in_grade(grade) }
+    number_of_columns.times do #Going across the number_of_columns column totals. 
+      lunch = Menu.lunch_by_date(i, date, menu_id)
+      if lunch 
+        grand_total += self.by_user_group(ids).where("lunch_id = ?", lunch.id).to_a.count #LunchChoice.fac_column_totals(i, date, menu_id, grade_range, role, type)
+      end
+      i += 1
+    end
+    grand_total
+  end 
+#
 
   def self.sum(amount, date, menu_id = nil, grade_range = nil, role = nil)
     sum = 0 

@@ -28,7 +28,7 @@
 <% end  %>
 <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: %w[1 2 3 4], role: "students", date: @date}%>
 <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: %w[5 6 7], role: "students", date: @date}%>
-<%= render partial: 'summaries/line_partials/totals_row', locals: {grade: Child::DWT_GRADES, role: "faculty", date: @date}%>
+<%= render partial: 'summaries/line_partials/faculty_totals_row', locals: {grade: Child::DWT_GRADES, role: "faculty", date: @date}%>
 <%= render partial: 'summaries/line_partials/totals_row', locals: {grade: Child::DWT_GRADES, role: "grand", date: @date}%>
 </table>
 

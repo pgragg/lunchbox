@@ -1,0 +1,21 @@
+ 
+<% number_of_columns = Menu.id_for(grade, role) == 4 ? 10 : 12 %> 
+ <tr> 
+    <%= render partial: 'summaries/line_partials/fac_column_totals', 
+      locals: {
+        title: "#{grade} #{role}",
+        date: date,
+        grade_range: grade,
+        role: role, 
+        menu_id: Menu.id_for(grade, role),
+        number_of_columns: number_of_columns,
+        }%>
+</tr> 
+
+
+
+
+
+
+
+
