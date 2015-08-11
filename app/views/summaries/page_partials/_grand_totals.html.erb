@@ -46,6 +46,15 @@
 
   <%= render partial: 'summaries/line_partials/totals', 
   locals: {
+    title: "DWT/ECD Staff",
+    number_of_columns: 12,
+    date: @date,
+    menu_id: [1,3],
+    grade_range: nil,
+    role: "staff" }%>
+
+  <%= render partial: 'summaries/line_partials/totals', 
+  locals: {
     title: "ECD sp. deliv",
     number_of_columns: 12,
     date: @date,
