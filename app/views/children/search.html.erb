@@ -1,4 +1,9 @@
+<div class = "text-center title_row">
 <h1 class="text-center title_row"> Child Accounts </h1> 
+<% if @potential_dupes_exist %> 
+  <%= link_to "There may be duplicate child accounts!", children_path, class: "btn btn-danger" %> 
+<% end %> 
+</div>
 <p id = "help"> Help? </p> 
 <div class = "popup_text text-center">
   <p> Hints: </p> 

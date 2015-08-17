@@ -1,4 +1,6 @@
 class Child < ActiveRecord::Base
+
+
   after_save :define_menu_id
   after_update :define_menu_id
 
@@ -7,18 +9,46 @@ class Child < ActiveRecord::Base
   has_many :lunch_choices, dependent: :destroy 
   belongs_to :menu 
 
+  default_scope { order('last_name ASC') }
   scope :by_menu, ->(id) { where(menu_id: id)}
   scope :by_campus, ->(campus) { where(campus: campus)}
-  default_scope { order('last_name ASC') }
   scope :by_grade, ->(grade) { where(grade: grade)}
+  scope :by_similar, ->(last_name, first_name, grade) {where(last_name: last_name, first_name: first_name, grade: grade)}
 
   validates :first_name, :presence => true 
   validates :last_name, :presence => true
   validates :grade, :presence => true
 
+  ALL_GRADES = %w[twos threes fours k 1 2 3 4 5 6 7 8 9 10 11 12]
   GRADES = %w[threes fours k 1 2 3 4 5 6 7]
   ECD_GRADES = %w[threes fours k]
   DWT_GRADES = %w[1 2 3 4 5 6 7]
+
+  require 'similar_text'
+  include ChildSearch
+
+  def self.enrolled_in(grade)
+    self.all.by_grade(grade).count 
+  end
+
+  def self.all_similar_by(amount)
+    possible_duplicates = []
+    Child.all.each {|child| 
+      if child.similar_to_anyone_by(amount)
+        possible_duplicates << child
+      end }
+    possible_duplicates
+  end
+
+  def grade_index
+    Child::ALL_GRADES.find_index(self.grade)
+  end
+
+  def grade_change_by(amount)
+    self.grade = Child::ALL_GRADES[grade_index + amount]
+    puts "#{self.first_name}'s new grade is #{grade} (#{self.campus} campus)"
+    self.save! 
+  end
 
   def parent # Finds the child's parent. 
     User.find(self.user_id)
@@ -39,6 +69,10 @@ class Child < ActiveRecord::Base
   def staff? #Children cannot be staff. 
     false
   end
+
+  def already_exists?(property) 
+    Child.search("#{property}", self.property).count >= 1
+  end 
 
   def self.search(search_term, search)
     if search_term != '' && search != ''

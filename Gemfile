@@ -21,6 +21,7 @@ gem 'jquery-rails'
 gem 'factory_girl_rails' 
 gem 'sendgrid' #Email. Now working! 
 gem 'nprogress-rails' #JS loading bar. 
+gem 'similar_text' #For comparing child accounts. 
 
 
 gem 'faker'

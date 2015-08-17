@@ -1,21 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'trimesters/edit'
-
-  get 'trimesters/update'
-
-  get 'years/edit'
-
-  get 'years/update'
-
-  get 'year/edit'
-
-  get 'year/update'
-
-  get 'trimester/edit'
-
-  get 'trimester/update'
-
   resources :years do
     resources :trimesters 
   end
@@ -41,6 +25,7 @@ Rails.application.routes.draw do
   end 
   resources :children do #Added here experimentally to allow searching.
     get '/search' => 'children#search', as: :search #URL, controller method, path. 
+    get '/find_duplicates' => 'children#find_duplicates', as: :find_duplicates
     # post '/visit_menu' => 'children#visit_menu', as: :visit_menu
   end  
   resources :welcome 

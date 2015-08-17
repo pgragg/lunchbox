@@ -1,4 +1,7 @@
-<tr class=""> <h1 class="text-center"> Children </h1> </tr>
+<%= link_to "New search for duplicates", child_find_duplicates_path, class: "btn btn-success" %> 
+
+<tr class=""></tr>
+<% if children %> 
   <tr> 
     <td><h3>Name</h3></td> 
     <td><h3>Grade </h3></td> 
@@ -6,22 +9,20 @@
     <td><h3>Parent Email</h3></td> 
     <td><h3> </h3></td> 
   </tr> 
-  <% if children %> 
       <%children.each do |child| %> 
         <tr> 
         <td> <%="#{child.first_name} #{child.last_name}"%></td> 
         <td> <%=child.grade %> </td> 
         <td> <%=child.campus =="DWT" ? "89th street - Main Campus" : "Early Childhood Division (ECD)"%> </td> 
         <td> <%=child.parent.email  %> </td> 
-        <td> 
-            <%if child.menu_id != nil%>
-            <%= link_to "Menu", user_child_menu_path(@user, child, child.menu_id), class:"btn btn-success"%> 
-            <%end%>
-        </td>
-        <td> <%= link_to "Edit", edit_user_child_path(@user, child), class:"btn btn-warning"%></td>
-        <td> <%= link_to "Remove", user_child_path(@user, child), method: :delete, class:"btn btn-danger"%></td>
+        <td> <%= link_to "Edit", edit_user_child_path(child.parent, child), class:"btn btn-warning"%></td>
+        <td> <%= link_to "Remove", child_path(child), method: :delete, class:"btn btn-danger"%></td>
         </tr> 
       <% end %>
+<% else %> 
+  <tr class= "text-center"> 
+    <td> No duplicates found. </td>  
+  </tr> 
 <% end %> 
 </table>
 <!-- 

@@ -1,6 +1,8 @@
 class ChildrenController < ApplicationController
   helper_method :sort_column, :sort_direction
 
+  include ChildSearch 
+
 
   def index
     if current_user.faculty? 
@@ -8,15 +10,23 @@ class ChildrenController < ApplicationController
     end 
     @user = current_user
     @children = @user.children
+    params[:amount] ||= 50
+    @duplicates = Match.children #Child.all_similar_by(params[:amount].to_i)
   end
 
   def search 
     @children = Child.search(params[:search_term],params[:search]).order(sort_column + " " + sort_direction)
+    @potential_dupes_exist = (Match.all.count > 0)
   end
+
+  def find_duplicates 
+    ChildSearch::Matches.compile_matches
+    redirect_to :back
+  end 
 
   def edit
     @user = current_user 
-    @child = Child.find(params[:id]) #@user.children.find(params[:id])
+    @child = Child.find(params[:id]) 
     @user = @child.parent if current_user.admin? 
     #Allows editing other people's children. 
   end
@@ -57,8 +67,7 @@ class ChildrenController < ApplicationController
 
   def destroy
    @user = current_user 
-   @child = @user.children.find(params[:id])
-   @user = @child.parent if current_user.admin? 
+   @child = Child.find(params[:id])
    @children = @user.children
    if @child.destroy
      flash[:notice] = "\"#{@child.first_name}\" was removed successfully."

@@ -2,11 +2,13 @@
 
 <table class="table text-center">
   <% if current_user.children.count >= 1 %>  
-    <%= render partial: 'children' %>
+    <%= render partial: 'children', locals: {children: @children} %>
   <% else %> 
     <div class ="text-center child_notice"> 
-      <h1> Welcome! </h1> 
-      <p> Add your children to your account. <p> 
+      <% if current_user.parent? %> 
+        <h1> Welcome! </h1> 
+        <p> Add your children to your account. <p> 
+      <% end %>
     </div> 
   <%end%>
 
@@ -14,6 +16,10 @@
   <div class = "col-md-12 col-sm-12 col-lg-12">
     <% if current_user.parent? %> 
       <%=link_to "Add a child", new_user_child_path(current_user), class: button_class %>
+    <% end %>
+    <% if current_user.admin? %> 
+    <h1> Find and remove potential duplicate Children </h1> 
+      <%= render partial: 'duplicate_children', locals: {children: @duplicates}%> 
     <% end %>
   </div>
 </div>
