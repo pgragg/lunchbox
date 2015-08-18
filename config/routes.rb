@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'matches/invalidate_match'
+
   resources :years do
     resources :trimesters 
   end
@@ -27,6 +29,7 @@ Rails.application.routes.draw do
     get '/search' => 'children#search', as: :search #URL, controller method, path. 
     get '/find_duplicates' => 'children#find_duplicates', as: :find_duplicates
     get '/remove_match_and_child' => 'children#remove_match_and_child', as: :remove_match_and_child
+    get '/invalidate' => 'matches#invalidate', as: :invalidate
     # post '/visit_menu' => 'children#visit_menu', as: :visit_menu
   end  
   resources :welcome 

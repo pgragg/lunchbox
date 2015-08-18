@@ -3,6 +3,7 @@
 <tr class=""></tr>
 <% if matches.count >= 1 %> 
   <tr> 
+    <th></th>
     <th>Percent Match</th> 
     <th>Name</th> 
     <th>Grade</th> 
@@ -11,11 +12,16 @@
     <th> </th> 
   </tr> 
       <%matches.each do |match| %> 
-        <tr> 
+        <tr class= "<%= match.dismissed ? 'dismissed' : 'regular'%>"> 
+        <% if match.dismissed %> 
+         <td rowspan="2"> <%= link_to "Validate match", matches_invalidate_match_path(:id => match.id, :valid => true), class: "btn btn-success" %> </td> 
+        <% else %> 
+         <td rowspan="2"> <%= link_to "Invalidate match", matches_invalidate_match_path(:id => match.id), class: "btn btn-success" %> </td> 
+        <% end %> 
         <td rowspan="2"> <%=match.amount%></td>
         <%= render partial: 'match_rows', locals: {child: match.child(1)}%> 
         </tr> 
-        <tr> 
+        <tr class= "<%= match.dismissed ? 'dismissed' : 'regular'%>"> 
         <%= render partial: 'match_rows', locals: {child: match.child(2)}%> 
         </tr> 
       <% end %>

@@ -405,6 +405,11 @@ th {
   border-radius: 0px; 
 }
 
+tr.dismissed {
+  background-color: rgba(10, 10, 10, 0.52);
+  color: rgba(255, 255, 255, 0.8);
+}
+
 // Progress bar 
 
 #nprogress {

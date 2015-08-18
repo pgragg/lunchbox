@@ -1,12 +1,23 @@
 class Match < ActiveRecord::Base
 
   belongs_to :child 
+  default_scope { order('dismissed ASC') } 
 
   # attr_accessor :id1, :id2, :dismissed, :amount 
 
   def child(place) #call pair.child(1) or pair.child(2) to return that part of the pair. 
     choice = place == 1 ? id1 : id2 
     child = Child.find_by_id(choice)
+  end
+
+  def invalidate
+    self.dismissed = true 
+    self.save! 
+  end
+
+  def validate
+    self.dismissed = false 
+    self.save! 
   end
 
   def self.list_of_ids
