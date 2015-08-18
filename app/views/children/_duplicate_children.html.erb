@@ -11,25 +11,35 @@
     <th>Parent Email</th> 
     <th> </th> 
   </tr> 
-      <%matches.each do |match| %> 
-        <tr class= "<%= match.dismissed ? 'dismissed' : 'regular'%>"> 
-        <% if match.dismissed %> 
-         <td rowspan="2"> <%= link_to "Validate match", matches_invalidate_match_path(:id => match.id, :valid => true), class: "btn btn-success" %> </td> 
-        <% else %> 
-         <td rowspan="2"> <%= link_to "Invalidate match", matches_invalidate_match_path(:id => match.id), class: "btn btn-success" %> </td> 
-        <% end %> 
-        <td rowspan="2"> <%=match.amount%></td>
-        <%= render partial: 'match_rows', locals: {child: match.child(1)}%> 
-        </tr> 
-        <tr class= "<%= match.dismissed ? 'dismissed' : 'regular'%>"> 
-        <%= render partial: 'match_rows', locals: {child: match.child(2)}%> 
-        </tr> 
-      <% end %>
+  <%matches.each do |match| %> 
+    <tr class= "<%= match.dismissed ? 'dismissed' : 'regular'%>"> 
+    <% if match.dismissed %> 
+     <td rowspan="2"> <%= link_to "Validate match", matches_invalidate_match_path(:id => match.id, :valid => true), class: "btn btn-success" %> </td> 
+    <% else %> 
+     <td rowspan="2"> <%= link_to "Invalidate match", matches_invalidate_match_path(:id => match.id), class: "btn btn-success" %> </td> 
+    <% end %> 
+    <td rowspan="2"> <%=match.amount%></td>
+    <%= render partial: 'match_rows', locals: {child: match.child(1)}%> 
+    </tr> 
+    <tr class= "<%= match.dismissed ? 'dismissed' : 'regular'%>"> 
+    <%= render partial: 'match_rows', locals: {child: match.child(2)}%> 
+    </tr> 
+  <% end %>
 <% else %> 
   <div class= "text-center"> 
     <td> No duplicates found. </td>  
   </div> 
 <% end %> 
 </table>
+
+<h4> What is the purpose of this page? </h4> 
+<p> This page allows you to see child records that are potential duplicates of a record you already have, and delete those duplicate records if they exist. This allows you to freely create child records on an admin "parent" account, and then delete those records if the real parent signs up for the program later. </p> 
+
+<h4> What happens when I invalidate a match? </h4> 
+<p> Not much: it's just grayed out slightly and moved to the bottom of the list to allow you to concentrate on the matches that are important. You can then revalidate it if you wish. </p> 
+
+<h4> What happens if I delete or edit a child from this page? </h4> 
+<p> If you delete or edit a child from this page, that single child record will be deleted or edited in the database. The other child in the match will not be deleted. Be careful. You probably only want to delete or edit children that you have created, and only when their parents have signed up and created a child account for that child.  </p> 
+
 <!-- 
 This is the view the parent sees when editing their child's lunches.  -->
