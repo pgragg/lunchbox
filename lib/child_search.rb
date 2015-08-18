@@ -3,7 +3,9 @@ module ChildSearch
   module Matches 
 
     def no_existing_match(child)
-      Match.find("#{self.id}#{child.id}".to_i) == nil 
+      return false if child.id == self.id 
+      match = Match.find_by_id(Match.key(self.id, child.id)) 
+      match == nil 
     end
 
     def new_match(child,amount)
@@ -13,21 +15,17 @@ module ChildSearch
           id2: child.id, 
           dismissed: false, 
           amount: amount)
-        match.set_id
+        match.make_key!
       end 
     end
 
     def compare(child, amount)
-      new_match if similar_to(child, amount)
+      new_match(child, similarity_to(child)) if similarity_to(child) >= amount
     end 
 
-    def compare_to_all_in_grade(amount)
-      Child.by_grade(self.grade).each do |child|
-        compare(child, amount)
-      end
-    end
+    
 
-    def self.compile_matches
+    def self.compile_matches(amount)
       Child::GRADES.each {|grade|
         Child.all.by_grade(grade).each {|child| 
           child.compare_to_all_in_grade(amount)
@@ -80,10 +78,10 @@ module ChildSearch
       self.similar_to(child, amount) && (child.user_id != self.user_id)
     end
 
-    def similar_to(child, amount)
+    def similarity_to(child)
       t1 = self.similarity("last_name", child.last_name)
       t2 = self.similarity("first_name", child.first_name)
-      (t1 + t2).to_i >= (amount * 2) 
+      (t1 + t2).to_i/2
     end
 
     def similarity(property, given)

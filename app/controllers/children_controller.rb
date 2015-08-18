@@ -10,8 +10,7 @@ class ChildrenController < ApplicationController
     end 
     @user = current_user
     @children = @user.children
-    params[:amount] ||= 50
-    @duplicates = Match.children #Child.all_similar_by(params[:amount].to_i)
+    @matches = Match.all.where("amount >= ?", 50) #Child.all_similar_by(params[:amount].to_i)
   end
 
   def search 
@@ -20,7 +19,8 @@ class ChildrenController < ApplicationController
   end
 
   def find_duplicates 
-    ChildSearch::Matches.compile_matches
+    Match.delete_all 
+    ChildSearch::Matches.compile_matches(0)
     redirect_to :back
   end 
 
@@ -75,7 +75,19 @@ class ChildrenController < ApplicationController
    else
      flash[:error] = "Couldn't remove child right now."
    end
- end
+  end
+
+  def remove_match_and_child
+    child_id = params[:child_id]
+    @child = Child.find_by_id(child_id)
+    if @child 
+     @child.matches.each {|match| match.delete}
+     @child.destroy
+    flash[:notice] = "\"#{@child.first_name}\" was removed successfully." 
+    end
+    
+    redirect_to :back
+  end
 
   private 
   def sort_column

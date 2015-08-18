@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150817144004) do
+ActiveRecord::Schema.define(version: 20150818152300) do
 
   create_table "bagels", force: :cascade do |t|
     t.string   "bagel_filling"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20150817144004) do
     t.integer  "id1"
     t.integer  "id2"
     t.integer  "amount"
+    t.integer  "child_id"
   end
 
   create_table "menus", force: :cascade do |t|

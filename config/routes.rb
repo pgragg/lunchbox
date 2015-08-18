@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :children do #Added here experimentally to allow searching.
     get '/search' => 'children#search', as: :search #URL, controller method, path. 
     get '/find_duplicates' => 'children#find_duplicates', as: :find_duplicates
+    get '/remove_match_and_child' => 'children#remove_match_and_child', as: :remove_match_and_child
     # post '/visit_menu' => 'children#visit_menu', as: :visit_menu
   end  
   resources :welcome 

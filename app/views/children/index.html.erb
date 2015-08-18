@@ -19,7 +19,7 @@
     <% end %>
     <% if current_user.admin? %> 
     <h1> Find and remove potential duplicate Children </h1> 
-      <%= render partial: 'duplicate_children', locals: {children: @duplicates}%> 
+      <%= render partial: 'duplicate_children', locals: {matches: @matches}%> 
     <% end %>
   </div>
 </div>

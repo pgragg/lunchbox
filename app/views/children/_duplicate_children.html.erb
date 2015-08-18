@@ -1,28 +1,28 @@
-<%= link_to "New search for duplicates", child_find_duplicates_path, class: "btn btn-success" %> 
+<%= link_to "New search for duplicates", child_find_duplicates_path(Child.first), class: "btn btn-success duplicates" %> 
 
 <tr class=""></tr>
-<% if children %> 
+<% if matches.count >= 1 %> 
   <tr> 
-    <td><h3>Name</h3></td> 
-    <td><h3>Grade </h3></td> 
-    <td><h3>Campus</h3></td> 
-    <td><h3>Parent Email</h3></td> 
-    <td><h3> </h3></td> 
+    <th>Percent Match</th> 
+    <th>Name</th> 
+    <th>Grade</th> 
+    <th>Campus</th> 
+    <th>Parent Email</th> 
+    <th> </th> 
   </tr> 
-      <%children.each do |child| %> 
+      <%matches.each do |match| %> 
         <tr> 
-        <td> <%="#{child.first_name} #{child.last_name}"%></td> 
-        <td> <%=child.grade %> </td> 
-        <td> <%=child.campus =="DWT" ? "89th street - Main Campus" : "Early Childhood Division (ECD)"%> </td> 
-        <td> <%=child.parent.email  %> </td> 
-        <td> <%= link_to "Edit", edit_user_child_path(child.parent, child), class:"btn btn-warning"%></td>
-        <td> <%= link_to "Remove", child_path(child), method: :delete, class:"btn btn-danger"%></td>
+        <td rowspan="2"> <%=match.amount%></td>
+        <%= render partial: 'match_rows', locals: {child: match.child(1)}%> 
+        </tr> 
+        <tr> 
+        <%= render partial: 'match_rows', locals: {child: match.child(2)}%> 
         </tr> 
       <% end %>
 <% else %> 
-  <tr class= "text-center"> 
+  <div class= "text-center"> 
     <td> No duplicates found. </td>  
-  </tr> 
+  </div> 
 <% end %> 
 </table>
 <!-- 

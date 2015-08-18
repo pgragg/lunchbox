@@ -7,6 +7,7 @@ class Child < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :lunches, through: :lunch_choices
   has_many :lunch_choices, dependent: :destroy 
+  has_many :matches, dependent: :destroy  
   belongs_to :menu 
 
   default_scope { order('last_name ASC') }
@@ -25,7 +26,19 @@ class Child < ActiveRecord::Base
   DWT_GRADES = %w[1 2 3 4 5 6 7]
 
   require 'similar_text'
-  include ChildSearch
+  include ChildSearch::Matches
+  include ChildSearch::Similarities
+
+
+  def matches 
+    [Match.all.where("id1 == ?", id), Match.all.where("id2 == ?", id)].flatten.compact 
+  end 
+
+  def compare_to_all_in_grade(amount)
+    Child.by_grade(self.grade).each do |child|
+      compare(child, amount)
+    end
+  end
 
   def self.enrolled_in(grade)
     self.all.by_grade(grade).count 
