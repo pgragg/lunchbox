@@ -30,6 +30,13 @@ class Child < ActiveRecord::Base
   include ChildSearch::Similarities
 
 
+  def remove_matches 
+    if matches.count >= 1 
+      matches.each {|match| match.delete}
+    end 
+  end 
+
+
   def matches 
     [Match.all.where("id1 == ?", id), Match.all.where("id2 == ?", id)].flatten.compact 
   end 

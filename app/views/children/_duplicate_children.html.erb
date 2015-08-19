@@ -19,10 +19,10 @@
      <td rowspan="2"> <%= link_to "Invalidate match", matches_invalidate_match_path(:id => match.id), class: "btn btn-success" %> </td> 
     <% end %> 
     <td rowspan="2"> <%=match.amount%></td>
-    <%= render partial: 'match_rows', locals: {child: match.child(1)}%> 
+    <%= render partial: 'match_rows', locals: {child: match.child(1), match: match}%> 
     </tr> 
     <tr class= "<%= match.dismissed ? 'dismissed' : 'regular'%>"> 
-    <%= render partial: 'match_rows', locals: {child: match.child(2)}%> 
+    <%= render partial: 'match_rows', locals: {child: match.child(2), match: match}%> 
     </tr> 
   <% end %>
 <% else %> 

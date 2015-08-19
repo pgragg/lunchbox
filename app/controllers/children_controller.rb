@@ -70,6 +70,7 @@ class ChildrenController < ApplicationController
    @child = Child.find(params[:id])
    @children = @user.children
    if @child.destroy
+     @child.remove_matches 
      flash[:notice] = "\"#{@child.first_name}\" was removed successfully."
      redirect_to user_children_path(@user.id, @children)
    else
@@ -78,12 +79,11 @@ class ChildrenController < ApplicationController
   end
 
   def remove_match_and_child
-    child_id = params[:child_id]
-    @child = Child.find_by_id(child_id)
-    if @child 
-     @child.matches.each {|match| match.delete}
-     @child.destroy
-    flash[:notice] = "\"#{@child.first_name}\" was removed successfully." 
+    child = Child.find_by_id(params[:child_id])
+    if child 
+     child.remove_matches
+     child.destroy
+     flash[:notice] = "\"#{child.first_name}\" was removed successfully." 
     end
     
     redirect_to :back

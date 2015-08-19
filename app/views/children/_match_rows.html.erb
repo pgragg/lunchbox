@@ -3,4 +3,5 @@
 <td> <%=child.campus =="DWT" ? "89th street - Main Campus" : "Early Childhood Division (ECD)"%> </td> 
 <td> <%=child.parent.email  %> </td> 
 <td> <%= link_to "Edit", edit_user_child_path(child.parent, child), class:"btn btn-warning"%></td>
-<td> <%= link_to "Delete", child_remove_match_and_child_path(child.id), class:"btn btn-danger"%></td>
+<td> <%= link_to "Delete", child_remove_match_and_child_path(:child_id => child.id, :match_id => match.id), class:"btn btn-danger"%></td>
+`
