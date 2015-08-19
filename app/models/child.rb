@@ -38,7 +38,7 @@ class Child < ActiveRecord::Base
 
 
   def matches 
-    [Match.all.where("id1 == ?", id), Match.all.where("id2 == ?", id)].flatten.compact 
+    [Match.all.where("id1 = ?", id), Match.all.where("id2 = ?", id)].flatten.compact 
   end 
 
   def compare_to_all_in_grade(amount)
