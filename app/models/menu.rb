@@ -80,6 +80,15 @@ class Menu < ActiveRecord::Base
     dates 
   end 
 
+  def restricted_lunch_date_list
+    dates = Array.new 
+    self.lunches.each {|lunch| dates << lunch.date}
+    dates.uniq!.keep_if {|date| 
+      date >= (Date.today + 10)
+    }
+    dates 
+  end 
+
   def self.master_date_list
     dates = Array.new 
     self.all.each do |menu|  

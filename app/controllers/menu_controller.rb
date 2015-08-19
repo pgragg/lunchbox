@@ -82,10 +82,18 @@
     @menu 
   end
 
+  def assign_correct_dates
+    if current_user.admin? 
+      @dates = @menu.lunch_date_list 
+    else
+      @dates = @menu.restricted_lunch_date_list
+    end
+  end 
+
   def show
     define_user
     @menu = assign_correct_menu
-    @dates = @menu.lunch_date_list
+    assign_correct_dates 
     @lunch_choice = @user.lunch_choices.last 
   end
 

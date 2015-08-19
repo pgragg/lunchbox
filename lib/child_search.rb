@@ -23,8 +23,6 @@ module ChildSearch
       new_match(child, similarity_to(child)) if similarity_to(child) >= amount
     end 
 
-    
-
     def self.compile_matches(amount)
       Child::GRADES.each {|grade|
         Child.all.by_grade(grade).each {|child| 

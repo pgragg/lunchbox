@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  #validates_format_of :email, :without => /(\\d+).*?((?:[a-z][a-z\\.\\d_]+)\\.(?:[a-z\\d]{3}))(?![\\w\\.])/, :message => "Children can not sign up for accounts. Use a parent's email address!"
   before_save :define_role
   after_update :define_menu_id
-  after_save :define_menu_id
+  before_save :define_menu_id
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
@@ -27,7 +28,15 @@ class User < ActiveRecord::Base
     end
   end
 
-  
+  def child?
+    email.split('').include?('2') && email.split('@').include?('dwight.edu')
+  end
+
+  def delete_if_child
+    if child? 
+      self.delete 
+    end
+  end
 
   def redirect_if_menu_id_invalid
     self.define_campus 
@@ -152,10 +161,10 @@ class User < ActiveRecord::Base
     end
   end
 
-  def define_menu_id
-    self.menu_id = Menu.id_for(self.grade, self.role, self.campus) #Updates menu if it detects that you've changed the child's campus. 
-    self.save! 
-  end 
+  # def define_menu_id
+  #   self.menu_id = Menu.id_for(self.grade, self.role, self.campus) #Updates menu if it detects that you've changed the child's campus. 
+  #   self.save! 
+  # end 
 
   def destroy_my_lunch_choices
     self.lunch_choices.each {|lc| lc.delete}
@@ -176,6 +185,7 @@ class User < ActiveRecord::Base
       self.destroy_my_lunch_choices
       self.save!
     end 
+    delete_if_child
   end 
 
   private 

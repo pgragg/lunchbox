@@ -20,7 +20,7 @@ class ChildrenController < ApplicationController
 
   def find_duplicates 
     Match.delete_all 
-    ChildSearch::Matches.compile_matches(0)
+    ChildSearch::Matches.compile_matches(50)
     redirect_to :back
   end 
 
